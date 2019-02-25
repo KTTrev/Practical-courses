@@ -1,0 +1,30 @@
+\contentsline {chapter}{\numberline {1}Simpson's Paradox}{4}{chapter.1}
+\contentsline {section}{\numberline {1.1}Introduction and description of the problem}{4}{section.1.1}
+\contentsline {section}{\numberline {1.2}Exercise}{5}{section.1.2}
+\contentsline {chapter}{\numberline {2}Descriptive statistics }{10}{chapter.2}
+\contentsline {section}{\numberline {2.1}Introduction and description of the problem}{10}{section.2.1}
+\contentsline {section}{\numberline {2.2}Exercise}{10}{section.2.2}
+\contentsline {chapter}{\numberline {3}Distribution of a data}{21}{chapter.3}
+\contentsline {section}{\numberline {3.1}Introduction and description of the problem}{21}{section.3.1}
+\contentsline {section}{\numberline {3.2}Exercise}{21}{section.3.2}
+\contentsline {chapter}{\numberline {4}Maximum Likelihood estimation}{28}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introduction and description of the problem}{28}{section.4.1}
+\contentsline {section}{\numberline {4.2}Exercise}{29}{section.4.2}
+\contentsline {chapter}{\numberline {5}Tests for categorical data }{32}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introduction and description of the problem}{32}{section.5.1}
+\contentsline {section}{\numberline {5.2}Exercise}{32}{section.5.2}
+\contentsline {chapter}{\numberline {6}Tests for quantitative data}{34}{chapter.6}
+\contentsline {section}{\numberline {6.1}Introduction and description of the problem}{34}{section.6.1}
+\contentsline {section}{\numberline {6.2}Exercise}{34}{section.6.2}
+\contentsline {chapter}{\numberline {7}Linear regression}{38}{chapter.7}
+\contentsline {section}{\numberline {7.1}Introduction and description of the problem}{38}{section.7.1}
+\contentsline {section}{\numberline {7.2}Exercise}{38}{section.7.2}
+\contentsline {chapter}{\numberline {8}Logistic regression }{46}{chapter.8}
+\contentsline {section}{\numberline {8.1}Introduction and description of the problem}{46}{section.8.1}
+\contentsline {section}{\numberline {8.2}Exercise}{46}{section.8.2}
+\contentsline {chapter}{\numberline {9}Penalised regression}{51}{chapter.9}
+\contentsline {section}{\numberline {9.1}Introduction and description of the problem}{51}{section.9.1}
+\contentsline {section}{\numberline {9.2}Exercise}{51}{section.9.2}
+\contentsline {chapter}{\numberline {10}Principal component analysis}{55}{chapter.10}
+\contentsline {section}{\numberline {10.1}Introduction and description of the problem}{55}{section.10.1}
+\contentsline {section}{\numberline {10.2}Exercise}{55}{section.10.2}
