@@ -1,9 +1,8 @@
-setwd("~/Stochastic_Lab/Stochastic_Lab_Course_2")
 ## online book https://r4ds.had.co.nz
 ## isntall tidyverse
 
 #install.packages("tidyverse")
-library(tidyverse)
+library("tidyverse")
 
 ###start with ggplot2
 ##first qplot
@@ -15,6 +14,8 @@ qplot(data=mpg,x=displ) #only x = histogram
 qplot(data=mpg,x=displ,geom="density")
 
 qplot(data=mpg, x=displ,y=hwy,color=drv) #add colors for different classes, f = front-wheel drive, r = rear wheel drive, 4 = 4wd
+qplot(data=mpg, x=displ,y=hwy,color=year)
+qplot(data=mpg, x=displ,y=hwy,color=as.factor(year))
 
 ##now qqplot2
 ggplot(data=mpg) #nothing happens
@@ -28,11 +29,11 @@ ggplot(data = mpg) +
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, alpha = drv))
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, shape = drv))
+  geom_point(mapping = aes(x = displ, y = hwy, shape = drv, alpha = drv))
 
 #set global aesthetic
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy), color = "blue", shape=23, fill="red",stroke=2) #check ?geom_point for all aesthetics
+  geom_point(mapping = aes(x = displ, y = hwy, fill = drv), color = "blue", shape=23,stroke=2) #check ?geom_point for all aesthetics
 
 #Facets
 ggplot(data = mpg) +
@@ -40,11 +41,13 @@ ggplot(data = mpg) +
   facet_wrap(~ drv, nrow = 1)
 
 ## Adding a smooth line (loess smoother)
-ggplot(data = mpg) +
-  geom_smooth(mapping = aes(x = displ, y = hwy)) + geom_point(mapping = aes(x = displ, y = hwy))
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_smooth() + 
+  geom_point(aes(color = drv))
 #works the same with aesthetics
 ggplot(data = mpg) +
-  geom_smooth(se=FALSE,mapping = aes(x = displ, y = hwy, linetype = drv,color=drv)) + geom_point(mapping = aes(x = displ, y = hwy, color = drv))
+  geom_smooth(se=FALSE,mapping = aes(x = displ, y = hwy, linetype = drv,color=drv)) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = drv))
 
 ## more types of geom_" geom_bar, geom_boxplot, 
 ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
@@ -52,7 +55,8 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 ##maps
 nz <- map_data("nz") #check ?map_data
 ggplot(nz, aes(long, lat, group = group)) +
-  geom_polygon(fill = "white", color = "black")
+  geom_polygon(fill = "white", color = "black") + 
+  coord_fixed(1) 
 
 
 ##Changes axes, labels and add legends, themes
@@ -61,13 +65,20 @@ g=ggplot(data = mpg) +
 
 #sizes
 g+theme(text=element_text(size=20))
-g+theme(axis.text=element_text(size=25),axis.title = element_text(size=30),legend.text = element_text(size=20),legend.title = element_text(size=15))
+g+theme(axis.text=element_text(size=25),
+        axis.title = element_text(size=30),
+        legend.text = element_text(size=20),
+        legend.title = element_text(size=15))
 #labels
-g=g+theme(text=element_text(size=20))+xlab("Engine size")+ylab("Efficiency")+ggtitle("Cars")
+g=g+theme(text=element_text(size=20))+
+  xlab("Engine size")+ylab("Efficiency")+
+  ggtitle("Cars")
 #legend (much more on position, background color is possible)
-g+guides(color=guide_legend(title="Drive"))+theme(legend.position = c(0.8,0.8))
+g+guides(color=guide_legend(title="Drive"))+
+  theme(legend.position = c(0.8,0.8))
 #changing xlim, ylim
-g+xlim(c(0,8))+ylim(c(0,50))+theme(legend.position = c(0.8,0.8))
+g+xlim(c(0,8))+ylim(c(0,50))+
+  theme(legend.position = c(0.8,0.8))
 #change theme/ see https://ggplot2.tidyverse.org/reference/ggtheme.html 
 g+theme_minimal()
 g+theme_light()
@@ -80,10 +91,12 @@ g+theme_light()
 ##If you want to use the base version of these functions after loading dplyr, 
 ##you’ll need to use their full names: stats::filter() and stats::lag().
 
-install.packages("nycflights13")
+#install.packages("nycflights13")
 library(nycflights13)
+
 flights
 ## the data are saved in TIBBLE explained later (int=integer, dbl=double, chr=character, dttm = data+tme, lgl= T/F, fctr=factor)
+setwd("~/Stochastic_Lab/Stochastic_Lab_Course_2")
 
 ## filter = pick observations by their value
 jan1=filter(flights, month == 1, day == 1) # other options: >,<,!=,==,<=,>=
@@ -102,22 +115,32 @@ select(flights, year:day)
 select(flights, -(year:day))
 
 ## add new variable
-flights_sml <- select(flights,year:day,ends_with("delay"),distance,air_time)
-mutate(flights_sml,gain = arr_delay - dep_delay,speed = distance / air_time * 60)
+flights_sml <- select(flights,year:day,ends_with("delay"),
+                      distance,air_time)
+mutate(flights_sml,
+       gain = arr_delay - dep_delay,
+       speed = distance / air_time * 60)
 
 ## summarize 
-summarize(flights, delay = mean(dep_delay, na.rm = TRUE))
+summarize(flights, 
+          delay = mean(dep_delay, na.rm = TRUE))
 by_month=group_by(flights, month) 
 summarize(by_month, delay = mean(dep_delay, na.rm = TRUE))
 
-## summarize/group with pipe (pipe does not work with ggplot2, since was written later)
+## summarize/group with pipe (pipe does not work with ggplot2, 
+#since was written later)
 #to make this plot from summary
 by_dest <- group_by(flights, dest)
-delay <- summarize(by_dest,count = n(),dist = mean(distance, na.rm = TRUE),delay = mean(arr_delay, na.rm = TRUE) )
+delay <- summarize(by_dest,
+                   count = n(),
+                   dist = mean(distance, na.rm = TRUE),
+                   delay = mean(arr_delay, na.rm = TRUE) )
 delay <- filter(delay, count > 20, dest != "HNL")
 # the same with pipe %>%
 delays <- flights %>% group_by(dest) %>% 
-  summarize(count = n(),dist = mean(distance, na.rm = TRUE), delay = mean(arr_delay, na.rm = TRUE) ) %>%
+  summarize(count = n(),
+            dist = mean(distance, na.rm = TRUE), 
+            delay = mean(arr_delay, na.rm = TRUE) ) %>%
   filter(count > 20, dest != "HNL")
 
 ggplot(data = delay, mapping = aes(x = dist, y = delay)) +
@@ -156,7 +179,7 @@ df%>%.$x
 df%>%.[[1]]
 
 ##read the data (package readr in tidyverse)
-shhs=read_tsv("shhs1.txt")
+shhs=read_tsv("shhs1.txt") #getwd and setwd
 # compare to (different data types! integer/double)
 as_tibble(read.table("shhs1.txt",header=T))
 ##check parse_* functions!
@@ -179,7 +202,9 @@ write_tsv(shhs,"shhs2.txt")
 #spread() makes long tables shorter, gather() makes wide table narrower
 table4a
 #make a tidy tibble with country, year, cases using gather()
-table4a %>% gather(`1999`, `2000`, key = "year", value = "cases")
+table4a %>% 
+  gather(`1999`, `2000`, 
+         key = "year", value = "cases")
 
 #spread is the opposite to gather
 table2
@@ -188,10 +213,13 @@ spread(table2, key = type, value = count)
 
 #separate makes two variables from obe, wherever a separator characted apperas
 table3
-table3 %>%separate(rate, into = c("cases", "population"),sep="/",convert=TRUE) #without convert cases and population are characters!
+table3 %>%
+  separate(rate, into = c("cases", "population"),
+           sep="/",convert=TRUE) #without convert cases and population are characters!
 #unite makes the opposite
 table5
-table5 %>%unite(new, century, year,sep="")
+table5 %>%
+  unite(new, century, year,sep="")
 
 
 ##missing values
@@ -215,16 +243,23 @@ who2
 #now separate variables
 who3 <- who2 %>% separate(key, c("new", "type", "sexage"), sep = "_")
 who3
+
+
 #new, iso2, iso3 are redundant
 who4 <- who3 %>%select(-new, -iso2, -iso3)
 who4
 #separate age and sex
-who5 <- who4 %>%separate(sexage, c("sex", "age"), sep = 1)
+who5 <- who4 %>%separate(sexage, c("sex", "age"), 
+                         sep = 1)
 who5
 
 #same, all together:
-who %>% gather(code, value, new_sp_m014:newrel_f65, na.rm = TRUE) %>% mutate(code = stringr::str_replace(code, "newrel", "new_rel")) %>%
-  separate(code, c("new", "var", "sexage")) %>% select(-new, -iso2, -iso3) %>%separate(sexage, c("sex", "age"), sep = 1)
+who %>% 
+  gather(code, value, new_sp_m014:newrel_f65, na.rm = TRUE) %>% 
+  mutate(code = stringr::str_replace(code, "newrel", "new_rel")) %>%
+  separate(code, c("new", "var", "sexage")) %>% 
+  select(-new, -iso2, -iso3) %>%
+  separate(sexage, c("sex", "age"), sep = 1)
 
 
 #### merging datasets (inner, full, left, right joins)
@@ -251,9 +286,87 @@ right_join(base,visits) #will have everything in visits, rest NA; same as left_j
 full_join(base,visits)
 
 #merging on several variables
-hr_visits=tibble(id=rep(1:2,2),visit=rep(1:2,2),hr=rpois(4,lambda=100))
+hr_visits=tibble(id=rep(1:2,2),
+                 visit=rep(1:2,2),hr=rpois(4,lambda=100))
 full_join(visits,hr_visits) #same as full_join(visits,hr_visits,by=c("id","visits"))
 
 
 #### work through the chapters strings, factors, data and times (14-16)
+
+#strings
+
+str0 = "Hello World!" #this is a string
+str0
+
+str1 = c("Hello", "World!") #strings can be vectors
+str1
+
+str_c(str1, sep=" ") #concatinating vectors doesnt work
+str_c(str1, sep=", ", 
+      collapse=" ") #but with collapse = T it does
+str2 = str_c("Hello", "World!",  #or the vector is specified pieve by piece
+             sep=" ")
+str2
+
+
+str_c("Hello", 
+      c("beautiful", "cruel"), 
+      c("World!", "stoch lab class"), sep=" ") #concatinating iterates through 
+str3 = str_c("Hello", c("kind", "beautiful", "cruel"), "World!", sep=" ") #concatinating iterates through 
+str3
+
+str_to_upper(str2) #this is useful to make make data form different sources uniform
+
+str_replace(str2," ","_") #and replacing some symbols
+
+str_detect(str3,"l ") #or finding particular pieces of the string
+
+mpg %>% filter(str_detect(mpg$manufacturer, "n$")) #only manufacturers ending with "n"
+
+
+
+
+#factors
+mpg #trans is character
+table(mpg$trans)
+
+table(mpg[mpg$manufacturer=="audi",]$trans) #trans is no factor
+
+trans.f = as.factor(mpg$trans)
+table(trans.f[mpg$manufacturer=="audi"])
+
+table(as.factor(mpg[mpg$manufacturer=="audi",]$trans))
+
+
+
+
+#dates and times
+library("lubridate")
+
+flights
+
+flights1 = flights %>% 
+  na.omit() %>% #remove NAs -> flights that were cancelled(?)
+  select(year, month, day, hour, minute, dep_time, sched_dep_time)
+flights1
+
+
+
+#directly obtain time using pipe operator
+flights1 %>%  
+  mutate(sched_dep = make_datetime(year, month, day, hour, minute),
+         dep = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100)) %>%
+  select(sched_dep, dep)
+
+
+today() + dweeks(2) - ddays(2) #end of course
+
+ymd(20190401) - today() #report is due
+
+diff = today()-ymd(17770430) #what happened on that day?
+diff
+as.duration(diff)
+
+
+
 
