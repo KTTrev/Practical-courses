@@ -17,7 +17,6 @@ df0 <- rbind(df1, df2, df3)
 #Normal distributed?
 ggplot(data = df0, mapping = aes(sample = grades)) + 
   geom_density(aes(x = grades), fill = "chartreuse") +
-  geom_abline(alpha = 0.25) +
   ggtitle("Emperical densities") +
   theme(plot.title = element_text(hjust = 0.5)) + #to center the title on the plot
   facet_wrap(. ~types)
