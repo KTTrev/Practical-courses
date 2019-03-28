@@ -96,7 +96,7 @@ library(nycflights13)
 
 flights
 ## the data are saved in TIBBLE explained later (int=integer, dbl=double, chr=character, dttm = data+tme, lgl= T/F, fctr=factor)
-setwd("~/Stochastic_Lab/Stochastic_Lab_Course_2")
+setwd("~/Practical-courses/Stochastic_Lab_Course_2")
 
 ## filter = pick observations by their value
 jan1=filter(flights, month == 1, day == 1) # other options: >,<,!=,==,<=,>=

@@ -1,4 +1,4 @@
-setwd("~/Stochastic_Lab/Stochastic_Lab_Course_2")
+setwd("~/Practical-courses/Stochastic_Lab_Course_2")
 library("tidyverse")
 library("haven")
 library(maptools)
