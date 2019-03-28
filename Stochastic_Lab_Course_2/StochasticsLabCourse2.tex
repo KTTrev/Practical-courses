@@ -1,127 +1,203 @@
 \documentclass{report}
+%chapter style Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, %Bjornstrup
+\usepackage[Bjarne]{fncychap}
+
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
+\numberwithin{equation}{section} %for equations numbering
 \usepackage{amssymb}
 \usepackage[top=5cm, bottom=5cm, left=3cm, right=3cm]{geometry}
 \pagestyle{headings}
 \usepackage{lmodern}
 \usepackage{enumitem}
 \usepackage{float, graphicx}
+\usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
 \DeclareMathOperator{\argmax}{argmax}
+%define my own color
+\definecolor{royalblue}{rgb}{0.0, 0.14, 0.4}
 
-\title{\textbf{Stochastics Lab Course II}}
+%pagestyle
+\pagestyle{fancy}
+\fancyhead[RE,LO]{{\color{royalblue}Stochastics Lab Course II}}
+\fancyhead[LE,RO]{\leftmark}
+\fancyfoot[RE,LO]{\rightmark}
+{\color{royalblue}\fancyfoot[LE,RO]{\thepage}}
+\cfoot{}
+
+%decorative lines
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{
+		\color{royalblue}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{1pt}
+\renewcommand{\footrule}{\hbox to\headwidth{%
+		\color{royalblue}\leaders\hrule height \headrulewidth\hfill}}
+
+\title{\textsc{Stochastics Lab Course II}}
 \author{Khwam Tabougua Trevor}
 \date{March 2019}
 \begin{document}
 	
 \maketitle
 
-\chapter*{Introduction}
+{\color{royalblue}\chapter*{Introduction}}
 
 The "Stochastics Lab course II" is an Introductory Course for
-statistics and stochastics applications with R programming language. The course lasted for two weeks in March 2019. The report contains results, interpretations and figures from the ten exercises that had to be solved. Along with this report, there is also the R codes, which are recommended to understand the result.
+statistics and stochastics applications with R programming language. The course lasted for two weeks in March 2019. The report written on \LaTeX, contains results, interpretations and figures from the ten exercises that had to be solved. Along with this report, there is also the R codes, which are recommended to understand the result.
 
 \tableofcontents
-\chapter{Tidyverse}
-\section{Problem's description}
+{\color{royalblue}\chapter{Tidyverse}}
+{\color{royalblue}\section{Problem description}}
 
-\section{Methods' description}
+{\color{royalblue}\section{Methods}}
 
-\section{Results' discussion}
+{\color{royalblue}\section{Results}}
 
 %222222222222222222222222222222222222222222222%
 
-\chapter{Random number generation}
-\section{Problem's description}
+{\color{royalblue}\chapter{Random number generation}}
+{\color{royalblue}\section{Problem description}}
 
-\section{Methods' description}
+{\color{royalblue}\section{Methods}}
 Linear congruent generators: Give the algo/pseudo code. Give an 
 exemple (with a fuul period), the drawbacks of the method. Talk a 
 little bit about multiplicative congruent generator, then Mersenne
 twister.
 Inverse method:
-rejection method (Accept-Reject)
-\section{Results' discussion}
+rejection method (Accept-Reject) 
+{\color{royalblue}\section{Results}}
 
 %333333333333333333333333333333333333333333333%
 
-\chapter{Bootstrap}
-\section{Problem's description}
+{\color{royalblue}\chapter{Bootstrap}}
+{\color{royalblue}\section{Problem description}}
 
-\section{Methods' description}
+{\color{royalblue}\section{Methods}}
 Bootstrap:
 algorithm:
 Bootstrap confidence intervals:
 
 
-\section{Results' discussion}
+{\color{royalblue}\section{Results}}
 
 %44444444444444444444444444444444444444444444%
 
-\chapter{Generalised linear models}
-\section{Problem's description}
+{\color{royalblue}\chapter{Generalised linear models}}
+{\color{royalblue}\section{Problem description}}
 
-\section{Methods' description}
+{\color{royalblue}\section{Methods}}
 
-\section{Results' discussion}
+{\color{royalblue}\section{Results}}
 
 %55555555555555555555555555555555555555555555%
 
-\chapter{Survival analysis}
-\section{Problem's description}
+{\color{royalblue}\chapter{Survival analysis}}
+{\color{royalblue}\section{Problem description}}
 We want to analyze data where the outcome variable is the time until the occurrence of an event of interest. The event can be death, occurrence of a disease, marriage, divorce, etc. The time to event or survival time can be measured in days, weeks, years, etc. For example, if the event of interest is heart attack, then the survival time can be the time in years until a person develops a heart attack. subjects are usually followed over a specified time period and the focus is on the time at which the event of interest occurs. Why not use linear regression to model the survival time as a function of a set of predictor variables? First, survival times are typically positive numbers; ordinary linear regression may not be the best choice unless these times are first transformed in a way that
 removes this restriction. Second, and more importantly, ordinary linear regression cannot effectively handle the censoring of observations. Why not compare proportion of events in your groups using risk/odds ratios or logistic regression? Simply because it ignores time. \\
 To tackle these issues, we'll use some survival analysis methods.
-\section{Methods' description}
 
-\section{Results' discussion}
+{\color{royalblue}\section{Methods}}
+
+{\color{royalblue}\section{Results}}
 
 %66666666666666666666666666666666666666666666%
 
-\chapter{Kernel density estimation}
-\section{Problem's description}
+{\color{royalblue}\chapter{Kernel density estimation}}
+{\color{royalblue}\section{Problem description}}
 
-\section{Methods' description}
+Consider observations which are realizations of univariate random variables,
+$X_1, \ldots, X_n \sim F$ where $F$ denotes an unknown cumulative distribution function. The goal is to estimate the distribution $F$. In particular, we are interested in estimating the density $f = F^{'}$, assuming that it exists.\\
+Instead of assuming a parametric model for the distribution (e.g. Normal distribution
+with unknown expectation and variance), we rather want to be "as general as possible": that is, we only assume that the density exists and is suitably smooth (e.g. differentiable). It is then possible to estimate the unknown density function $f(\cdot)$.
 
-\section{Results' discussion}
+{\color{royalblue}\section{Methods}}
+	
+{\color{royalblue}\section{Results}}
 
 %77777777777777777777777777777777777777777777%
 
-\chapter{Nonparametric regression: local polynomials}
-\section{Problem's description}
+{\color{royalblue}\chapter{Nonparametric regression: local polynomials}}
+{\color{royalblue}\section{Problem description}}
 
-\section{Methods' description}
+To study the relation between a dependent variable $Y$ and an independent variable $X$, the common method used is linear regression. When appropriate, this method is very useful as its suppose a simple model of the form 
+\begin{equation}
+Y = \beta_{0} + \beta_{i}x_{i} + \epsilon_{i}
+\end{equation}
+This is advantageous since it is easy to interpret and to calculate. Moreover, when the assumptions on the residues $\epsilon_{i}$  are verified, we can run some tests on the parameters. \\
+However, the restricted assumption of linearity is frequently not fulfilled, eventually when the data set is very large. In that case, we would like to find a complex model that will better highlight the relation between $Y$ and $X$. A first approach for this aim would be to specify another parametric form for this relation, for example a transformation of the observations or a polynomial regression. Nonetheless it remains difficult to find the suitable relation since the form of the data does not really change after these transformations. That is why in this section, we opt for a non-parametric regression technique (local polynomials) in which data choose their own form of relation (the predictor does not take a predetermined form but is constructed according to information derived from the data) making things more flexible.
 
-\section{Results' discussion}
+{\color{royalblue}\section{Methods}}
+	
+{\color{royalblue}\section{Results}}
 
 %88888888888888888888888888888888888888888888%
 
-\chapter{Nonparametric regression: splines}
-\section{Problem's description}
+{\color{royalblue}\chapter{Nonparametric regression: splines}}
+{\color{royalblue}\section{Problem description}}
 
-\section{Methods' description}
-
-\section{Results' discussion}
+{\color{royalblue}\section{Methods}}
+	
+{\color{royalblue}\section{Results}}
 
 %99999999999999999999999999999999999999999999%
 
-\chapter{Mixed models}
-\section{Problem's description}
+{\color{royalblue}\chapter{Mixed models}}
+{\color{royalblue}\section{Problem description}}
+To illustrate the targeted problem ib this section, we use the following example. Let us consider the following linear model,\\
+\begin{equation}
+Y_{i,t} = \beta_{0} + \beta_{i}t + \epsilon_{i,t}
+\end{equation}
+Here, $\beta_{0}$ and $\beta_{i}$
+ 
 
-\section{Methods' description}
-
-\section{Results' discussion}
+{\color{royalblue}\section{Methods}}
+	
+{\color{royalblue}\section{Results}}
 
 %10101010101010101010101010101010101010101010%
 
-\chapter{Partial least squares}
-\section{Problem's description}
+{\color{royalblue}\chapter{Partial least squares}}
+{\color{royalblue}\section{Problem description}}
 
-\section{Methods' description}
+In a standard linear model, we have at our disposal $(X_i, Y_i)$ supposed to be linked with,
+\begin{equation}
+Y_i = X_{i}^{t}\beta+ \epsilon_{i}, \hspace{1cm}  1 \leqslant i \leqslant n
+\end{equation}
+In particular, each observation $X_i$ is described by p variables $(X_1, \ldots, X_n)$ so that the former relation should be understood as
+\begin{equation}
+Y_i = \sum_{j = 1}^{p} \beta_j X_{i}^{j}+ \epsilon_{i}, \hspace{1cm}  1 \leqslant i \leqslant n
+\end{equation}
 
-\section{Results' discussion}
+From a matricial point of view, the linear model can we written as follows :
+\begin{equation}
+Y_i = X \beta_0 + \epsilon_{i},\hspace{1cm}  Y \in \mathbb{R}^n, X \in \mathcal{M}_{n,p},  \beta_{0} \in \mathbb{R}^p
+\end{equation}
+
+A classical "optimal" estimator is the MLE :
+\begin{equation}
+\hat{\beta}_{MLE} := (X^{t}X)^{-1} X^{t}Y
+\end{equation}
+
+This can be obtained while remarking that J is a convex function, that possesses a unique minimizer if and only if $X^{t}X$ has a full rank, meaning that $J$ is indeed strongly convex :
+\begin{equation}
+ D^2 J= X^{t}X
+\end{equation}
+Which is a squared $p × p$ symmetric and positive matrix. It is non degenerate if $X^{t}X$ has full rank, meaning that necessarily $p \leqslant n$.\\
+
+In large dimensional case, we often have $p > n$, hence a problem when applying linear regression in this case:\\
+$X^{t}X$ is an $p × p$ matrix, but its rank is lower than $n$. If $n << p$, then
+\begin{equation}
+rk(X^{t}X) \leqslant n << p
+\end{equation}
+Consequently, the the Gram matrix $X^{t}X$ is not invertible and even very ill-conditionned (most of the eigenvalues are 0 !). The linear model $\hat{\beta}_{MLE}$ completely fails.\\
+As a remedy to this problem that occurs most of the time in big data analysis, we will make use of the partial least squares (PLS) method.
+
+{\color{royalblue}\section{Methods}}
+
+{\color{royalblue}\section{Results}}
 
 
 \end{document}
