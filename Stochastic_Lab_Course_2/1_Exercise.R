@@ -4,6 +4,7 @@ library("haven")
 library(maptools)
 library(raster)
 library(rgdal)
+library(tikzDevice) # To export plots as .tex files
 ##Question(a)
 
 children <- read_dta("childrenfinal.dta")
@@ -21,32 +22,25 @@ children2<- children1 %>%
 children3<- children2 %>%
   dplyr::select(c(hypage, ruralfacto, female, zstunt, zweight, zwast, adm2))
 
-#Make a scatter plot of zstunt against hypage
-ggplot(children3, aes(x = zstunt, y = hypage)) +
-  geom_point() +
-  ggtitle("scatter plot of zstunt against hypage")
+#Make a scatter plot of zstunt against hypage, Add a smooth line to the plot
 
-#Add a smooth line to the plot
-ggplot(children3, aes(x = zstunt, y = hypage)) +
+plot1 <- ggplot(children3, aes(x = zstunt, y = hypage)) +
   geom_point() +
-  geom_smooth(se = F) +
-  ggtitle("scatter plot of zstunt against hypage \n with smooth line")
+  geom_smooth(se = F, color = "purple")
 
 #smooth plots of zstunt against age for females and males on one plot
-ggplot(children3, aes(x = zstunt, y = hypage,  colour = factor(female))) +
-  geom_point() +
+plot2 <- ggplot(children3, aes(x = zstunt, y = hypage,  colour = factor(female))) +
+  geom_point(alpha = 0.4) +
   geom_smooth(se = F) +
   scale_colour_manual(labels = c("male", "female"), values = c("blue2", "green3")) +
-  guides(colour = guide_legend(title="Gender")) +
-  ggtitle("scatter plot of zstunt against hypage \n for females and males")
+  guides(colour = guide_legend(title="Gender"))
 
 #plot zstunt against age for urban and rural children
-ggplot(children3, aes(x = zstunt, y = hypage,  colour = factor(ruralfacto))) +
-  geom_point() +
+plot3 <- ggplot(children3, aes(x = zstunt, y = hypage,  colour = factor(ruralfacto))) +
+  geom_point(alpha = 0.4) +
   geom_smooth(se = F) +
   scale_colour_manual(labels = c("urban", "rural"), values = c("blue2", "green3")) +
-  guides(colour = guide_legend(title="Area")) +
-  ggtitle("zstunt against age for urban and rural children")
+  guides(colour = guide_legend(title="Area"))
 
 #Experiment with different aesthetics, themes and font sizes for the plots, report your favourite
 
@@ -91,7 +85,27 @@ ggplot(data = Kenya1_df, aes(x = long, y = lat, group = group, fill = zstunt.mea
   geom_polygon(color = "black", size = 0.25) +
   geom_text(data = centroids_df, aes(x = long, y = lat, label = NAME_1, group = NULL), size = 3) +
   scale_fill_distiller(name="Zstunt mean for \n each county", palette = "Spectral") +
-  theme(aspect.ratio=1)
+  theme(aspect.ratio = 1)
 
 ##(d)write the tibble from (b) into a text file
 write.table(children3,"children3.txt")
+
+#exports plots as .tex files
+tikz('Ex1plot1.tex',width=3.5, height=3)
+plot1
+dev.off()
+
+tikz('Ex1plot2.tex',width=3.5, height=3)
+plot2
+dev.off()
+
+tikz('Ex1plot3.tex',width=3.5, height=3)
+plot3
+dev.off()
+
+
+
+
+
+
+

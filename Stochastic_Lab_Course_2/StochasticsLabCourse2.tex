@@ -19,6 +19,8 @@
 %define my own color
 \definecolor{royalblue}{rgb}{0.0, 0.14, 0.4}
 
+\usepackage{tikz} %for .tex vector images
+
 %pagestyle
 \pagestyle{fancy}
 \fancyhead[RE,LO]{{\color{royalblue}Stochastics Lab Course II}}
@@ -47,14 +49,62 @@
 The "Stochastics Lab course II" is an Introductory Course for
 statistics and stochastics applications with R programming language. The course lasted for two weeks in March 2019. The report written on \LaTeX, contains results, interpretations and figures from the ten exercises that had to be solved. Along with this report, there is also the R codes, which are recommended to understand the result.
 
+%1111111111111111111111111111111111111111111111%
 \tableofcontents
 {\color{royalblue}\chapter{Tidyverse}}
 {\color{royalblue}\section{Problem description}}
+R base tools can accomplish "almost" every programming tasks. However, when using large datasets or when implementing complex tasks(like graphs, maps, tidying, etc), things get complicated. We want to enhance our algorithms fo batter results or productivity. To this aim, we will use the Tidyverse package.
 
 {\color{royalblue}\section{Methods}}
+Tidyverse is a collection of packages for data manipulation, exploration and visualization. The core packages are \textbf{ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, and forcats}, but we will only be using ggplot2, dplyr, tidyr, and tibble.
+\begin{itemize}
+	\item[--] \textbf{ggplot2} is a system for declaratively creating graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
+	
+	\item[--] \textbf{dplyr} is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges such as adding new variables (that are functions of existing variables), picking variables based on their names, selecting rows (based on their value), reducing multiple values down to a single summary, and changing the ordering of the rows.
+	
+	\item[--] \textbf{tidyr} package goal is to help you create tidy data. Tidy data is data where each variable is in a column, each observation is a row, and Each value is a cell.
+	
+	\item[--] \textbf{tibble} package goal is to use tibbles, which are modern take on data frames. They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e. converting character vectors to factors).
+	
+	
+\end{itemize}
 
 {\color{royalblue}\section{Results}}
 
+\begin{enumerate}[label=(\alph*)]
+	\item After loading and filtering the data childrenfinal.dta, we convert some variables (namely tetanusmother, breastfeeding, wantedchild, anetalvisits, and placedelivery) into double labeled \textit{<dbl>} (doubles, or real numbers).
+	
+	\item 
+	\item[°]The \hyperlink{Figure 1.1}{figure 1.1} indicates that the effect of zstunt is negatively affecting te hypage.
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex1plot1.tex}}
+		\caption{Scatter plot of zstunt against hypage with smooth line (in purple)}
+	\end{figure}
+	
+	\item[°]gjdhgdhdg
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex1plot2.tex}}
+		\caption{Some Meaningful Caption}
+	\end{figure}
+	
+	\item[°]gjdhgdhdg
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex1plot3.tex}}
+		\caption{Some Meaningful Caption}
+	\end{figure} 
+		
+	\item 
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.5]{Ex1plot4.png}
+		\caption{Scatter plot of zstunt against hypage with smooth line (in purple)}
+	\end{figure}	
+		
+		
+\end{enumerate}	
 %222222222222222222222222222222222222222222222%
 
 {\color{royalblue}\chapter{Random number generation}}
@@ -66,7 +116,7 @@ exemple (with a fuul period), the drawbacks of the method. Talk a
 little bit about multiplicative congruent generator, then Mersenne
 twister.
 Inverse method:
-rejection method (Accept-Reject) 
+rejection method (Accept-Reject)
 {\color{royalblue}\section{Results}}
 
 %333333333333333333333333333333333333333333333%
