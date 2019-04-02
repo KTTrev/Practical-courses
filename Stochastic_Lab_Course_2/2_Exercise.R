@@ -1,5 +1,7 @@
+setwd("~/Practical-courses/Stochastic_Lab_Course_2")
 set.seed(250)
 library("tidyverse")
+library(tikzDevice) # To export plots as .tex files
 
 ##Question (a)
 #Switch the default random number generator in R to Wichmann-Hill
@@ -40,9 +42,8 @@ colnames(bin_rbin) <- c("rand_num", "method")
 
 df <- rbind(bin_inv, bin_bern, bin_rbin)
 
-ggplot(df, aes(x = rand_num, fill = method)) +
-  geom_histogram( binwidth=.5, position="dodge") +
-  labs(fill = "Simulation \n method", title = "Histograms of all three samples", x = "random numbers")
+plot1 <- ggplot(df, aes(x = rand_num, fill = method)) +
+  geom_histogram( binwidth=.5, position="dodge")
 
 #Switch the random number generator back to its default
 RNGkind(kind = "default", normal.kind = NULL)
@@ -78,15 +79,28 @@ while(length(rand_num) != N){
 #Histogram of the obtained sample with the standard normal density
 k <- rnorm(N)
 df <- data.frame(rand_num, k)
-ggplot(df) +
+plot2 <- ggplot(df) +
   geom_histogram(aes( x = rand_num, y = ..density.., colour = rand_num), colour ="white") +
-  geom_density(aes(x = k), colour = "blue") +
-  ggtitle("Histogram of the obtained sample and plot the standard normal density")
+  geom_density(aes(x = k), colour = "blue") 
 
 #QQ-plot
-ggplot(data = df, mapping = aes(sample = rand_num)) +
+plot3 <- ggplot(data = df, mapping = aes(sample = rand_num)) +
   stat_qq() 
 
 #it is not possible to simulate from the standard Cauchy density using
 #the accept-reject method, the standard normal candidate density
 #because max(g(x)/f(x)) == Inf
+
+
+#exports plots as .tex files
+tikz('Ex2plot1.tex',width=3.5, height=3, sanitize=TRUE)
+plot1
+dev.off()
+
+tikz('Ex2plot2.tex',width=3.5, height=3, sanitize=TRUE)
+plot2
+dev.off()
+
+tikz('Ex2plot3.tex',width=3.5, height=3, sanitize=TRUE)
+plot3
+dev.off()

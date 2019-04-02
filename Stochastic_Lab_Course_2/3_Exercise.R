@@ -2,6 +2,7 @@ setwd("~/Practical-courses/Stochastic_Lab_Course_2")
 set.seed(1)
 library("tidyverse")
 library("bootstrap")
+library(tikzDevice) # To export plots as .tex files
 
 n <- 100 #the sample size 
 R <- 1000 #the number of bootstrap replications
@@ -204,7 +205,7 @@ Fourth_average_interval_length <- c(sum(df$CI_MED_right - df$CI_MED_left)/nrow(d
 shhs1 <- read.delim("shhs1.txt")
 
 #histogram and empirical distribution of the variable rdi4p
-ggplot(shhs1, aes(x = rdi4p, y = ..density..)) +
+plot <- ggplot(shhs1, aes(x = rdi4p, y = ..density..)) +
   geom_histogram(color = 'white') +
   geom_density(aes(x = rdi4p), colour = "blue")
 
@@ -251,3 +252,7 @@ CI_SD_left <- A$confpoints[1,2]
 CI_SD_right <- A$confpoints[2,2]
 
 is_sd_A = rdi4p.sigma >= CI_SD_left & rdi4p.sigma <= CI_SD_right
+
+tikz('Ex3plot.tex',width=3.5, height=3, sanitize=TRUE)
+plot
+dev.off()

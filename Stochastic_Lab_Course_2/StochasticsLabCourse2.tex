@@ -12,10 +12,16 @@
 \usepackage{lmodern}
 \usepackage{enumitem}
 \usepackage{float, graphicx}
+\usepackage[%  
+colorlinks=true,
+pdfborder={0 0 0},
+linkcolor=red
+]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
 \DeclareMathOperator{\argmax}{argmax}
+\newtheorem{theorem}{Theorem}
 %define my own color
 \definecolor{royalblue}{rgb}{0.0, 0.14, 0.4}
 
@@ -108,16 +114,140 @@ Tidyverse is a collection of packages for data manipulation, exploration and vis
 %222222222222222222222222222222222222222222222%
 
 {\color{royalblue}\chapter{Random number generation}}
+
 {\color{royalblue}\section{Problem description}}
+Generating a random variable from any distribution is very essential for stochastics studies. However, true random numbers are not always available, but we can use some algorithms that generate some pseudo-random numbers.\\
 
 {\color{royalblue}\section{Methods}}
-Linear congruent generators: Give the algo/pseudo code. Give an 
-exemple (with a fuul period), the drawbacks of the method. Talk a 
-little bit about multiplicative congruent generator, then Mersenne
-twister.
-Inverse method:
-rejection method (Accept-Reject)
+Pseudo-random numbers are a sequence of numbers that appear "random" or approximate properties of random numbers with the following properties:\\
+\begin{itemize}
+	\item Good approximation of the properties of random numbers.
+	\item Number can be easily and efficiently generated.
+	\item Reproducibility (truly random numbers never satisfy this).
+\end{itemize}
+
+With the help of some probability properties, it is typically enough to be able to use a uniform distributed random variable, in order to generate any pseudo-random numbers from a given distribution.\\
+The simplest idea for generating uniformly distributed pseudo-random numbers is using a \textit{linear congruent generators} (LCG):\\
+\fbox{
+	\begin{minipage}{1\textwidth}
+		\begin{center}
+			\begin{enumerate}
+				\item Choose positive integer parameters a, c and m.
+				\item Choose an initial value $x_0 \in \{0, 1, \ldots, m - 1\}$ (this value is called the seed).
+				\item For each $n \in \mathbb{N} $, compute\\
+				\begin{equation}
+				x_{n+1} := ax_{n} + c \hspace{0.2cm}
+				\text{mod} \hspace{0.2cm} m, \hspace{1cm} \forall n \in \mathbb{N} 
+				\end{equation}
+				\item The psuedorandom numbers are the sequence $x_1; x_2; x_3; \ldots $.
+			\end{enumerate}
+		\end{center}
+	\end{minipage}
+}\\
+
+We make some observations regarding the LCG algorithm.\\
+\begin{itemize}
+	\item The LCG can generates at most m distinct numbers which are contained in $\{0, 1, \ldots, m - 1\}$
+	\item As soon as some number in the sequence, say ${x_n}_0$, is repeated (i.e.,$\exists p$ such that $x_{n_{0} + p} = {x_n}_0$),
+
+	then the same is true for the entire sequence:
+	\begin{equation}
+	x_{n_{0} +p+j} = x_{n_{0} + j}, \hspace{0.5cm} \forall j \geqslant 1
+	\end{equation}
+	The number $p$ is called the period of the sequence. This musst be less than or equal to $m$.
+	\item Suppose that (under the right conditions) the LCG approximates a uniform distribution with
+
+	parameters $0$ and $m$. In this case, $x_n / m$ would approximate a uniform distribution with parameters
+0 and 1.
+\end{itemize}
+To generate uniformly random numbers, the period has to be maximal
+(i.e., $p = m$), so that we sample every value in the sequence before repeating any. One can show that LCG has a full period $m = 2^{b}$, $b \geqslant 2$ if and
+only if $c \in (0; m)$ is odd and $a$ mod $4 = 1$.\\
+
+After generating uniform pseudo-random numbers, we can easily obtain random variables from other distributions. The \textbf{inversion method} is one way of doing so, with the help of the following theorem:
+\begin{theorem}
+	Let F be a distribution function on $\mathbb{R}$. The quantile function $F^{-1}$ is defined by
+	 \[ F^{-1}(u) = \text{inf} \{x: F(x)\ge u, 0 < u < 1 \} \]
+	If $U \sim U_{[0; 1]}$, then $F^{-1}(u)$ has a distribution function
+$F$.
+\end{theorem}
+Hence, for continuous distributions (exponential, Pareto, standard Cauchy, etc) where $F^{-1}$, we simply simulate $U_{i}$ (with LCG) and set $X_{i} = F^{-1}(U_i)$. If $F^{-1}$ cannot be inverted analytically, appropriate
+numerical methods can be applied.\\
+
+Let $X$ be a discrete random variable with possible values $\{x_{1}, x{2},\ldots \}$, so that $F(x) = \displaystyle\sum_{i:x_{i} \leqslant x} P(X = x_{i})$ and
+\[F^{-1} =  \text{min} \{k \in \mathbb{N}: \displaystyle\sum_{j=1}^{k} P(X = x_{j}) = \displaystyle\sum_{j=1}^{k}p_{j} \geqslant r\}\]
+Then the inverse method becomes: set $X = x_{1}$ if and only if $U_{i} \in [0, p_{1})$ and $X = x_{k}$ if and only if
+$U_{i} \in \Big[ \displaystyle\sum_{j=1}^{k-1}p_{j}, \displaystyle\sum_{j=1}^{k}p_{j}\Big)$, $k = 2, 3, \ldots$. Note that
+
+\[P(X = x_{k}) = P\Big(\displaystyle\sum_{j=1}^{k-1}p_{j} \leqslant U_{i} < \displaystyle\sum_{j=1}^{k}p_{j} \Big) = \displaystyle\sum_{j=1}^{k}p_{j} - \displaystyle\sum_{j=1}^{k-1}p_{j} = p_{k} \]
+
+For example, to simulate a Bernoulli random variable $Ber(p)$, generate $U \in U_{[0, 1]}$ and
+set $X = 0$, if $U \leqslant 1 - p$ and $X = 1$ if $U > 1 - p$.\\
+
+Another general approach to pseudo-random variables generation is the \textbf{acceptance-rejection method}.
+
+\fbox{
+	\begin{minipage}{1\textwidth}
+		\begin{center}
+			\begin{enumerate}
+				\item [] \textbf{Data}: Two probability densitiy functions: $f$ for $X$ and $g$ for $Y$
+				\item Find a constant $M > 0$ such that $sup_{x} \frac{f(x)}{g(x)} \leqslant c$ ;
+				\item Obtain a sample $y$ from $Y$ ;
+				\item Obtain a sample $u$ from the uniform distribution on $[0, 1]$;
+				\item \textbf{if} $u < \dfrac{f(y)}{cg(y)}$ \textbf{then}
+				\item $\bigg|$ Accept $y$ as a sample drawn from $f$;
+				\item \textbf{else}
+				\item $\bigg|$ Reject the value of $y$ and return to the sampling step (line 2);
+				\item [] \textbf{Result:} $y$, a sample drawn from $f$ (using $g$)
+			\end{enumerate}
+		\end{center}
+	\end{minipage}
+}\\
+
+\textbf{NB:} Computing $c$ could be difficult, but one can show that $c = sup_{x} {\frac{f(x)}{g(x)}}$\\
+
 {\color{royalblue}\section{Results}}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+	With the Wichmann-Hill pseudo-random number generator in R, we Simulate $N =1000 $ binomial random variables $B(n = 10, p = 0.4)$ using three approaches: inversion
+	method, by simulating corresponding Bernoulli random variables by inversion methodand using R built-in function rbinom. From the figure \ref{fig 2.1}, the histograms of the three samples present the same shape but are different. This proves that the "random" numbers generated by our methods are just approximations of true random numbers.
+	
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex2plot1.tex}}
+		\caption{Histogram of the empirical CDF of allthree samples}
+		\label{fig 2.1}
+	\end{figure}
+	
+	\item To use accept-reject method (and a generator for uniform random variables only), of $N = 10000$ standard normal distributed random variableswith density 
+	$f(x) = (2\pi)^{-\frac{1}{2}}e^{-\frac{x^2}{2}} $, the density of thestandard Cauchy distribution is used: 
+	$ g(x)=\{{\pi(1+x^2)}^{-1}\} $.
+	
+	\item[°] The constant value $c$ for this method is given by $sup_{x} {\frac{f(x)}{g(x)}} = 1.520347 $
+	\item[°] Then after computing the $N$ standard normal random variables, we notice that the estimated and theoretical acceptance probabilities are almost equal. This is well depicted with in the figure \ref{fig 2.2}, where the histogram of the obtain sample is symmetric and has the same shape as the standard normal density curve.
+	
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex2plot2.tex}}
+		\caption{Histogram of the obtained sample and the standard
+		normal density (in blue)}
+	\label{fig 2.2}
+	\end{figure}
+	
+	\item[°] The QQ-plot in figure \ref{fig 2.3} shows points following the identity line. Hence the accept-reject method used to simulate a standard normal distributed sample (using the the standard Cauchy density) is well accurate.
+	
+	\newpage
+	
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex2plot3.tex}}
+		\caption{QQ-plot}
+		\label{fig 2.3}
+	\end{figure}
+	
+	\item[°] However, it is not possible to simulate ample distributed from the standard Cauchy density usingthe accept-reject method with a standard normal candidate density, simply because cannot find a $c$ such that $g(x) \leqslant cf(x)$ is verified ( because $ sup_{x} {\frac{g(x)}{f(x)}} = \infty $).
+	
+\end{enumerate}
 
 %333333333333333333333333333333333333333333333%
 
