@@ -65,7 +65,8 @@ children4 <- children3 %>%
 #Adding the missing county Isiolo
 children4[nrow(children4) + 1,] <- NA
 children4$NAME_1[47] <- "Isiolo"
-
+#reordering 
+children4<- children4[order(children4$NAME_1),]
 #Prepare the dataframe for ggplot
 Kenya1_UTM@data$id <- rownames(Kenya1_UTM@data)
 Kenya1_UTM@data <- mutate(Kenya1_UTM@data, zstunt.mean= children4$mean)
