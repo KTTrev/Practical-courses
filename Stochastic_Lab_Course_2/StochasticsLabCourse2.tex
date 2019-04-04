@@ -11,6 +11,8 @@
 \pagestyle{headings}
 \usepackage{lmodern}
 \usepackage{enumitem}
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \usepackage{float, graphicx}
 \usepackage[%  
 colorlinks=true,
@@ -261,13 +263,45 @@ the accept-reject method with a standard normal candidate density, simply becaus
 
 {\color{royalblue}\chapter{Bootstrap}}
 {\color{royalblue}\section{Problem description}}
-Suppose that a sample $ X = \{X_1,\ldots ,X_n \} $ is used to estimate a parameter $\theta$ of the distribution $P$ (which is unknown) and let $\hat{\theta} = S(X)$ be a statistic that estimates $\theta$. For the purpose of statistical inference on $\theta$,  we are interested in the sampling distribution of $\hat{\theta}$ (or certain aspects of it) so as to assess the accuracy of our estimator or to set confidence intervals for our estimate of $\theta$. If the true distribution $P$ were known, we could draw samples $X^{(b)}, b = 1,\ldots, B$ from P and use Monte Carlo methods to estimate the sampling distribution of our estimate $\hat{\theta}$. The problem is that $P$ is unknown and we cannot sample from it.\\
+Suppose that a sample $ \mathbf{X} = \{X_1,\ldots ,X_n \} $ is used to estimate a parameter $\theta$ of the distribution $P$ (which is unknown) and let $\hat{\theta} = S(\mathbf{X})$ be a statistic that estimates $\theta$. For the purpose of statistical inference on $\theta$,  we are interested in the sampling distribution of $\hat{\theta}$ (or certain aspects of it) so as to assess the accuracy of our estimator or to set confidence intervals for our estimate of $\theta$. If the true distribution $P$ were known, we could draw samples $\mathbf{X}_{l}, l = 1,\ldots, R \in \mathbb{N}$ from P and use Monte Carlo methods to estimate the sampling distribution of our estimate $\hat{\theta}$. The problem is that $P$ is unknown and we cannot sample from it.\\
 The following section explains how to use bootstrap to make the interference on $\hat{\theta}$.
 
 {\color{royalblue}\section{Methods}}
-Bootstrap:
-algorithm:
-Bootstrap confidence intervals:
+The bootstrap is a computerintensive resampling method, which  principle can be summarized by the following schematic diagram:
+\begin{center}
+	\begin{tabular}{|P{3.5cm} P{3.5cm} P{3.5cm} P{3.5cm}|}
+		\hline
+		\multicolumn{2}{|c}{\textbf{Real World}} & \multicolumn{2}{c|}{\textbf{Bootstrap World}} \\
+		Unknown probability distribution & Observed random sample  & Empirical distribution & Bootstrap sample \\
+		\multicolumn{4}{|c|}{$P \longrightarrow \mathbf{X} = \{X_1,\ldots ,X_n \}  \hspace{1cm} \Longrightarrow \hspace{1cm} \hat{P} \longrightarrow \mathbf{X}^{*} = \{{X_1}^{*},\ldots ,{X_n}^{*} \} $} \\
+		\multicolumn{2}{|c}{$\Big\downarrow$} & \multicolumn{2}{c|}{$\Big\downarrow$} \\ 
+		\multicolumn{2}{|c}{$\hat{\theta} = S(\mathbf{X})$} & \multicolumn{2}{c|}{$\hat{\theta}^{*} = S(\mathbf{X}^{*})$} \\  
+		\multicolumn{2}{|c}{Statistic of interest} & \multicolumn{2}{c|}{Bootstrap replication} \\
+		\hline  
+	\end{tabular}
+\end{center}
+
+Then The idea is to sample from an empiricaldistribution function. Recall that for random variables $Y = \{Y_1,\ldots ,Y_n \}$, the empirical distribution function is defined via $F_n(y) = n^{-1} \displaystyle\sum_{i=1}^{n}\mathbb{I}(Y_i \leqslant y)$. If the sample of size $n$ is from a continuous distribution, then each observation has a probability $1/n$ and sampling from $F_n$ would be equivalent to draw with replacement from the sample. Hence the following algorithm:
+
+\fbox{
+	\begin{minipage}{1\textwidth}
+		\begin{center}
+			\begin{enumerate}
+				\item Draw $n$ times with replacement from $\mathbf{X}$ to get a bootstrap sample $\mathbf{X}^{*}_{1}$ of size $n$. Repeat $R$ times to get $R$ bootstrap samples $\mathbf{X}^{*}_{1},\ldots,\mathbf{X}^{*}_{R}$, each of size $n$.
+				\item Compute bootstrap statistics $S(\mathbf{X}^{*}_{1}),\ldots, S(\mathbf{X}^{*}_{R})$.
+				\item Make inference about $\theta$ based on $S(\mathbf{X}^{*}_{1}),\ldots, S(\mathbf{X}^{*}_{R})$.
+			\end{enumerate}
+		\end{center}
+	\end{minipage}
+}\\
+
+We can also evaluate the goodness of the estimators (point or interval) based on the bootstrap sample. We construct confidence intervals for $\theta$ from the bootstrap replications (see step 2 in the above algorithm). First recall the definition of a confidence interval.\\
+
+Let $\mathbf{X} = (X_1, \ldots, X_n)$ be a sample from a population with distribution $P \in \mathcal{P} = \{ P_\theta :\theta \in \Theta \subset \mathbb{R}^d \}$. Let $C(\mathbf{X})$ depend only on the sample $\mathbf{X}$ and $\theta \in \Theta$ be an unknown parameterof interest. If
+\[ \inf_{P \in \mathcal{P}} P(\theta \in C(\Theta)) \geqslant 1-\alpha \]
+for a fixed $\alpha \in (0,1)$, then $C(\Theta)$ is a \textbf{confidence set} for $\theta$ with \textbf{level ofsignificance} $1-\alpha$. If the parameter $\theta$ is real-valued, then 
+$C(\Theta) = [\underline{\theta}(\mathbf{X}), \bar{\theta}(\mathbf{X})]$, for a pair of real-valuedstatistics $\underline{\theta}$ and $\bar{\theta}$ is called a confidence interval for $\theta$.\\
+Therefore, a natural way to construct the bootstrap confidence interval is to use empirical quantiles of the bootstrap distribution of $S(\mathbf{X})$: compute $\hat{\theta}^{*}_i = S(\mathbf{X}^{*}_{i})$, $i = 1,\ldots,R$ bootstrap statistics and set the confidence interval for $\theta$ by $[\theta^{*}_{L}, \theta^{*}_{U}]$, where $\theta^{*}_{L}$ and $\theta^{*}_{U}$ are respectively $\lfloor R(\frac{1-\alpha}{2}) \rfloor$-th and $\lfloor R(1-\frac{1-\alpha}{2}) \rfloor$-th value in the ordered list of $\theta^{*}_{i}$. Such confidence intervals arecalled \textbf{bootstrap percentile}  confidence intervals.
 
 
 {\color{royalblue}\section{Results}}

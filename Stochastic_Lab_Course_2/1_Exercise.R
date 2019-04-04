@@ -24,19 +24,19 @@ children3<- children2 %>%
 
 #Make a scatter plot of zstunt against hypage, Add a smooth line to the plot
 
-plot1 <- ggplot(children3, aes(x = zstunt, y = hypage)) +
+plot1 <- ggplot(children3, aes(x = hypage, y = zstunt)) +
   geom_point() +
   geom_smooth(se = F, color = "purple")
 
 #smooth plots of zstunt against age for females and males on one plot
-plot2 <- ggplot(children3, aes(x = zstunt, y = hypage,  colour = factor(female))) +
+plot2 <- ggplot(children3, aes(x = hypage, y = zstunt,  colour = factor(female))) +
   geom_point(alpha = 0.4) +
   geom_smooth(se = F) +
   scale_colour_manual(labels = c("male", "female"), values = c("blue2", "green3")) +
   guides(colour = guide_legend(title="Gender"))
 
 #plot zstunt against age for urban and rural children
-plot3 <- ggplot(children3, aes(x = zstunt, y = hypage,  colour = factor(ruralfacto))) +
+plot3 <- ggplot(children3, aes(x = hypage, y = zstunt,  colour = factor(ruralfacto))) +
   geom_point(alpha = 0.4) +
   geom_smooth(se = F) +
   scale_colour_manual(labels = c("urban", "rural"), values = c("blue2", "green3")) +

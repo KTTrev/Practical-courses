@@ -146,7 +146,7 @@ GCV <- function(Y, X, bw, l){
     V = diag(epanechnikov(aux/bw))
     
     weight_vector = solve(t(X_mat) %*% V %*% X_mat) %*% t(X_mat) %*% V
-    weight_vector = factorial(l+1) * weight_vector[l+1, ]
+    weight_vector = weight_vector[1, ]
     
     W_trace[index] = sum((X == i) * weight_vector)
     
@@ -167,10 +167,10 @@ GCV2 <- Vectorize(function(bw){GCV(Y, X, bw, l = 2)})
 GCV3 <- Vectorize(function(bw){GCV(Y, X, bw, l = 3)})
 GCV4 <- Vectorize(function(bw){GCV(Y, X, bw, l = 4)})
 
-opt.GCV1 <- optimize(GCV1, interval = c(1, 11))$minimum
-opt.GCV2 <- optimize(GCV2, interval = c(1, 11))$minimum
-opt.GCV3 <- optimize(GCV3, interval = c(1, 11))$minimum
-opt.GCV4 <- optimize(GCV4, interval = c(1, 11))$minimum
+opt.GCV1 <- optimize(GCV1, interval = c(2, 11))$minimum
+opt.GCV2 <- optimize(GCV2, interval = c(2, 11))$minimum
+opt.GCV3 <- optimize(GCV3, interval = c(2, 11))$minimum
+opt.GCV4 <- optimize(GCV4, interval = c(2, 11))$minimum
 
 
 
