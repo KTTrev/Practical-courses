@@ -43,19 +43,19 @@ for (j in 1:M) {
   CI_MED_right[j] <- MED[floor(R*(1-(1-alpha)/2))]
   CI_SD_left[j] <- SD[floor(R*(1-alpha))/2]
   CI_SD_right[j] <- SD[floor(R*(1-(1-alpha)/2))]
-  df <- data.frame(CI_MED_left, CI_MED_right, CI_SD_left, CI_SD_right)
+  df1 <- data.frame(CI_MED_left, CI_MED_right, CI_SD_left, CI_SD_right)
 }
-df <- df %>% 
+df1 <- df1 %>% 
   mutate(is_median = xmed >= CI_MED_left & xmed <= CI_MED_right)
-df <- df %>% 
+df1 <- df1 %>% 
   mutate(is_sd = sigma >= CI_SD_left & sigma <= CI_SD_right)
 
 
 #estimation of the coverage probability of both confidence intervals
-First_coverage_prob <- c(sum(df$is_median)/M, sum(df$is_sd)/M)
+First_coverage_prob <- c(sum(df1$is_median)/M, sum(df1$is_sd)/M)
 
 #Estimation of the average interval length
-First_average_interval_length <- c(sum(df$CI_MED_right - df$CI_MED_left)/nrow(df), sum(df$CI_SD_right - df$CI_SD_left)/nrow(df))
+First_average_interval_length <- c(sum(df1$CI_MED_right - df1$CI_MED_left)/nrow(df1), sum(df1$CI_SD_right - df1$CI_SD_left)/nrow(df1))
 
 #####if n = R = 1000 
 n <- 1000
@@ -85,19 +85,19 @@ for (j in 1:M) {
   CI_MED_right[j] <- MED[floor(R*(1-(1-alpha)/2))]
   CI_SD_left[j] <- SD[floor(R*(1-alpha))/2]
   CI_SD_right[j] <- SD[floor(R*(1-(1-alpha)/2))]
-  df <- data.frame(CI_MED_left, CI_MED_right, CI_SD_left, CI_SD_right)
+  df2 <- data.frame(CI_MED_left, CI_MED_right, CI_SD_left, CI_SD_right)
 }
-df <- df %>% 
+df2 <- df2 %>% 
   mutate(is_median = xmed >= CI_MED_left & xmed <= CI_MED_right)
-df <- df %>% 
+df2 <- df2 %>% 
   mutate(is_sd = sigma >= CI_SD_left & sigma <= CI_SD_right)
 
 
 #estimation of the coverage probability of both confidence intervals
-Second_coverage_prob <- c(sum(df$is_median)/M, sum(df$is_sd)/M)
+Second_coverage_prob <- c(sum(df2$is_median)/M, sum(df2$is_sd)/M)
 
 #Estimation of the average interval length
-Second_average_interval_length <- c(sum(df$CI_MED_right - df$CI_MED_left)/nrow(df), sum(df$CI_SD_right - df$CI_SD_left)/nrow(df))
+Second_average_interval_length <- c(sum(df2$CI_MED_right - df2$CI_MED_left)/nrow(df2), sum(df2$CI_SD_right - df2$CI_SD_left)/nrow(df2))
 
 #####if n = 100, R = 5000
 n <- 100
@@ -127,19 +127,19 @@ for (j in 1:M) {
   CI_MED_right[j] <- MED[floor(R*(1-(1-alpha)/2))]
   CI_SD_left[j] <- SD[floor(R*(1-alpha))/2]
   CI_SD_right[j] <- SD[floor(R*(1-(1-alpha)/2))]
-  df <- data.frame(CI_MED_left, CI_MED_right, CI_SD_left, CI_SD_right)
+  df3 <- data.frame(CI_MED_left, CI_MED_right, CI_SD_left, CI_SD_right)
 }
-df <- df %>% 
+df3 <- df3 %>% 
   mutate(is_median = xmed >= CI_MED_left & xmed <= CI_MED_right)
-df <- df %>% 
+df3 <- df3 %>% 
   mutate(is_sd = sigma >= CI_SD_left & sigma <= CI_SD_right)
 
 
 #estimation of the coverage probability of both confidence intervals
-Third_coverage_prob <- c(sum(df$is_median)/M, sum(df$is_sd)/M)
+Third_coverage_prob <- c(sum(df3$is_median)/M, sum(df3$is_sd)/M)
 
 #Estimation of the average interval length
-Third_average_interval_length <- c(sum(df$CI_MED_right - df$CI_MED_left)/nrow(df), sum(df$CI_SD_right - df$CI_SD_left)/nrow(df))
+Third_average_interval_length <- c(sum(df3$CI_MED_right - df3$CI_MED_left)/nrow(df3), sum(df3$CI_SD_right - df3$CI_SD_left)/nrow(df3))
 
 ####bootstrap accelerated 
 ####with M Monte Carlo samples to assess the coverage probability and the average length
@@ -186,18 +186,19 @@ df_bca_point_SD <- df_bca_point_SD %>%
 
 #Before we continue, we group relevant results into dataframes
 estim <-  data.frame(z_SD, a.0_SD, z_MED, a.0_MED) #estimated bias correction and estimated acceleration constant values
-df <- data.frame(df_bca_point_MED, df_bca_point_SD) 
+df4 <- data.frame(df_bca_point_MED, df_bca_point_SD) 
 # Now, estimation of the coverage probability of both confidence intervals
 
-Fourth_coverage_prob <- c(sum(df$is_median)/M, sum(df$is_sd)/M)
+Fourth_coverage_prob <- c(sum(df4$is_median)/M, sum(df4$is_sd)/M)
 
 #Estimation of the average interval length
-Fourth_average_interval_length <- c(sum(df$CI_MED_right - df$CI_MED_left)/nrow(df), sum(df$CI_SD_right - df$CI_SD_left)/nrow(df))
+Fourth_average_interval_length <- c(sum(df4$CI_MED_right - df4$CI_MED_left)/nrow(df4), sum(df4$CI_SD_right - df4$CI_SD_left)/nrow(df4))
 
 ####IMPORTANT: take the average of  each z_SD, a.0_SD, z_MED and a.0_MED, to comment on z0 and a^
-
-
-
+comment1 <- mean(z_SD)
+comment2 <- mean(a.0_SD)
+comment3 <- mean(z_MED)
+comment4 <- mean(a.0_MED)
 
 
 
@@ -230,6 +231,7 @@ CI_MED_right <- MED[floor(R*(1-(1-alpha)/2))]
 CI_SD_left <- SD[floor(R*(1-alpha))/2]
 CI_SD_right <- SD[floor(R*(1-(1-alpha)/2))]
 
+boostrap_percentile_CI <- data.frame(CI_MED_left, CI_MED_right, CI_SD_left, CI_SD_right)
 is_median <- rdi4p.med >= CI_MED_left & rdi4p.med <= CI_MED_right
 is_sd <- rdi4p.sigma >= CI_SD_left & rdi4p.sigma <= CI_SD_right
 
@@ -252,6 +254,9 @@ CI_SD_left <- A$confpoints[1,2]
 CI_SD_right <- A$confpoints[2,2]
 
 is_sd_A = rdi4p.sigma >= CI_SD_left & rdi4p.sigma <= CI_SD_right
+
+BCa_CI <- data.frame(CI_MED_left, CI_MED_right, CI_SD_left, CI_SD_right, z_MED, a.0_MED, z_SD, a.0_SD)
+
 
 tikz('Ex3plot.tex',width=3.5, height=3, sanitize=TRUE)
 plot

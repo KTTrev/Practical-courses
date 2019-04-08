@@ -13,14 +13,14 @@
 \usepackage{enumitem}
 \usepackage{array}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
-\usepackage{float, graphicx}
+\usepackage{float, graphicx, subcaption}
 \usepackage[%  
 colorlinks=true,
 pdfborder={0 0 0},
 linkcolor=red
 ]{hyperref}
 \usepackage{fancyhdr}
-\usepackage{hyperref}
+\usepackage{caption} %to fix referencing to exact the label
 \usepackage[dvipsnames]{xcolor}
 \DeclareMathOperator{\argmax}{argmax}
 \newtheorem{theorem}{Theorem}
@@ -281,7 +281,9 @@ The bootstrap is a computerintensive resampling method, which  principle can be 
 	\end{tabular}
 \end{center}
 
-Then The idea is to sample from an empiricaldistribution function. Recall that for random variables $Y = \{Y_1,\ldots ,Y_n \}$, the empirical distribution function is defined via $F_n(y) = n^{-1} \displaystyle\sum_{i=1}^{n}\mathbb{I}(Y_i \leqslant y)$. If the sample of size $n$ is from a continuous distribution, then each observation has a probability $1/n$ and sampling from $F_n$ would be equivalent to draw with replacement from the sample. Hence the following algorithm:
+Then The idea is to sample from an empirical
+distribution function. Recall that for random variables $Y = \{Y_1,\ldots ,Y_n \}$, the empirical distribution function is defined via $F_n(y) = n^{-1} \displaystyle\sum_{i=1}^{n}\mathbb{I}(Y_i \leqslant y)$ (we will use the notation $F_B$ for the bootstrap empirical distribution). If the sample of size $n$ is from a continuous distribution, then each
+ observation has a probability $1/n$ and sampling from $F_n$ would be equivalent to draw with replacement from the sample. Hence the following algorithm:
 
 \fbox{
 	\begin{minipage}{1\textwidth}
@@ -295,25 +297,295 @@ Then The idea is to sample from an empiricaldistribution function. Recall that 
 	\end{minipage}
 }\\
 
-We can also evaluate the goodness of the estimators (point or interval) based on the bootstrap sample. We construct confidence intervals for $\theta$ from the bootstrap replications (see step 2 in the above algorithm). First recall the definition of a confidence interval.\\
+We can also evaluate the goodness of the estimators (point or interval) based on the bootstrap sample. We construct confidence intervals for $\theta$ from the bootstrap replications (see step 2 in the above algorithm). \\
 
-Let $\mathbf{X} = (X_1, \ldots, X_n)$ be a sample from a population with distribution $P \in \mathcal{P} = \{ P_\theta :\theta \in \Theta \subset \mathbb{R}^d \}$. Let $C(\mathbf{X})$ depend only on the sample $\mathbf{X}$ and $\theta \in \Theta$ be an unknown parameterof interest. If
+First recall the definition of a confidence interval. Let $\mathbf{X} = (X_1, \ldots, X_n)$ be a sample from a population with distribution $P \in \mathcal{P} = \{ P_\theta :\theta \in \Theta \subset \mathbb{R}^d \}$. Let $C(\mathbf{X})$ depend only on the sample $\mathbf{X}$ and $\theta \in \Theta$ be an unknown parameter
+of interest. If
 \[ \inf_{P \in \mathcal{P}} P(\theta \in C(\Theta)) \geqslant 1-\alpha \]
-for a fixed $\alpha \in (0,1)$, then $C(\Theta)$ is a \textbf{confidence set} for $\theta$ with \textbf{level ofsignificance} $1-\alpha$. If the parameter $\theta$ is real-valued, then 
-$C(\Theta) = [\underline{\theta}(\mathbf{X}), \bar{\theta}(\mathbf{X})]$, for a pair of real-valuedstatistics $\underline{\theta}$ and $\bar{\theta}$ is called a confidence interval for $\theta$.\\
-Therefore, a natural way to construct the bootstrap confidence interval is to use empirical quantiles of the bootstrap distribution of $S(\mathbf{X})$: compute $\hat{\theta}^{*}_i = S(\mathbf{X}^{*}_{i})$, $i = 1,\ldots,R$ bootstrap statistics and set the confidence interval for $\theta$ by $[\theta^{*}_{L}, \theta^{*}_{U}]$, where $\theta^{*}_{L}$ and $\theta^{*}_{U}$ are respectively $\lfloor R(\frac{1-\alpha}{2}) \rfloor$-th and $\lfloor R(1-\frac{1-\alpha}{2}) \rfloor$-th value in the ordered list of $\theta^{*}_{i}$. Such confidence intervals arecalled \textbf{bootstrap percentile}  confidence intervals.
+for a fixed $\alpha \in (0,1)$, then $C(\Theta)$ is a \textbf{confidence set} for $\theta$ with \textbf{level of
+significance} $1-\alpha$. If the parameter $\theta$ is real-valued, then 
+$C(\Theta) = [\underline{\theta}(\mathbf{X}), \bar{\theta}(\mathbf{X})]$, for a pair of real-valued
+statistics $\underline{\theta}$ and $\bar{\theta}$ is called a confidence interval for $\theta$.\\
+Therefore, a natural way to construct the bootstrap confidence interval is to use empirical quantiles of the bootstrap distribution of $S(\mathbf{X})$: compute $\hat{\theta}^{*}_i = S(\mathbf{X}^{*}_{i})$, $i = 1,\ldots,R$ bootstrap statistics and set the confidence interval for $\theta$ by $[\theta^{*}_{L}, \theta^{*}_{U}]$, where $\theta^{*}_{L}$ and $\theta^{*}_{U}$ are respectively $\lfloor R(\frac{1-\alpha}{2}) \rfloor$-th and $\lfloor R(1-\frac{1-\alpha}{2}) \rfloor$-th value in the ordered list of $\hat{\theta}^{*}_i$. Such confidence intervals are
+called \textbf{bootstrap percentile}  confidence intervals. By defining $F_{B}(x) = P (\hat{\theta}^{*} \leqslant x)$, note that we have $P (\hat{\theta}^{*} \leqslant \hat{\theta}^{*}_L ) \approx \frac{1}{2} \alpha$ and $P (\hat{\theta}^{*} \geqslant \hat{\theta}^{*}_U ) \approx \frac{1}{2} \alpha$, which makes a coverage probability of $1-\alpha$.\\
 
+The confidence interval should have equal probability to both sides of $\hat{\theta}^{*}$, that is $P(\hat{\theta}^{*} \leqslant \theta \leqslant \hat{\theta}^{*}_U) = P(\hat{\theta}^{*}_L \leqslant \theta \leqslant \hat{\theta}^{*}) $. If $\hat{\theta}^{*}$ is not the median of the bootstrap distribution, this condition is not fulfilled. An appropriate correction is given by $ \hat{\theta}^*_{LC} = F^{-1}_B(\Phi[z_\frac{\alpha}{2} + 2\hat{z}_0]) $ and $ \hat{\theta}^*_{UC} = F^{-1}_B(\Phi[z_{1-\frac{\alpha}{2}} + \hat{z}_0]) $ (respectively  the bias-corrected lower and upper confidence bound for $\theta$), where $\Phi(.)$ is the cdf of the standard normal distribution and $\hat{z}_0 = \Phi^{-1}{\{ F_B(\hat{\theta})\}} $. This interval is the \textbf{bias corrected percentile interval}. In practice, $\hat{\theta}^*_{LC}=\lfloor R\alpha_1 \rfloor $ and $\hat{\theta}^*_{UC}=\lfloor R\alpha_2 \rfloor $,
+with $\alpha_1 = \Phi(z_\frac{\alpha}{2} + 2\hat{z}_0)$ and $\alpha_2 = \Phi(z_{1-\frac{\alpha}{2}} + 2\hat{z}_0)$. \\
 
+An extension of the bias corrected percentile confidence interval, the $BC_a$ (\textbf{bias-corrected accelerated} bootstrap) confidence interval described as follow: 
+\newpage
+
+\[\alpha_1=\Phi\Big(\hat{z}_0 + \frac{\hat{z}_0 + z_{\alpha/2}}{1-\hat{a}(\hat{z}_0 + z_{\alpha/2})}\Big) \]
+\[\alpha_2=\Phi\Big(\hat{z}_0 + \frac{\hat{z}_0 + z_{1-\alpha/2}}{1-\hat{a}(\hat{z}_0 + z_{1-\alpha/2})}\Big) ,\]
+where
+\[\hat{a}=\frac{\sum_{i=1}^{n}(\bar\theta_J - \hat{\theta}_i)^3}{6\Big\{\sum_{i=1}^{n}(\bar\theta_J - \hat{\theta}_i)^2 \Big\}^{3/2}} \]
+With $\bar{\theta}_J=n^{-1}\sum_{i=1}^{n}\hat{\theta}_{(i)}$, for $\hat{\theta}_{(i)}$ as the estimator of $\theta$ obtained without observation $i$, i.e., $\hat{\theta}_{(i)} = S(X_1,\ldots,X_{i-1},X_{i+1},\ldots,X_n)$. It is easily performed in \textbf{R} with \textbf{bootstrap::bcanon}.
+
+\newpage
 {\color{royalblue}\section{Results}}
+\begin{enumerate}[label=(\alph*)]
+	\item Let's consider a Weibull distribution with scale parameter $\lambda$, shape parameter $k$, variance $\sigma^2$ and median $x_{med}$. From a sample $(x_1,\ldots,x_n)$ simulated from the Weibull distribution with $\lambda=13$ and $k=1$, we aim to to build confidence intervals for $\sigma$ based on a statistics $\hat{s}^2=(n-1)^{-1}\sum_{i=1}^{n}(x_i-\bar{X})^2$, and $x_{med}$ based on the sample median.
+	\begin{itemize}
+		\item First, the sample size is set as $n = 100$, the number of bootstrap replications $R = 1000$
+and the number of Monte Carlo samples $M = 1000$. We build two-sided bootstrap percentile confidence intervals for $\sigma$ and $x_{med}$ at the
+significance level $\alpha=0.05$, and  Use $M$ Monte Carlo samples to estimate the coverage
+probability(CP) and the average interval length(AIL) for both confidence intervals(CI). We get the following results:\\
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|P{1.5cm}|P{1.5cm}|P{1.5cm}|}
+				\hline
+				& $x_{med}$ CI & $\sigma$ CI \\
+				\hline
+				CP & 0.944  & 0.856 \\
+				\hline  
+				AIL & 5.103662 & 6.006730 \\
+				\hline  
+			\end{tabular}
+		\caption{\label{tableau31}Confidence intervals coverage probability and average interval length: $n = 100$, $R = 1000$}
+		\end{table}
+	The coverage probability for $x_{med}$ confidence interval is pretty close to $1-\alpha = 0.95$, the same for $\sigma$ confidence interval, but less than the CP $x_{med}$ CI. This might suggest that the bootstrap percentile confidence interval approximates $x_{med}$ CI more than $\sigma$ CI.
+	
+	\item Now, use the following settings: $n = R = 1000$ to get the results in table \ref{tableau32} and $n = 100$, $R = 5000$ and obtain the corresponding results in table \ref{tableau33}
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{1.5cm}|P{1.5cm}|P{1.5cm}|}
+			\hline
+			& $x_{med}$ CI & $\sigma$ CI \\
+			\hline
+			CP & 0.947 & 0.935 \\
+			\hline  
+			AIL & 1.620852 & 2.211146 \\
+			\hline  
+		\end{tabular}
+		\caption{\label{tableau32}Confidence intervals coverage probability and average interval length: $n = R = 1000$}
+	\end{table}
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{1.5cm}|P{1.5cm}|P{1.5cm}|}
+			\hline
+			& $x_{med}$ CI & $\sigma$ CI \\
+			\hline
+			CP & 0.946 & 0.848 \\
+			\hline  
+			AIL & 5.101970 & 5.981314 \\
+			\hline  
+		\end{tabular}
+		\caption{\label{tableau33}Confidence intervals coverage probability and average interval length: $n = 100$, $R = 5000$}
+	\end{table}
+	We can notice that the CP value for both confidence intervals are again close to $0.95$, but huge differences with the AIL. Actually, we want the length of the confidence intervals to be narrow as possible, and the AIL in table \ref{tableau32} are the smallest AIL, and the CP are the largest. Hence, increasing the sample size and the number of bootstraps replications improves the accuracy of the bootstrap.
+	
+	\item With  $n = 100$, $R = 1000$ and $M=1000$, we build bootstrap accelerated
+bias-corrected ($bc_a$) confidence intervals both for $\sigma$ and $x_{med}$, and Use $M$ Monte Carlo samples to assess the coverage probability and the average length of the confidence intervals to obtain the following table.
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{1.5cm}|P{1.5cm}|P{1.5cm}|}
+			\hline
+			& $x_{med}$ CI & $\sigma$ CI \\
+			\hline
+			CP & 0.956 & 0.912 \\
+			\hline  
+			AIL & 5.030710 & 6.661682 \\
+			\hline  
+		\end{tabular}
+		\caption{\label{tableau34}Confidence intervals coverage probability and average interval length: $bc_a$}
+	\end{table}
+	The CP values for the $bc_a$ confidence intervals are more closer to $0.95$ (especially for $\sigma CI$)than the ones of the bootstrap percentile confidence intervals(see table \ref{tableau31}). We also notice a slight difference in the AIL for both confidence intervals in both methods. The following table 
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{0.5cm}|P{2.5cm}|P{2cm}|}
+			\hline
+			& $x_{med}$ & $\sigma$ \\
+			\hline
+			$\hat{z}_0$ & $-0.04063$ & 0.1113 \\
+			\hline  
+			$\hat{a}$ & $-1.475\times10^{-15}$ & 0.09085 \\
+			\hline  
+		\end{tabular}
+		\caption{\label{tableau35}Average $\hat{z}_0$ and $\hat{a}$}
+	\end{table}
+	
+	\end{itemize}
+\newpage
+    \item From the dataset \textit{shhs1.txt} has been obtained from \href{https://sleepdata.org/datasets/shhs}{Sleep Heart Health Study}, we are using the variable \textbf{rdi4p}: respiratory disturbance index. Figure \ref{fig 3.1}, we notice that the \textbf{rdi4p} is skewed on the left.
+    
+    \begin{figure}[ht]
+    	\centering
+    	\scalebox{1.2}{\input{Ex3plot.tex}}
+    	\caption{Histogram of \textbf{rdi4p} with the empirical distribution}
+    	\label{fig 3.1}
+    \end{figure}
+    
+    By building bootstrap percentile and bootstrap accelerated bias-corrected confidence intervals for the standard deviation and
+median, we get the following results (with $R = 1000$)
+    
+    \begin{table}[H]
+    	\centering
+    	\begin{tabular}{|P{2cm}|P{2.5cm}|P{2.5cm}|}
+    		\hline
+    		& $x_{med}$ & $\sigma$ \\
+    		\hline
+    		CI & [3.951, 4.419] & [11.785, 13.045] \\
+    		\hline
+    		CI$_{length}$ & 0.498 & 1.26 \\
+    		\hline  
+    	\end{tabular}
+    	\caption{\label{tableau36}Results for bootstrap percentile confidence interval}
+    \end{table}
+    
+    \begin{table}[H]
+    	\centering
+    	\begin{tabular}{|P{2cm}|P{2.5cm}|P{2.5cm}|}
+    		\hline
+    		& $x_{med}$ & $\sigma$ \\
+    		\hline
+    		CI & [3.944, 4.429] & [11.792, 13.103] \\
+    		\hline
+    		CI$_{length}$ & 0.485 & 1.311 \\
+    		\hline
+    		$\hat{z}_0$ & $0.00251$ & $-0.00251$ \\
+    		\hline  
+    		$\hat{a}$ & 0 & 0.0272 \\
+    		\hline  
+    	\end{tabular}
+    	\caption{\label{tableau37}Results for $bc_a$}
+    \end{table}
+    The median of the variable \textbf{rdi4p} is 4.193012 and its standard deviation is 12.43283
+    
+\end{enumerate}
 
 %44444444444444444444444444444444444444444444%
 
 {\color{royalblue}\chapter{Generalised linear models}}
 {\color{royalblue}\section{Problem description}}
+In its simplest form, a linear model specifies the (linear) relationship between a dependent variable $Y$ (normally distributed), and a set of independent variables $X_i$, $i=1,\ldots,k\in \mathbb{N}$, so that $Y= b_0 + b_1X_1 +\ldots+ b_kX_k$, where $b_0$ is the regression coefficient for the intercept and the $b_i$ values are the regression coefficients (for variables 1 through k). However, there are many relationships that cannot adequately be summarized by a simple linear equation, for two major reasons:
+\begin{itemize}
+	\item  \textit{Distribution of the dependent variable.} The dependent variable of interest may have a non-continuous distribution, and thus, the predicted values should also follow the respective distribution; any other predicted values are not logically possible.
+	\item \textit{Link function.} The second reason why the linear model might be inadequate to describe a particular relationship is that the effect of the predictors on the dependent variable may not be linear in nature.
+\end{itemize}
+Generalized linear models (GLMs) extend linear models to accommodate both non-normal response distributions and transformations to linearity.
 
 {\color{royalblue}\section{Methods}}
 
+Let $(Y_1, X_1),\ldots,(Y_n, X_n)$ be independent pairs of observations, where $Y_i$ is real-valued
+and $X_i$ are $\mathbb{R}^k$-valued random variables. Generalised linear models (GLMs) have the following
+three-part specification:
+
+\begin{itemize}
+	\item \textbf{The random component} (=response from an overdispersed exponential family). The data $Y_1,\ldots,Y_n$ are such that $Y_1|X_1,\ldots, Y_n|X_n$ are independent and $Y_i|X_i$ has
+the p.d.f.
+	\[ f_{\eta,\psi}(y_i|x_i) = \mathtt{exp}\bigg\{   \frac{\eta_iy_i - \kappa(\eta_i)}{\psi_i} \bigg\}h(y_i,\psi_i), \hspace{0.5cm} i=1,\ldots,n, \]
+	where $\eta_i$ is called canonical parameter and i is an unknown scale or dispersion parameter. Functions $\kappa$ and $h$ are known and $\kappa^{''}(\eta) > 0$ is assumed. Note that 
+	\[ \mu(\eta_i):=\mathtt{E}(Y_i|X_i) = \kappa_0(\eta_i) \hspace{0.25cm}\mathtt{and}\hspace{0.25cm} var(Y_i|X_i)=\psi_i\kappa^{''}(\eta), \hspace{0.5cm} i=1,\ldots,n \]
+	\item \textbf{The systematic component} (=linear predictor) Canonical parameter $\eta_i$ is assumed to be related to $X_i$. The term $X^t_i\beta$ for unknown
+$\beta \in \mathbb{R}^d$ is called the \textbf{linear predictor or systematic component}.
+	\item The \textbf{link function} between random and systematic components. The relationship between $\eta_i$ and $X^t_i\beta$ is described through
+	\[ g\{\mu(\eta_i)\} = X^t_i\beta, \hspace{0.5cm} i=1,\ldots,n \]
+	where g is called a link function. The link function g is assumed to be a known, one-to-one, third-order continuously differentiable function. If $g=\mu^{-1}$ then $\eta_i=X^t_i\beta$, and $g$ is called the \textbf{canonical or natural link function}. If $g$ is not canonical, then
+
+	it is assumed that $d(g\circ\mu)(\eta)/d\eta \ne 0$ for all $\eta$.	
+\end{itemize}
+
+In a GLM, the parameter of interest is $\beta$. Parameters $\psi_i$ are considered to be nuisance parameters. It is often assumed that $\psi_i = \psi/t_i$, $i = 1,\ldots,n$ with an unknown
+$\psi$ and known $t_i$'s or, alternatively $\psi_i =a( )$ for some known function $a$. Note that $\psi_i$
+enter $var(Y_i|X_i) = \psi_i\kappa{''}(\eta_i)$, making it more flexible, that is allowing for over- or underdispersion.\\
+
+\textbf{Exemple:} Let Let $Y_i|X_i \backsim Poi(\lambda_i)$. We can write the density
+\[ f_\eta(y_i)= \mathtt{exp}\{ y_ilog(\lambda_i) - \lambda_i \}\frac{1}{y_i!}\mathbb{I}_{\{ 1,2,\ldots \}}(y_i) \]
+that is, the canonical parameter $\eta_i = \mathtt{log}(\lambda_i), \kappa(\eta_i) = \lambda_i = \mathtt{exp}(\eta_i)$, $\psi_i = 1$ and $h(y_i) = (y_i)^{-1}\mathbb{I}_{\{ 1,2,\ldots \}}(y_i)g(y_i)$. Since $E(Y_i|X_i) = \kappa_0(\eta_i) = \mathtt{exp}(\eta_i) =: \mu(\eta_i)$, the canonical link is
+
+$g(x) = \mu^{-1}(x) = \mathtt{log}(x)$, which is called the \textbf{log-link} $(g(\mu(\eta_i)) = \eta_i)$. Hence, 
+\[ \mathtt{log}\{\mathtt{E}(Y_i|X_i=x_i)\} = x^t_i\beta,\]
+where $x_i \in \mathbb{R}^k,\hspace{0.25cm} i=1,\ldots,n$.\\
+
+\begin{center}
+	\textbf{\large Estimation}
+\end{center}
+Let $\theta = (\beta, \psi)$ and $(g\circ\mu)^{-1} = \zeta$ (for a canonical link $\zeta(x) \equiv x$). Then
+
+\[ \ell(\theta)= \sum_{i=1}^{n} \bigg[ \frac{\zeta(X^t_i\beta)Y_i-\kappa\{\zeta(X^t_i\beta)\}} {a(\psi)} + \mathtt{log}h(Y_i,\psi)  \bigg] .\]
+Further, consider the canonical link. Taking derivatives w.r.t. $\beta$ and we get the following
+score equations
+\[  \frac{\partial \ell(\theta)}{\partial\beta}= \frac{1}{a(\psi)} \sum_{i=1}^{n} \{ Y_i - \mu(X^t_i) \}X_i=0 \]
+
+\[ \frac{\partial \ell(\theta)}{\partial\psi}= \sum_{i=1}^{n}\bigg[ \frac{\partial\mathtt{log}h(y_i,\psi)}{\partial\psi}+ \{a^{-1}(\psi)\}^{'}\{ X^t_i\beta Y_i+ \kappa(X^t_i\beta) \} \bigg]= 0 \]
+
+Where $ \kappa(X^t_i\beta)= \mu(X^t_i\beta)$ was used. If MLE of $\beta$ exists, then it can be found from the
+first equation without estimating. Estimation of $\psi$ from the second equation in many cases is a difficult task and depends on a particular distribution. To estimate $\beta$ and study its properties we also need
+\[-\frac{\partial^2\ell(\theta)}{\partial\beta\partial\beta^t}= \frac{1}{a(\psi)} \sum_{i=1}^{n}\bigg[ \kappa(X^t_i\beta)^{''}X_i X^t_i \bigg]=: -\frac{F_n(\beta)}{a(\psi)} \]
+With this, we can set up the Newton-Raphson algorithm as
+\[ \hat\beta^{(j+1)}= \hat\beta^{(j)} +\big\{ F_n(\hat\beta^{(j)}) \big\}^{-1} S_n(\hat\beta^{(j)}), \hspace{0.25cm} j=0,1,2,\ldots, \]
+where $S_n(\hat\beta^{(j)})= a(\psi)\partial\ell(\theta)/\partial\beta.$\\
+
+\begin{center}
+	\textbf{\large Goodness-of-fit and models' comparison}
+\end{center}
+Now, we want to to assess how good the model fits the data,i.e., to measure the discrepancy between the data $Y_i|X_i$ and estimated $\mathtt{E}(Y_i|X_i) = \mu_i$. First, some definitions. The \textbf{null model} is simplest model, and has only one parameter, representing a common mean $\mu$, say, for all $Y_i|X_i$. At the other extreme is the \textbf{full model}, which has $n$ parameters, one for each observation. The full model gives a baseline for measuring the discrepancy for an intermediate model with k parameters. Assume for the moment that $\psi$  is knownand denote $\ell(\hat{\mu},\psi)$ the log-likelihood with $\hat{\mu} = g^{?1}(X\hat{\beta})$. The maximum likelihood in thefull model is then $\ell(Y, \psi)$ ($=\mu_i$ are replaced by $Y_i$). Then the \textbf{deviance of the fitted	model} is defined as
+\[ D(Y,\hat{\mu})= a(\psi)2\{ \ell(Y,\psi)- \ell(\hat{\mu}, \psi) \}  \]
+Note that $D(Y,\hat{\mu})/a(\psi)$ is called the \textbf{scaled deviance}(or the deviance for $2\{ \ell(Y,\psi)- \ell(\hat{\mu}, \psi) \}$).
+The \textbf{generalised Pearson statistic} is defined via
+\[ \chi^2=  \frac{\sum_{i=1}^{n}(Y_i-\hat{\mu}_i)^2}{V(\hat{\mu}_i)} \]. The following methods are used to measure the goodness-of-fit, and compare models:
+
+\begin{itemize}
+	\item  \textbf{Analysis of deviance:} Scaled deviance can be used to compare two nested models, i.e. the parameter spaceunder one model is a subspace of that under the second model. let $M_k$ and $M_q$, with $q<k$ (k and q are the number of parameters in $M_k$ and $M_q$ respectively) two nested models. Let us denote $D_{M_k}$ and $D_{M_q}$ respectively as the scaled deviance of $M_k$ and $M_q$. Since we have assume that $\psi$ is known, we have the following formula:
+	\[\frac{D_{M_q}- D_{M_k}}{\psi} \overset{approx}{\sim} \chi^2_{k-q}\] 
+	A widely usedrule of thumb(to measure goodness-of-fit) is that a good fit has the scaled deviance about $n ? k$, which is the expectation of a $\chi^2_{n-k}$ distributed random variable. Large values of the scaled deviance areconsidered to indicate a bad fit. However, this has to be treated with care. For Poissondata with large $\lambda_i$ and Binomial data with large $m_i$, the approximation to $\chi^2_{n-k}$ worksreasonable, but not in many other cases. Therefore we can use other methods.
+	
+	\item \textbf{Residual analysis:} Here, the residuals used are expected to behave approximately as zero-mean normally distributed variables. \textbf{Pearson residuals} defined via
+	\[ r^p_i= \frac{Y_i-\hat{\mu}_i}{d\sqrt{V(\hat{\mu}_i)}}, \hspace{0.25cm} i=1,\dots,n \]. Pearson residuals have the disadvantage of being skewed for non-normal responses. As a remedy, we have the \textbf{ Anscombe residulas}, which in the special case of the Poisson distribution is given by \[ r^a_i= \frac{3(Y^{2/3}_i-\hat{\mu}^{2/3}_i)}{2\hat{\mu}^{1/6}_i}, \hspace{0.25cm} i=1,\dots,n \].
+	\item \textbf{Deviance residuals:} based on the deviance, they are defined by \[ r^d_i= \mathtt{sign}(Y_i-\hat{\mu}_i)\sqrt{2\{  \ell_i(Y_i,\psi)- \ell_i(\hat{\mu}_i,\psi)\}}, \hspace{0.25cm} i=1,\dots,n \]
+	where $\ell_i$ is the log-likelihood corresponding to the $i$-th observation, so that $\sum_{i=1}^{n}(r^d_i)^2= D(Y, \hat{\mu})$). A standardised version of the deviance (as well as Pearson)residuals are used: \[ \frac{r^d_i}{\sqrt{a(\hat{\psi})(1-h_i)}}, \hspace{0.25cm}, i=1,\dots,n\] 
+	where $h_i = H_{i,i}$ with the hat matrix $H$ taking now the form $H = W^{1/2}X(X^t W X)^{-1}X^t W^{1/2}$, where W is the weight matrix from the Fisher scoring. In an adequate model the plotof standardised residuals against $\hat{\eta}= X\hat{\beta}$ should show \textit{no patterns}. The \textbf{null pattern} is a distribution of residuals with mean zero and constant variance.
+	
+	\item \textbf{Akaikeinformation criterion (AIC) and Bayes information criterion (BIC):} These criterions can be used to compare models with different subset of parameters or even to compare two differentmodels (e.g., with different link functions or a non-linear and with a linear model). Thesetwo criteria are most popular examples of penalised goodness-of-fit criteria
+	\[AIC(M)= -2\ell(M)+ 2|M|\]
+	\[BIC(M)= -2\ell(M)+ \mathtt{log}(n)|M|,\] where $\ell(M)$ denotes the log-likelihood corresponding to a model $M$ and $|M|$ is the number of parameters in that model $M$. The models, selected with these criteria are then
+	\[ \hat{M}_{AIC}= \mathtt{arg}\min_{M\in \mathcal{M}}AIC(M)  \]
+	\[ \hat{M}_{BIC}= \mathtt{arg}\min_{M\in \mathcal{M}}BIC(M)  \]	
+\end{itemize}
+\newpage
+
 {\color{royalblue}\section{Results}}
+For the exercise, the dataset \textit{student-mat.csv} can be found on \href{https://www.kaggle.com/uciml/student-alcohol-consumption}{Kaggle}. Variables G1, G2, G3 are first, second and finalgrades in mathematics. The remaining variables are explanatory variables. We would liketo identify variables that explain grades in mathematics.
+
+\begin{enumerate}[label=(\alph*)]
+	\item 
+	
+	
+	\begin{figure}
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex4plot1.tex}}
+			\caption{Emperical densities}
+			\label{fig 4.1}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex4plot2.tex}}
+			\caption{Q-Q plot with normal theoretical distribution}
+			\label{fig 4.2}
+		\end{subfigure}
+		\caption{Checking normality assumption}
+		\label{fig:roc_curve}
+	\end{figure}
+	
+	
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex4plot3.tex}}
+		\caption{Q-Q plot with Poisson as theoretical distribution}
+		\label{fig 4.3}
+	\end{figure}
+	
+	
+	
+	
+\end{enumerate}
+
+
+
+
 
 %55555555555555555555555555555555555555555555%
 

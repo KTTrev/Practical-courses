@@ -1,5 +1,6 @@
 setwd("~/Practical-courses/Stochastic_Lab_Course_2")
 library("tidyverse")
+library(tikzDevice) 
 student <- read.csv("student-mat.csv")
 
 #Question(a)
@@ -15,25 +16,19 @@ colnames(df3) <- c("grades", "types")
 df0 <- rbind(df1, df2, df3)
 
 #Normal distributed?
-ggplot(data = df0, mapping = aes(sample = grades)) + 
+plot1<- ggplot(data = df0, mapping = aes(sample = grades)) + 
   geom_density(aes(x = grades), fill = "chartreuse") +
-  ggtitle("Emperical densities") +
-  theme(plot.title = element_text(hjust = 0.5)) + #to center the title on the plot
   facet_wrap(. ~types)
 
-ggplot(data = df0, mapping = aes(sample = grades)) + 
+plot2<- ggplot(data = df0, mapping = aes(sample = grades)) + 
   stat_qq(distribution = stats::qnorm, dparams = list(mean = mean(df0$grades), sd = sd(df0$grades))) +
   geom_abline(alpha = 0.25) +
-  ggtitle("Q-Q plot with normal theoretical distribution") +
-  theme(plot.title = element_text(hjust = 0.5)) + #to center the title on the plot
   facet_wrap(. ~types)
 
 #Poisson distributed?
-ggplot(data = df0, mapping = aes(sample = grades)) + 
+plot3<- ggplot(data = df0, mapping = aes(sample = grades)) + 
   stat_qq(distribution = stats::qpois, dparams = list(lambda = mean(df0$grades))) +
   geom_abline(alpha = 0.25) +
-  ggtitle("Q-Q plot with Poisson as theoretical distribution") +
-  theme(plot.title = element_text(hjust = 0.5)) + #to center the title on the plot
   facet_wrap(. ~types)
 
 # Are there signs for over-dispersion or any other anomalies in the
@@ -85,4 +80,19 @@ anova(model.2, model.1, test = "Chisq")
 model.3 <- glm(formula = G1 ~ sex + Fedu + studytime + failures + schoolsup + famsup + Walc , family = poisson, data = student) 
 summary(model.3)
 plot(model.3)
+
+#exporting plots
+tikz('Ex4plot1.tex',width=3.5, height=3, sanitize=TRUE)
+plot1
+dev.off()
+
+tikz('Ex4plot2.tex',width=3.5, height=3, sanitize=TRUE)
+plot2
+dev.off()
+
+tikz('Ex4plot3.tex',width=3.5, height=3, sanitize=TRUE)
+plot3
+dev.off()
+
+
 

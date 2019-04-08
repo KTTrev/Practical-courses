@@ -172,7 +172,7 @@ opt.GCV2 <- optimize(GCV2, interval = c(2, 11))$minimum
 opt.GCV3 <- optimize(GCV3, interval = c(2, 11))$minimum
 opt.GCV4 <- optimize(GCV4, interval = c(2, 11))$minimum
 
-
+#Plot all four fits putting the curves on the same plot
 
 
 
