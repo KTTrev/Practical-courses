@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.31)  8 APR 2019 22:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.31)  13 APR 2019 14:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -250,6 +250,11 @@ Package caption Info: float package is loaded.
 )
 \c@subfigure=\count108
 \c@subtable=\count109
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/flafter.sty
+Package: flafter 2017/04/11 v1.4a Standard LaTeX floats after reference (FMi)
+Applying: [2015/01/01] float order in 2-column on input line 49.
+Already applied: [0000/00/00] float order in 2-column on input line 151.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
@@ -659,38 +664,38 @@ File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
 )))
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 34.
-
-
-Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
 less on input line 35.
 
 
-Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
 less on input line 36.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
 less on input line 37.
 
+
+Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
+less on input line 38.
+
 (./StochasticsLabCourse2.aux)
 \openout1 = `StochasticsLabCourse2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 52.
  (/usr/share/texmf/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -744,4 +749,407 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-(/usr/share/texlive/texmf-dist/tex/latex/o
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\AtBeginShipoutBox=\box43
+Package hyperref Info: Link coloring ON on input line 52.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
+)
+\c@section@level=\count146
+)
+LaTeX Info: Redefining \ref on input line 52.
+LaTeX Info: Redefining \pageref on input line 52.
+LaTeX Info: Redefining \nameref on input line 52.
+
+(./StochasticsLabCourse2.out) (./StochasticsLabCourse2.out)
+\@outlinefile=\write4
+\openout4 = `StochasticsLabCourse2.out'.
+
+
+ABD: EveryShipout initializing macros
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 55.
+ (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 55.
+(/usr/share/texmf/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 55.
+
+
+(/usr/share/texmf/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 55.
+
+
+(/usr/share/texmf/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 55.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 55.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 55.
+LaTeX Font Info:    Try loading font information for U+msa on input line 55.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 55.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 59.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 59.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 59.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.62 \tableofcontents
+                      [1
+
+] (./StochasticsLabCourse2.toc [2
+
+])
+\tf@toc=\write5
+\openout5 = `StochasticsLabCourse2.toc'.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 20.39996pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[3]
+Chapter 1.
+[4
+
+] (./Ex1plot1.tex) (./Ex1plot2.tex) (./Ex1plot3.tex)
+<Ex1plot4.png, id=237, 813.0375pt x 602.25pt>
+File: Ex1plot4.png Graphic file (type png)
+<use Ex1plot4.png>
+Package pdftex.def Info: Ex1plot4.png  used on input line 111.
+(pdftex.def)             Requested size: 406.51776pt x 301.12425pt.
+ [5] [6] [7] [8 <./Ex1plot4.png (PNG copy)>]
+Chapter 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 125--127
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 127.
+
+(/usr/share/texmf/tex/latex/lm/omslmr.fd
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 127.
+
+Overfull \hbox (13.46664pt too wide) in paragraph at lines 132--150
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 132--150
+
+ []
+
+[9
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 151--153
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--169
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--179
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
+
+ []
+
+
+Overfull \hbox (28.46664pt too wide) in paragraph at lines 209--210
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
+
+ []
+
+[11] (./Ex2plot1.tex) (./Ex2plot2.tex) [12] [13] (./Ex2plot3.tex) [14]
+Chapter 3.
+
+Overfull \hbox (3.56007pt too wide) in paragraph at lines 273--283
+ [] 
+ []
+
+[15
+
+]
+Overfull \hbox (28.46664pt too wide) in paragraph at lines 299--300
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 299--300
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 301--302
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 305--312
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 313--315
+
+ []
+
+[16] [17]
+Underfull \hbox (badness 10000) in paragraph at lines 330--346
+
+ []
+
+[18] [19] (./Ex3plot.tex) [20] [21]
+Chapter 4.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 478
+.
+(/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [22
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 490--493
+
+ []
+
+
+Overfull \hbox (30.94415pt too wide) in paragraph at lines 495--497
+\T1/lmr/m/n/10 that is, the canon-i-cal pa-ram-e-ter $\OML/lmm/m/it/10 ^^Q[] \O
+T1/lmr/m/n/10 = [](\OML/lmm/m/it/10 ^^U[]\OT1/lmr/m/n/10 )\OML/lmm/m/it/10 ; ^^
+T\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 ^^Q[]\OT1/lmr/m/n/10 ) = \OML/lmm/m/it/10 ^^
+U[] \OT1/lmr/m/n/10 = [](\OML/lmm/m/it/10 ^^Q[]\OT1/lmr/m/n/10 )$\T1/lmr/m/n/10
+ , $\OML/lmm/m/it/10  [] \OT1/lmr/m/n/10 = 1$ \T1/lmr/m/n/10 and $\OML/lmm/m/it
+/10 h\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 y[]\OT1/lmr/m/n/10 ) = (\OML/lmm/m/it/10
+ y[]\OT1/lmr/m/n/10 )[]\U/msb/m/n/10 I[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 y[]\O
+T1/lmr/m/n/10 )\OML/lmm/m/it/10 g\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 y[]\OT1/lmr/
+m/n/10 )$\T1/lmr/m/n/10 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 499--501
+
+ []
+
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 518--520
+
+ []
+
+[24] [25] [26] (./Ex4plot1.tex) (./Ex4plot2.tex) (./Ex4plot3.tex) [27] [28]
+(./Ex4plot4.tex) (./Ex4plot5.tex) (./Ex4plot6.tex) (./Ex4plot7.tex) [29]
+[30] [31]
+Chapter 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 665--671
+
+ []
+
+[32
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 675--683
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 689--696
+
+ []
+
+
+Overfull \hbox (24.97406pt too wide) in paragraph at lines 689--696
+\T1/lmr/m/n/10 Let's as-sume that $\OML/lmm/m/it/10 T$ \T1/lmr/m/n/10 has a con
+-tin-u-ous dis-tri-bu-tion $\OML/lmm/m/it/10 F$ \T1/lmr/m/n/10 and there are $\
+OML/lmm/m/it/10 n$ \T1/lmr/m/n/10 data points avail-able $\OT1/lmr/m/n/10 (\OML
+/lmm/m/it/10 y[]; ^^N[]\OT1/lmr/m/n/10 )\OML/lmm/m/it/10 ; [] ; \OT1/lmr/m/n/10
+ (\OML/lmm/m/it/10 y[]; ^^N[]\OT1/lmr/m/n/10 )$\T1/lmr/m/n/10 ,
+ []
+
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 722--728
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 728--748
+
+ []
+
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 757--759
+
+ []
+
+[35]
+Chapter 6.
+
+Underfull \hbox (badness 10000) in paragraph at lines 785--789
+
+ []
+
+[36
+
+] [37]
+Underfull \hbox (badness 10000) in paragraph at lines 809--815
+
+ []
+
+(./Ex6plot1.tex) (./Ex6plot2.tex)
+Overfull \hbox (0.57497pt too wide) in paragraph at lines 845--845
+ []|$[]$| 
+ []
+
+
+Overfull \hbox (0.57497pt too wide) in paragraph at lines 845--846
+ []|$[]$| 
+ []
+
+
+Overfull \hbox (2.71779pt too wide) in paragraph at lines 849--849
+ []|\T1/lmr/m/n/10 reading.score| 
+ []
+
+
+Overfull \hbox (1.60655pt too wide) in paragraph at lines 851--851
+ []|\T1/lmr/m/n/10 writing.score| 
+ []
+
+[38] (./Ex6plot3.tex) (./Ex6plot4.tex) (./Ex6plot5.tex) [39] [40]
+Chapter 7.
+[41
+
+]
+Chapter 8.
+[42
+
+]
+Chapter 9.
+
+Underfull \hbox (badness 10000) in paragraph at lines 931--932
+
+ []
+
+[43
+
+]
+Chapter 10.
+
+Underfull \hbox (badness 10000) in paragraph at lines 969--971
+
+ []
+
+[44
+
+] [45]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 985.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 985.
+ (./StochasticsLabCourse2.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 985.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 985.
+Package rerunfilecheck Info: File `StochasticsLabCourse2.out' has not changed.
+(rerunfilecheck)             Checksum: 879FC92C834184B40637C8B429B2357E;2316.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 985.
+ ) 
+Here is how much of TeX's memory you used:
+ 18693 strings out of 494923
+ 340890 string characters out of 6180742
+ 6595325 words of memory out of 10000000
+ 21435 multiletter control sequences out of 15000+600000
+ 84010 words of font info for 66 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 55i,14n,55p,962b,1007s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Figure\0401.1} has been referenced but does not e
+xist, replaced by a fixed one
+
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvip
+s/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share
+/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mat
+hit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}</usr/share/texmf/fo
+nts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.p
+fb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/
+type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb><
+/usr/share/texmf/fonts/type1/public/lm/lmmi5.pfb></usr/share/texmf/fonts/type1/
+public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/l
+m/lmr5.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pf
+b></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></usr
+/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on StochasticsLabCourse2.pdf (46 pages, 2775238 bytes).
+PDF statistics:
+ 626 PDF objects out of 1000 (max. 8388607)
+ 551 compressed objects within 6 object streams
+ 158 named destinations out of 1000 (max. 500000)
+ 338 words of extra memory for PDF output out of 10000 (max. 10000000)
+

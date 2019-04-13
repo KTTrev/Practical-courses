@@ -14,6 +14,7 @@
 \usepackage{array}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \usepackage{float, graphicx, subcaption}
+\usepackage{flafter}
 \usepackage[%  
 colorlinks=true,
 pdfborder={0 0 0},
@@ -520,24 +521,36 @@ where $S_n(\hat\beta^{(j)})= a(\psi)\partial\ell(\theta)/\partial\beta.$\\
 \begin{center}
 	\textbf{\large Goodness-of-fit and models' comparison}
 \end{center}
-Now, we want to to assess how good the model fits the data,i.e., to measure the discrepancy between the data $Y_i|X_i$ and estimated $\mathtt{E}(Y_i|X_i) = \mu_i$. First, some definitions. The \textbf{null model} is simplest model, and has only one parameter, representing a common mean $\mu$, say, for all $Y_i|X_i$. At the other extreme is the \textbf{full model}, which has $n$ parameters, one for each observation. The full model gives a baseline for measuring the discrepancy for an intermediate model with k parameters. Assume for the moment that $\psi$  is knownand denote $\ell(\hat{\mu},\psi)$ the log-likelihood with $\hat{\mu} = g^{?1}(X\hat{\beta})$. The maximum likelihood in thefull model is then $\ell(Y, \psi)$ ($=\mu_i$ are replaced by $Y_i$). Then the \textbf{deviance of the fitted	model} is defined as
+Now, we want to to assess how good the model fits the data,
+i.e., to measure the discrepancy between the data $Y_i|X_i$ and estimated $\mathtt{E}(Y_i|X_i) = \mu_i$. First, some definitions. The \textbf{null model} is simplest model, and has only one parameter, representing a common mean $\mu$, say, for all $Y_i|X_i$. At the other extreme is the \textbf{full model}, which has $n$ parameters, one for each observation. The full model gives a baseline for measuring the discrepancy for an intermediate model with k parameters. Assume for the moment that $\psi$  is known
+and denote $\ell(\hat{\mu},\psi)$ the log-likelihood with $\hat{\mu} = g^{?1}(X\hat{\beta})$. The maximum likelihood in the
+full model is then $\ell(Y, \psi)$ ($=\mu_i$ are replaced by $Y_i$). Then the \textbf{deviance of the fitted	model} is defined as
 \[ D(Y,\hat{\mu})= a(\psi)2\{ \ell(Y,\psi)- \ell(\hat{\mu}, \psi) \}  \]
 Note that $D(Y,\hat{\mu})/a(\psi)$ is called the \textbf{scaled deviance}(or the deviance for $2\{ \ell(Y,\psi)- \ell(\hat{\mu}, \psi) \}$).
 The \textbf{generalised Pearson statistic} is defined via
 \[ \chi^2=  \frac{\sum_{i=1}^{n}(Y_i-\hat{\mu}_i)^2}{V(\hat{\mu}_i)} \]. The following methods are used to measure the goodness-of-fit, and compare models:
 
 \begin{itemize}
-	\item  \textbf{Analysis of deviance:} Scaled deviance can be used to compare two nested models, i.e. the parameter spaceunder one model is a subspace of that under the second model. let $M_k$ and $M_q$, with $q<k$ (k and q are the number of parameters in $M_k$ and $M_q$ respectively) two nested models. Let us denote $D_{M_k}$ and $D_{M_q}$ respectively as the scaled deviance of $M_k$ and $M_q$. Since we have assume that $\psi$ is known, we have the following formula:
+	\item  \textbf{Analysis of deviance:} Scaled deviance can be used to compare two nested models, i.e. the parameter space
+under one model is a subspace of that under the second model. let $M_k$ and $M_q$, with $q<k$ (k and q are the number of parameters in $M_k$ and $M_q$ respectively) two nested models. Let us denote $D_{M_k}$ and $D_{M_q}$ respectively as the scaled deviance of $M_k$ and $M_q$. Since we have assume that $\psi$ is known, we have the following formula:
 	\[\frac{D_{M_q}- D_{M_k}}{\psi} \overset{approx}{\sim} \chi^2_{k-q}\] 
-	A widely usedrule of thumb(to measure goodness-of-fit) is that a good fit has the scaled deviance about $n ? k$, which is the expectation of a $\chi^2_{n-k}$ distributed random variable. Large values of the scaled deviance areconsidered to indicate a bad fit. However, this has to be treated with care. For Poissondata with large $\lambda_i$ and Binomial data with large $m_i$, the approximation to $\chi^2_{n-k}$ worksreasonable, but not in many other cases. Therefore we can use other methods.
+	A widely used
+rule of thumb(to measure goodness-of-fit) is that a good fit has the scaled deviance about $n ? k$, which is the expectation of a $\chi^2_{n-k}$ distributed random variable. Large values of the scaled deviance are
+considered to indicate a bad fit. However, this has to be treated with care. For Poisson
+data with large $\lambda_i$ and Binomial data with large $m_i$, the approximation to $\chi^2_{n-k}$ works
+reasonable, but not in many other cases. Therefore we can use other methods.
 	
 	\item \textbf{Residual analysis:} Here, the residuals used are expected to behave approximately as zero-mean normally distributed variables. \textbf{Pearson residuals} defined via
 	\[ r^p_i= \frac{Y_i-\hat{\mu}_i}{d\sqrt{V(\hat{\mu}_i)}}, \hspace{0.25cm} i=1,\dots,n \]. Pearson residuals have the disadvantage of being skewed for non-normal responses. As a remedy, we have the \textbf{ Anscombe residulas}, which in the special case of the Poisson distribution is given by \[ r^a_i= \frac{3(Y^{2/3}_i-\hat{\mu}^{2/3}_i)}{2\hat{\mu}^{1/6}_i}, \hspace{0.25cm} i=1,\dots,n \].
 	\item \textbf{Deviance residuals:} based on the deviance, they are defined by \[ r^d_i= \mathtt{sign}(Y_i-\hat{\mu}_i)\sqrt{2\{  \ell_i(Y_i,\psi)- \ell_i(\hat{\mu}_i,\psi)\}}, \hspace{0.25cm} i=1,\dots,n \]
-	where $\ell_i$ is the log-likelihood corresponding to the $i$-th observation, so that $\sum_{i=1}^{n}(r^d_i)^2= D(Y, \hat{\mu})$). A standardised version of the deviance (as well as Pearson)residuals are used: \[ \frac{r^d_i}{\sqrt{a(\hat{\psi})(1-h_i)}}, \hspace{0.25cm}, i=1,\dots,n\] 
-	where $h_i = H_{i,i}$ with the hat matrix $H$ taking now the form $H = W^{1/2}X(X^t W X)^{-1}X^t W^{1/2}$, where W is the weight matrix from the Fisher scoring. In an adequate model the plotof standardised residuals against $\hat{\eta}= X\hat{\beta}$ should show \textit{no patterns}. The \textbf{null pattern} is a distribution of residuals with mean zero and constant variance.
+	where $\ell_i$ is the log-likelihood corresponding to the $i$-th observation, so that $\sum_{i=1}^{n}(r^d_i)^2= D(Y, \hat{\mu})$). A standardised version of the deviance (as well as Pearson)
+residuals are used: \[ \frac{r^d_i}{\sqrt{a(\hat{\psi})(1-h_i)}}, \hspace{0.25cm}, i=1,\dots,n\] 
+	where $h_i = H_{i,i}$ with the hat matrix $H$ taking now the form $H = W^{1/2}X(X^t W X)^{-1}X^t W^{1/2}$, where W is the weight matrix from the Fisher scoring. In an adequate model the plot
+of standardised residuals against $\hat{\eta}= X\hat{\beta}$ should show \textit{no patterns}. The \textbf{null pattern} is a distribution of residuals with mean zero and constant variance.
 	
-	\item \textbf{Akaikeinformation criterion (AIC) and Bayes information criterion (BIC):} These criterions can be used to compare models with different subset of parameters or even to compare two differentmodels (e.g., with different link functions or a non-linear and with a linear model). Thesetwo criteria are most popular examples of penalised goodness-of-fit criteria
+	\item \textbf{Akaikeinformation criterion (AIC) and Bayes information criterion (BIC):} These criterions can be used to compare models with different subset of parameters or even to compare two different
+models (e.g., with different link functions or a non-linear and with a linear model). These
+two criteria are most popular examples of penalised goodness-of-fit criteria
 	\[AIC(M)= -2\ell(M)+ 2|M|\]
 	\[BIC(M)= -2\ell(M)+ \mathtt{log}(n)|M|,\] where $\ell(M)$ denotes the log-likelihood corresponding to a model $M$ and $|M|$ is the number of parameters in that model $M$. The models, selected with these criteria are then
 	\[ \hat{M}_{AIC}= \mathtt{arg}\min_{M\in \mathcal{M}}AIC(M)  \]
@@ -546,11 +559,27 @@ The \textbf{generalised Pearson statistic} is defined via
 \newpage
 
 {\color{royalblue}\section{Results}}
-For the exercise, the dataset \textit{student-mat.csv} can be found on \href{https://www.kaggle.com/uciml/student-alcohol-consumption}{Kaggle}. Variables G1, G2, G3 are first, second and finalgrades in mathematics. The remaining variables are explanatory variables. We would liketo identify variables that explain grades in mathematics.
+For the exercise, the dataset \textit{student-mat.csv} can be found on \href{https://www.kaggle.com/uciml/student-alcohol-consumption}{Kaggle}. Variables G1, G2, G3 are first, second and final
+grades in mathematics. The remaining variables are explanatory variables. We would like
+to identify variables that explain grades in mathematics.
 
 \begin{enumerate}[label=(\alph*)]
-	\item 
-	
+	\item First of all, we need to identify the distribution of G1, G2, and G3. From the Q-Q plots with normal theoretical distribution of figure \ref{fig 4.2}, we notice too many zero points and points away on the tails. Moreover, the emperical densities plots are skewed on the left, that is way different from the bell-shape of a normal distribution. Therefore G1, G2, and G3 are not normally distributed. On the other hand, the figure \ref{fig 4.3} of the Q-Q plot with Poisson as theoretical distribution, displays points along the identity line suggesting that we might have a Poisson distribution. However, there are some zero points (especially in G1 and G2), which is a sign of under-dispersion, and over-dispersion for G1. Actually since the variables are Poisson distributed, hence their means should be equal their variances. But different results (see table \ref{tableau41}) confirm the latter assumption.
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{1cm}|P{1cm}|P{1cm}|}
+			\hline
+			 & mean & var \\
+			\hline
+			G1 & 10.909 & 11.017 \\
+			\hline
+			G2 & 10.714 & 14.149 \\
+			\hline
+			G3& 10.415 & 20.989 \\
+			\hline  
+		\end{tabular}
+		\caption{\label{tableau41}Variances and means of G1, G2, and G3}
+	\end{table} 
 	
 	\begin{figure}
 		\centering
@@ -570,15 +599,52 @@ For the exercise, the dataset \textit{student-mat.csv} can be found on \href{htt
 		\label{fig:roc_curve}
 	\end{figure}
 	
-	
-	\begin{figure}[ht]
+	\begin{figure}
 		\centering
-		\scalebox{1.2}{\input{Ex4plot3.tex}}
+		\scalebox{0.75}{\input{Ex4plot3.tex}}
 		\caption{Q-Q plot with Poisson as theoretical distribution}
 		\label{fig 4.3}
 	\end{figure}
 	
+\newpage
 	
+	\item A generalised linear model(Model 1) is fitted to explain G1 including all explanatory variables. With a significance level of 0.05, we notice that all covariates are not significant. Moreover, we there too many covariates that arenot significant which is a sign of a bad fitted model.
+	
+	\begin{figure}
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex4plot4.tex}}
+			\caption{Pearson residuals}
+			\label{fig 4.4}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex4plot5.tex}}
+			\caption{Anscombe residuals}
+			\label{fig 4.5}
+		\end{subfigure}
+		\caption{Q-Q plots of residuals with normal theoretical distribution: Model 1}
+		\label{fig}
+	\end{figure}
+	
+	
+	
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex4plot6.tex}}
+		\caption{Residuals analysis: Model 1}
+		\label{fig 4.6}
+	\end{figure}
+	
+	
+	
+	\begin{figure}[ht]
+		\centering
+		\scalebox{1.2}{\input{Ex4plot7.tex}}
+		\caption{Q-Q plot with Poisson as theoretical distribution}
+		\label{fig 4.7}
+	\end{figure}
 	
 	
 \end{enumerate}
@@ -593,11 +659,117 @@ For the exercise, the dataset \textit{student-mat.csv} can be found on \href{htt
 {\color{royalblue}\section{Problem description}}
 We want to analyze data where the outcome variable is the time until the occurrence of an event of interest. The event can be death, occurrence of a disease, marriage, divorce, etc. The time to event or survival time can be measured in days, weeks, years, etc. For example, if the event of interest is heart attack, then the survival time can be the time in years until a person develops a heart attack. subjects are usually followed over a specified time period and the focus is on the time at which the event of interest occurs. Why not use linear regression to model the survival time as a function of a set of predictor variables? First, survival times are typically positive numbers; ordinary linear regression may not be the best choice unless these times are first transformed in a way that
 removes this restriction. Second, and more importantly, ordinary linear regression cannot effectively handle the censoring of observations. Why not compare proportion of events in your groups using risk/odds ratios or logistic regression? Simply because it ignores time. \\
-To tackle these issues, we'll use some survival analysis methods.
+To tackle these issues, we'll use some survival analysis.
 
 {\color{royalblue}\section{Methods}}
+Let $T$ be a non-negative random variable that represents the time to event. We assume its CDF as $F$ that has pdf $f$. Central concepts of the survival analysis are the \textit{survivor function} (the probability that a subject
+will survive past time t) $S(t)=P(T>t)=1-F(t)$, the \textit{hazard function} $h(t)=\frac{f(t)}{1-F(t)}$ (loosely speaking, it is the probability density of failure at time
+$t$, given survival to then), and the \textit{cumulative hazard function} (accumulated risk up to time t) $H(t)= \int_{0}^{t}h(s)ds= -log\{S(t)\}$. Thus we have $S(t)=\mathtt{exp}\{-H(t)\}$ and $f(t)= h(t)\mathtt{exp}\{-H(t)\}$.\\
+\\
+\textbf{Exemples:}Some common parametric distributions
+\begin{enumerate}
+	\item Exponential distribution: $h(t) =\lambda $ and $S(t) = \mathtt{exp}(-\lambda t)$
+	\item Weibull distribution: $h(t) = \alpha\lambda^\alpha t^{\alpha-1}$ and $S(t) = \mathtt{exp}\{(-\lambda t)^\alpha\}$
+\end{enumerate}
+
+Ideally, we would have independent realisations of $T$: $t_1,\dots,t_n$. However, in practice
+the failure time cannot always be observed due to various reasons. This phenomenon
+is called \textit{censoring}. We have \textit{Type I censoring}, where $T$ is observed until some pre-determined time $c$. If $T<c$, we observe the value $t_i$ of $T$ , if $T>c$, we only know that $T$ survived beyond $c$. \textit{Type II censoring} (rarely used)
+arises when $n$ independent variables are observed until there have been $r$ failures, so only
+$0<T_{(1)}<\dots<T{(r)}$ are observed. These are all examples of \textit{right-censoring}. \textit{Left-censoring} (the time
+of origin is not known) is less common.\\
+\\
+Under censoring one rather deals with $Y_i = \min\{T_i, C_i\}$ (the observed response), where $C_i$ denotes the censoring time for the $i$th subject. That is, a pair $(y_i; \delta_j)$ is observed, where Let $\delta$ denotes the event indicator.
+\[
+\delta_i = 
+\begin{cases} 
+0 & \text{if the event was observed } T_i \leq C_i \\
+1 & \text{if the response was censored  } T_i > C_i
+\end{cases}
+\]
+Note that $T$ and $C$ are independent.\\
+\\
+Let's assume that $T$ has a continuous distribution $F$ and there are $n$ data points available
+$(y_1, \delta_1),\dots,(y_n, \delta_n)$, where $y_i = \min\{t_i, \delta_i\}$. Assume that $F(x) = F(x, \theta)$ is a some
+parametric distribution and that censoring variables $C_i$ have CDF $G$
+and pdf $g$, which are independent on $?$. The log-likelihood contribution from $y_i$ can be represent as
+\[ \ell(\theta)= \sum_{i=1}^{n}[ \delta_i\mathtt{log}\{h(y_i;\theta)\}- H(y_i;\theta) ] \]
+
+For exponential distribution, have 
+\[ \ell(\theta)= \sum_{i=1}^{n} (\delta_ilog(\lambda)-\lambda y_i)= \log(\lambda)\sum_{i=1}^{n}\delta_i- \lambda \sum_{i=1}^{n}y_i \]
+implying \[\hat{\lambda}_{ML}= \frac{\sum_{i=1}^{n}\delta_i}{\sum_{i=1}^{n}y_i}. \]
+An
+approximate confidence interval for $\lambda$ (using asymptotic normality of maximum likelihood
+estimators) as
+\[ [\hat{\lambda}(1- z_{\alpha/2}/\sqrt{r}) ,\hat{\lambda}(1+ z_{\alpha/2}/\sqrt{r} ], \hspace{0.25cm} r= \sum_{i=1}^{n}\delta_i .\]
+
+A commonly used parametric distribution for modelling lifetimes
+with monotone hazard is the Weibull distribution. Values for $\lambda$ and $\alpha$ can be estimated
+by the maximum likelihood similarly to the exponential distribution, however, this has to
+be done numerically.
+\newpage
+
+\textbf{Nonparametric estimators}\\
+Often it is unclear which parametric model would be appropriate for the data (if any). A
+standard tool for initial data inspection, for suggesting plausible models and for checking
+their fit is a nonparametric estimator of the survivor function. For no censored
+observations, we could estimate $\hat{S}(t)= n^{-1}\sum_{i=1}^{n}\mathbb{I}(T_i >t)$. For censored observation, let $0\leq \tau_1< \tau_n< \dots$ be the ordered uncensored failure times. Let $r_i$ denote the number
+of units that are still in risk at $\tau_i$ (=not failed yet or censored) and $d_i$ the number of
+units that fail at $\tau_i$. The \textbf{Kaplan-Meier estimator} for the survivor function $S$ is given by
+\[ \hat{S}_{KM}(t)= \underset{ \{j:\tau_j<t\} }{\prod} \Big(1- \frac{d_j}{r_j} \Big) \]
+A further estimator for $S$ is the \textbf{Fleming-Harrington estimator} $\hat{S}_{FH}(t)$. It is a plug in
+estimator defined by
+\[ \hat{S}(t)= \mathtt{exp}\{- \hat{H}(t) \}, \]
+where $\hat{H}(t)= \underset{ \{j:\tau_j<t\} }{\sum} \frac{d_j}{r_j}$, is the \textit{Nelson-Aalen} estimator for $H$.\\
+\\
+\textbf{Confidence bands}\\
+Assume that $\hat{S}$ is an estimator for $S$ (e.g. the Kaplan-Meier or the Fleming-Harrington estimator) and let $\hat{\mathtt{var}}(\mathtt{log}(\hat{S}))$ be some estimate for the variance of log(S). An approximate confidence band
+(contained in $[0, 1]$) is given by 
+\[ [\mathtt{exp}(-\mathtt{exp}(B^-), \mathtt{exp}(-\mathtt{exp}(B^+)]  ,\]
+where
+$B^\pm = \mathtt{log}(-\mathtt{log}\hat{S}(t))\pm z_{\alpha/2}\mathtt{log}^{-1} \hat{S}(t) \sqrt{\hat{\mathtt{var}}(\mathtt{log}(\hat{S}))}$\\
+\\
+\textbf{Log-rank test}\\
+We wish to decide whether or not two (or more) samples stem from the same survivor
+function or not. Assume that the failure times $\tau_1<\dots< \tau_k$ are realizations of two random variables $T_1$ and
+$T_2$ corresponding to two groups of items (patients). For each observed failure time $\tau_j$ we
+consider the contingency table
+\begin{table}[H]
+	\centering
+	\begin{tabular}{c c c}
+		\hline
+		Groups & failure at time $\tau_j$ & items at risk at time $\tau_j$ \\
+		\hline
+		1 & $d_{1j}$ & $r_{1j}$ \\
+		2 & $d_{2j}$ & $r_{2j}$ \\
+		\hline
+		$1 + 2$ & $d_j$ & $r_j$ \\ 
+	\end{tabular}
+\end{table}
+
+Under the null-hypothesis that $T_1 = T_2$ the expected number of failures at time $\tau_j$ in
+group 1 and 2 are hypergeometrically distributed with parameters $r_j, r_{1j}, d_j$ and $r_j, r_{2j}, d_{j}$
+respectively. Thus, mean and variance of the number of failures in group 1 and 2 can be
+computed as
+\[ e_{1j}=\frac{d_j}{r_j}r_{1j} \hspace{0.25cm} \mathtt{and} \hspace{0.25cm} e_{2j}=\frac{d_j}{r_j}r_{2j} \] and
+\[ v_{1j}= v_{2j}= \frac{d_j r_{1j} r_{2j}(r_j-d_j)}{r^2_j(r_j- 1)} \]
+Under the null-hypothesis, the statistic
+\[ \chi^2 = \frac{  \Big[ \sum_{j=1}^{k} (d_{1j}-e_{1j})\Big]^2 }{\sum_{j=1}^{k}v_{1j}} \]
+is $\chi^2$-distributed with 1 degree of freedom.\\
+
+\textbf{Graphical tool to check if the Weibull model is adequate}\\
+Under the assumption that $T$ is Weibull distributed, one has
+\[ \mathtt{log}\{-\mathtt{log}(S(t))\}= \alpha\mathtt{log}(t)+ \mathtt{log}(\lambda), \hspace{0.25cm}, t>0. \]
+Now let $\hat{S}(t)$ be a nonparametric estimate for $S$ (e.g. the Kaplan-Meier estimator $\hat{S}_{KM}$).Then the plot $\mathtt{log}\{-\mathtt{log}(\hat{S}(t))\}$ against $\mathtt{log}(t)$ should approximately be a straight line with
+slope $\alpha$ and intercept $-\mathtt{log}(\lambda)$.
 
 {\color{royalblue}\section{Results}}
+
+
+
+
+
+
 
 %66666666666666666666666666666666666666666666%
 
@@ -606,12 +778,122 @@ To tackle these issues, we'll use some survival analysis methods.
 
 Consider observations which are realizations of univariate random variables,
 $X_1, \ldots, X_n \sim F$ where $F$ denotes an unknown cumulative distribution function. The goal is to estimate the distribution $F$. In particular, we are interested in estimating the density $f = F^{'}$, assuming that it exists.\\
-Instead of assuming a parametric model for the distribution (e.g. Normal distribution
-with unknown expectation and variance), we rather want to be "as general as possible": that is, we only assume that the density exists and is suitably smooth (e.g. differentiable). It is then possible to estimate the unknown density function $f(\cdot)$.
+Instead of assuming a parametric model for the distribution (e.g. Normal distribution with unknown expectation and variance), we rather want to be "as general as possible": that is, we only assume that the density exists and is suitably smooth (e.g. differentiable). It is then possible to estimate the unknown density function $f(\cdot)$.
 
 {\color{royalblue}\section{Methods}}
-	
+
+\textbf{Definition}\\
+\\
+Let $X_1,\dots,X_n \overset{iid}{\sim} F$ with a given density $F^{'} = f$. A \textbf{kernel density estimator} for $f$
+is defined via
+\[ \hat{f}(x;h)= \sum_{i=1}^{n}K\Big( \frac{x-X_i}{h} \Big), \hspace{0.25cm} x\in \mathbb{R}, \hspace{0.25cm} h>0.\]
+Thereby $K :\mathbb{R} \rightarrow \mathbb{R}$, such that $\int_{-\infty}^{\infty} K(x)dx=1$ is known as \textbf{kernel} and $h > 0$ is called
+ \textbf{bandwidth}.
+\\
+Some classical kernels:
+\begin{enumerate}
+	\item 0.5$\mathbb{I}(|x|\leq 1)$ (the rectangular or uniform kernel)
+	\item $(1-|x|)\mathbb{I}(|x|\leq 1)$ (the triangular kernel)
+	\item $0.75(1-x^2)\mathbb{I}(|x|\leq 1)$ (the Epanechnikov kernel)
+	\item $2^{-1/2}\mathtt{exp}(-x^2 /2)$ (the Gaussian kernel)
+\end{enumerate}
+Now we want to find a practical way of choosing $K$ and $h$. The optimal bandwidth is given by $h_{CV}= \mathtt{arg}\min_{h>0} CV(h)$, where $CV(.)$ is the \textbf{(leave-one-out) cross-validation criterion}.  
+\[ CV(h)= \int\{ \hat{f}(x;h) \}^2 dx -2\frac{1}{n(n-1)h}\sum_{i=1}^{n}\sum_{j\ne i}K(\frac{X_j -X_i}{h}).\]
+
+Then, the cross-validation kernel density
+estimator is define via
+\[ \hat{f}(x;h_{CV})= \frac{1}{nh_{CV}}\sum_{i=1}^{n}K(\frac{X_i -x}{h_{CV}}) \]
+
+\newpage
 {\color{royalblue}\section{Results}}
+The dataset used for the exercise is \textit{StudentsPerformace.csv} and can be found on \href{https://www.kaggle.com/spscientist/students-performance-in-exams}{Kaggle datasets}. In our analysis we will only consider the
+following variables:\\
+$\mathtt{test.preparation.course}$: If a student took part at the preparation course\\
+$\mathtt{math.score}$: Score on the math exam (0-100)\\
+$\mathtt{reading.score}$: Score on the reading exam (0-100)\\
+$\mathtt{ writing.score}$: Score on the writing exam (0-100)\\
+
+\begin{enumerate}[label=(\alph*)]
+	\item After the implement of the kernel density estimation in an \textbf{R} function, we have the following plot \ref{fig 6.1}. Since we want to avoid under- or oversmoothing, the ideal bandwidth would be 8. This Bandwidth is then used to plot \ref{fig 6.2} with four different kernels. We can notice that the Epanechnikov kernel function would be ideal for the kernel density estimation because its curve is not too smooth or too rough. However, the kernels curves are pretty close, which is not the case for the bandwidths. Hence, the choice of the kernel does not matter very much as the choice of the bandwidth.
+	
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex6plot1.tex}}
+			\caption{ with the Epanechnikov kernel and 4 different bandwidths}
+			\label{fig 6.1}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex6plot2.tex}}
+			\caption{ with four kernel functions: bandwidth = 8 }
+			\label{fig 6.2}
+		\end{subfigure}
+	    \caption{Plots of kernel density estimators of math.score}
+		\label{figg}
+	\end{figure}
+	
+	\item After the implemention of the cross-validation (CV) criterion to find the optimal bandwidth, we use it to find the optimal bandwidth in density for all three scores math.score, reading.score andwriting.score. The same is done with \textbf{R} built-in functions $\mathtt{bw.ucv}$, and $\mathtt{bw.bcv}$, then we have the table \ref{tableau61}. The cross-validation criterion returns the highest optimal bandwidth for all three scores.
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{1.9cm}|P{1cm}|P{1cm}|P{1cm}|}
+			\hline
+			& CV & $\mathtt{bw.ucv}$ & $\mathtt{bw.bcv}$ \\
+			\hline
+			math.score & 5.506 & 4.644 & 4.257 \\
+			\hline
+			reading.score & 4.465 & 3.756 & 4.393 \\
+			\hline
+			writing.score & 5.489 & 4.265 & 4.175 \\
+			\hline  
+		\end{tabular}
+		\caption{\label{tableau61}Optimal bandwidth for each samples with different methods}
+	\end{table} 
+	
+	%the following plots are from the next question, but I want them on this page
+	\item 
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex6plot3.tex}}
+			\caption{}
+			\label{fig 6.3}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex6plot4.tex}}
+			\caption{}
+			\label{fig 6.4}
+		\end{subfigure}
+	
+	    \begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+	    	\centering
+	    	\scalebox{0.75}{\input{Ex6plot5.tex}}
+	    	\caption{}
+	    	\label{fig 6.5}
+	    \end{subfigure}
+		\caption{Densities plots of all three scores of the students that did not take part in the preparation course with the students who attended the preparationcourse}
+		\label{figgg}
+	\end{figure}
+	
+	
+	
+	
+	
+	
+	
+	
+\end{enumerate}
+
+
+
+
+
+
 
 %77777777777777777777777777777777777777777777%
 

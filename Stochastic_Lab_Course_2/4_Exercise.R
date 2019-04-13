@@ -46,25 +46,22 @@ summary(model.1)
 
 #Pearson residuals for model.1
 pearson.resid <- residuals(model.1, "pearson")
-
+#model 1 Pearson residuals Q-Q plot with normal theoretical distribution
 df <- data.frame(pearson.resid)
-ggplot(data = df, mapping = aes(sample = pearson.resid)) + 
+plot4<- ggplot(data = df, mapping = aes(sample = pearson.resid)) + 
   stat_qq(distribution = stats::qnorm, dparams = list(mean = mean(df$pearson.resid), sd = sd(df$pearson.resid))) +
-  geom_abline(alpha = 0.25) +
-  ggtitle("model 1 Pearson residuals Q-Q plot \n with normal theoretical distribution") +
-  theme(plot.title = element_text(hjust = 0.5)) #to center the title on the plot
+  geom_abline(alpha = 0.25) 
 
 #Anscombe residuals for model.1
 ans.resid <- anscombe.residuals(student$G1, model.1$fitted.values)
-
+#model 1 Anscombe residuals Q-Q plot with normal theoretical distribution
 dt <- data.frame(ans.resid)
-ggplot(data = dt, mapping = aes(sample = ans.resid)) + 
+plot5<- ggplot(data = dt, mapping = aes(sample = ans.resid)) + 
   stat_qq(distribution = stats::qnorm, dparams = list(mean = mean(dt$ans.resid), sd = sd(dt$ans.resid))) +
-  geom_abline(alpha = 0.25) +
-  ggtitle("model 2 Anscombe residuals Q-Q plot \n with normal theoretical distribution") +
-  theme(plot.title = element_text(hjust = 0.5)) #to center the title on the plot
+  geom_abline(alpha = 0.25)
 
 #residual analysis
+par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
 plot(model.1)
 
 
@@ -79,6 +76,7 @@ anova(model.2, model.1, test = "Chisq")
 #model 3 and comparison with model 2
 model.3 <- glm(formula = G1 ~ sex + Fedu + studytime + failures + schoolsup + famsup + Walc , family = poisson, data = student) 
 summary(model.3)
+par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
 plot(model.3)
 
 #exporting plots
@@ -94,5 +92,21 @@ tikz('Ex4plot3.tex',width=3.5, height=3, sanitize=TRUE)
 plot3
 dev.off()
 
+tikz('Ex4plot4.tex',width=3.5, height=3, sanitize=TRUE)
+plot4
+dev.off()
 
+tikz('Ex4plot5.tex',width=3.5, height=3, sanitize=TRUE)
+plot5
+dev.off()
+
+tikz('Ex4plot6.tex',width=3.5, height=3, sanitize=TRUE)
+par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
+plot(model.1)
+dev.off()
+
+tikz('Ex4plot7.tex',width=3.5, height=3, sanitize=TRUE)
+par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
+plot(model.3)
+dev.off()
 
