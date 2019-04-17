@@ -1,6 +1,7 @@
 setwd("~/Practical-courses/Stochastic_Lab_Course_2")
 library("tidyverse") 
 library("NonpModelCheck")
+library(tikzDevice)
 
 #loading the data
 children <- read.delim("children3.txt", sep = "")
@@ -75,7 +76,7 @@ df2 <- data.frame(a = 0:59, b = dfit.2)
 df3 <- data.frame(a = 0:59, b = dfit.3)
 df4 <- data.frame(a = 0:59, b = dfit.4)
 #Then the plot
-ggplot(children, aes(x = hypage, y = zwast)) +
+plot1<- ggplot(children, aes(x = hypage, y = zwast)) +
   geom_point(color = "gray31") +
   geom_line(data = df1, aes(x = a, y = b, color = "2"), size = 1) +
   geom_line(data = df2, aes(x = a, y = b, color = "5"), size = 1) +
@@ -84,7 +85,7 @@ ggplot(children, aes(x = hypage, y = zwast)) +
   labs(color = "Bandwidth") 
 
 
-#now with bw = 8, we fix the polynomial degree to 1, estimate f with 4 kernel from exercise 6
+#now with bw = 8, we fix the polynomial degree to 1, estimate f with 4 kernels from exercise 6
 fit.5 <- local.poly.fit(children$zwast, children$hypage, bw = 8, l = 1, kernel = "epanechnikov")
 fit.6 <- local.poly.fit(children$zwast, children$hypage, bw = 8, l = 1, kernel = "uniform")
 fit.7 <- local.poly.fit(children$zwast, children$hypage, bw = 8, l = 1, kernel = "triangular")
@@ -101,7 +102,7 @@ df6 <- data.frame(a = 0:59, b = dfit.6)
 df7 <- data.frame(a = 0:59, b = dfit.7)
 df8 <- data.frame(a = 0:59, b = dfit.8)
 #Then the plot
-ggplot(children, aes(x = hypage, y = zwast)) +
+plot2<- ggplot(children, aes(x = hypage, y = zwast)) +
   geom_point(color = "gray31") +
   geom_line(data = df5, aes(x = a, y = b, color = "epanechnikov"), size = 1) +
   geom_line(data = df6, aes(x = a, y = b, color = "uniform"), size = 1) +
@@ -111,10 +112,6 @@ ggplot(children, aes(x = hypage, y = zwast)) +
 
 #Question (b)
 #Write a function that calculates the optimal bandwidth with Generalised Cross Validation (GCV)
-
-
-
-
 
 GCV <- function(Y, X, bw, l){
   # Y = covariate; X = response variable; bw = bandwidth; l = polynomial degree
@@ -151,7 +148,6 @@ GCV <- function(Y, X, bw, l){
     W_trace[index] = sum((X == i) * weight_vector)
     
     sum_square[index] = sum((Y[(X == i)] - poly_fit(i, deriv = 0))**2)
-    print(paste0(index, "/60"))
   }
   res = sum(sum_square)/(1 - sum(W_trace)/n)**2
   
@@ -171,9 +167,84 @@ opt.GCV1 <- optimize(GCV1, interval = c(2, 11))$minimum
 opt.GCV2 <- optimize(GCV2, interval = c(2, 11))$minimum
 opt.GCV3 <- optimize(GCV3, interval = c(2, 11))$minimum
 opt.GCV4 <- optimize(GCV4, interval = c(2, 11))$minimum
+#opt.GCV1= 4.999956
+#opt.GCV2= 10.99995
+#opt.GCV3= 10.99994
+#opt.GCV4= 8.403991
 
 #Plot all four fits putting the curves on the same plot
+# First, fits for each polynomial degree with the corresponding optimal bw
+fit.9 <- local.poly.fit(children$zwast, children$hypage, bw = opt.GCV1, l = 1, kernel = "epanechnikov")
+fit.10 <- local.poly.fit(children$zwast, children$hypage, bw = opt.GCV2, l = 2, kernel = "epanechnikov")
+fit.11 <- local.poly.fit(children$zwast, children$hypage, bw = opt.GCV3, l = 3, kernel = "epanechnikov")
+fit.12 <- local.poly.fit(children$zwast, children$hypage, bw = opt.GCV4, l = 4, kernel = "epanechnikov")
+#Fitting on the domain of hypage = 0:59
+dfit.9 <- fit.9(x = 0:59, derivative = 0)
+dfit.10 <- fit.10(x = 0:59, derivative = 0)
+dfit.11 <- fit.11(x = 0:59, derivative = 0)
+dfit.12 <- fit.12(x = 0:59, derivative = 0)
 
+#dataframes for ggplot
+df9 <- data.frame(a = 0:59, b = dfit.9)
+df10 <- data.frame(a = 0:59, b = dfit.10)
+df11 <- data.frame(a = 0:59, b = dfit.11)
+df12 <- data.frame(a = 0:59, b = dfit.12)
+#Then the plot
+plot3<- ggplot(children, aes(x = hypage, y = zwast)) +
+  geom_point(color = "gray31") +
+  geom_line(data = df9, aes(x = a, y = b, color = "1")) +
+  geom_line(data = df10, aes(x = a, y = b, color = "2")) +
+  geom_line(data = df11, aes(x = a, y = b, color = "3")) +
+  geom_line(data = df12, aes(x = a, y = b, color = "4")) +
+  labs(color = "polynomial \n degrees") 
+
+
+#Question(c)
+#calculate the first derivative of the function of zwast with the GCV-bandwidth 
+#and polynomial degrees from 1 to 4.
+
+fit.deriv.1 <- localpoly.reg(X, Y, bandwidth = 4.999956, degree.pol = 1, deriv = 1)
+fit.deriv.2 <- localpoly.reg(X, Y, bandwidth = 10.99995, degree.pol = 2, deriv = 1)
+fit.deriv.3 <- localpoly.reg(X, Y, bandwidth = 10.99994, degree.pol = 3, deriv = 1)
+fit.deriv.4 <- localpoly.reg(X, Y, bandwidth = 8.403991, degree.pol = 4, deriv = 1)
+#dataframes for ggplot
+df13 <- data.frame(a = unique(fit.deriv.1$x), b = unique(fit.deriv.1$predict))
+df14 <- data.frame(a = unique(fit.deriv.2$x), b = unique(fit.deriv.2$predict))
+df15 <- data.frame(a = unique(fit.deriv.3$x), b = unique(fit.deriv.3$predict))
+df16 <- data.frame(a = unique(fit.deriv.4$x), b = unique(fit.deriv.4$predict))
+
+#Plot all four derivative fits on one plot
+plot4<- ggplot(children, aes(x = hypage, y = zwast)) +
+  geom_point(color = "gray31") +
+  geom_line(data = df13, aes(x = a, y = b, color = "1")) +
+  geom_line(data = df14, aes(x = a, y = b, color = "2")) +
+  geom_line(data = df15, aes(x = a, y = b, color = "3")) +
+  geom_line(data = df16, aes(x = a, y = b, color = "4")) +
+  #ylim(-1, 1) +
+  #xlim(2, 59)+
+  labs(color = "polynomial \n degrees")
+
+
+
+
+
+
+#exports plots as .tex files
+tikz('Ex7plot1.tex',width=3.5, height=3)
+plot1
+dev.off()
+
+tikz('Ex7plot2.tex',width=3.5, height=3)
+plot2
+dev.off()
+
+tikz('Ex7plot3.tex',width=3.5, height=3)
+plot3
+dev.off()
+
+tikz('Ex7plot4.tex',width=3.5, height=3)
+plot4
+dev.off()
 
 
 

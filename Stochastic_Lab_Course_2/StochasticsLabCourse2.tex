@@ -835,7 +835,8 @@ $\mathtt{ writing.score}$: Score on the writing exam (0-100)\\
 		\label{figg}
 	\end{figure}
 	
-	\item After the implemention of the cross-validation (CV) criterion to find the optimal bandwidth, we use it to find the optimal bandwidth in density for all three scores math.score, reading.score andwriting.score. The same is done with \textbf{R} built-in functions $\mathtt{bw.ucv}$, and $\mathtt{bw.bcv}$, then we have the table \ref{tableau61}. The cross-validation criterion returns the highest optimal bandwidth for all three scores.
+	\item After the implemention of the cross-validation (CV) criterion to find the optimal bandwidth, we use it to find the optimal bandwidth in density for all three scores math.score, reading.score and
+writing.score. The same is done with \textbf{R} built-in functions $\mathtt{bw.ucv}$, and $\mathtt{bw.bcv}$, then we have the table \ref{tableau61}. The cross-validation criterion returns the highest optimal bandwidth for all three scores.
 	
 	\begin{table}[H]
 		\centering
@@ -876,12 +877,11 @@ $\mathtt{ writing.score}$: Score on the writing exam (0-100)\\
 	    	\caption{}
 	    	\label{fig 6.5}
 	    \end{subfigure}
-		\caption{Densities plots of all three scores of the students that did not take part in the preparation course with the students who attended the preparationcourse}
+		\caption{Densities plots of all three scores of the students that did not take part in the preparation course with the students who attended the preparation course}
 		\label{figgg}
 	\end{figure}
 	
-	
-	
+	From figure \ref{figgg}, we notice that the densities are skewed to the left. We also notice that they have the same shape, with different modes. This means that the two groups may have same distribution with different parameters. 	
 	
 	
 	
@@ -908,8 +908,108 @@ This is advantageous since it is easy to interpret and to calculate. Moreover, w
 However, the restricted assumption of linearity is frequently not fulfilled, eventually when the data set is very large. In that case, we would like to find a complex model that will better highlight the relation between $Y$ and $X$. A first approach for this aim would be to specify another parametric form for this relation, for example a transformation of the observations or a polynomial regression. Nonetheless it remains difficult to find the suitable relation since the form of the data does not really change after these transformations. That is why in this section, we opt for a non-parametric regression technique (local polynomials) in which data choose their own form of relation (the predictor does not take a predetermined form but is constructed according to information derived from the data) making things more flexible.
 
 {\color{royalblue}\section{Methods}}
-	
+Let $(Y_1, X_1),\dots,(Y_n, X_n)$ be iid as $(Y, X)$ random variables, $Y \in \mathbb{R}$ and $X \in \mathbb{R}^d$.
+Consider a random design
+nonparametric regression model
+\[ Y_i= f(X_i)+ \epsilon_{i}, \hspace{0.25cm} i=1,\dots,n \]
+\[ \mathtt{E}(\epsilon_{i}|X_i)= 0, \hspace{0.25cm}  \mathtt{E}(\epsilon_{i}^2|X_i)= \sigma^2 .\]
+Let$K:\mathbb{R}^d \rightarrow \mathbb{R}_{+}$ be a kernel function, and denote $e_k = (0,\dots,0,1,0,\dots,0) \in \mathbb{R}^(\ell+1) $ a unit vector with $1$ at $k$-th position, $k =
+1,\dots,\ell+1$. Moreover, we define
+\[ P(X_i-x)= \{1,(X_i-x),\dots,(X_i-x)^\ell  \}^t \]
+
+\[X = 
+\begin{pmatrix}
+1 & (X_1-x) & \cdots & (X_1-x)^\ell \\
+\vdots  & \vdots  & \ddots & \vdots  \\
+1 & (X_n-x) & \cdots & (X_1-x)^\ell 
+\end{pmatrix}, \hspace{0.25cm} 
+Y=
+\begin{pmatrix}
+Y_1 \\
+\vdots  \\
+Y_n 
+\end{pmatrix} \]
+
+\[V=\mathtt{diag}\bigg\{K\bigg(\frac{X_1-x}{h}\bigg),\dots,K\bigg(\frac{X_n-x}{h}\bigg) \bigg\} \]
+Then a \textbf{local polynomial estimator} of $f^{(k-1)}(x)$ is a linear estimator
+\[ \hat{f}^(k-1)(x)=(k-1)!e^t_k \bigg( \frac{1}{nh}X^tVX \bigg)^{-1}P(X_i-x)
+K\bigg(\frac{X_i-x}{h}\bigg)=\sum_{i=1}^{n}W_{k,i}(x)Y_i \]
+with the weight function
+\[ W_{k,i}(x)= \frac{(k-1)!}{nh}e^t_k\bigg( \frac{1}{nh}X^tVX \bigg)^{-1} 
+P(X_i -x)K\bigg( \frac{X_i -x}{h} \bigg) .\]
+The bandwiddth $h$ can be chosen efficiently with the following GCV(generalized cross-validation)
+\[GCV(h)= \frac{\sum_{i=1}^{n} \Big\{ Y_i- \hat{f}(X_i;h) \Big\}^2}{\{ 1-n^{-1}\sum_{i=1}^{n}W_{k,i}(h) \}^2} \]
+
+\newpage
 {\color{royalblue}\section{Results}}
+We use the dataset from Exercise 1 on Kenyan children. We are interested in the
+following two variables\\
+\textbf{hypage}: Age of a child\\
+\textbf{zwast}: Z-score for wasting\\
+\\
+Z-score for wasting is defined as the weight of a child standardised with the median andstandard deviation of children with the same height from the healthy population. We wouldlike to investigate how the Z-score for wasting changes with age, that is we consider themodel 
+\[\mathtt{ zwast}_i= f(\mathtt{hypage}_i)+ \epsilon_{i}, \hspace{0.25cm}  \mathtt{for} \hspace{0.25cm}
+\epsilon_{i} \sim \mathcal{N}(0,\sigma^{2}), \hspace{0.25cm}  i=1,\dots,n. \]
+
+\begin{enumerate}[label=(\alph*)]
+	\item After implementing a local polynomial fit and by fixing the polynomial degree to 1, we have the plots in figure \ref{figggg}. Since we want to avoid under- or oversmoothing, the ideal bandwidth from the plot \ref{fig 7.1} would be 8. This bandwidth is then used to plot the estimate of $f$ with 4 different bandwidths (figure \ref{fig 7.2}). It is clear that the curves of the estimator present the same shape, and almost the same level of smoothness. In this case, all the kernels might be used for further analysis.
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex7plot1.tex}}
+			\caption{ with the Epanechnikov kernel and 4 different bandwidths}
+			\label{fig 7.1}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex7plot2.tex}}
+			\caption{ with four kernel functions: bandwidth = 8 }
+			\label{fig 7.2}
+		\end{subfigure}
+		\caption{Plots of local polynomial estimator of $f$ }
+		\label{figggg}
+	\end{figure}
+	
+	 \newpage
+	 \item Now we want to find the optimal bandwidth with Generalised Cross Validation (GCV). For this aim, we implement a function that calculates the GCV, then with used Epanechnikov kernel and obtained GCV-bandwidth to estimate f usingpolynomial degrees from 1 to 4. The results are in table \ref{tableau71}. We note that the GCV-bandwidths are less than 8, and are different. This means that we will have different estimators for different polynomial degrees.
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{1.9cm}|P{1.25cm}|P{1.25cm}|P{1.25cm}|P{1.25cm}|}
+			\hline
+			Polynomial degree & 1 & 2 & 3 & 4 \\
+			\hline
+			GCV-bandwidth & 4.999956 & 10.99995 & 10.99994 & 8.403991 \\
+			\hline 
+		\end{tabular}
+		\caption{\label{tableau71}Optimal bandwidth for each polynomial degree}
+	\end{table} 
+	
+	The plot of all four fits are in figure \ref{fig 7.3}. We notice that the curves follow the same pattern in general, with less smoothness meaning that the obtained GCV-bandwidths are completely reasonable. However, the fitting curve for the polynomial degree 1 is very smooth compared to the others, especially with the fitting curve of the polynomial degree which is less smooth than the others. Moreover, the boundaries highlight slight signs of over-fitting(for polynomial degree 4), or under-fitting (for polynomial degree 2). Overall, using the polynomial degree 3 with the corresponding optimal bandwidth would be ideal. 
+	\begin{figure}[H]
+		\centering
+		\scalebox{0.7}{\input{Ex7plot3.tex}}
+		\caption{Plot of all four fits obtained using the GCV-bandwidths from table \ref{tableau71}}
+		\label{fig 7.3}
+	\end{figure}
+	
+	\newpage
+	\item In this question, we use the function \textbf{localpoly.reg} of library \textit{NonpModelCheck} to calculate the first derivative of the function of $\mathtt{ zwast}$ with the GCV-bandwidth and polynomial degrees from1 to 4. Figure \ref{fig 7.4} shows the plot of all four derivative fits. We can see noticeable differences on boundaries, since the curves  start at very different $\mathtt{ zwast}$ values. This suggest that some derivative fits(especailly the one from the polynomial degree 4) takes into account a lot of outliers, while others might use them less. Nevertheless, we do have signs of better $\mathtt{ zwast}$ after 2 years. Actually, after 2 years, the derivative fitting curves head towards 0 (and we also have some fluctuations around 0). Finally, the derivative fits curves we got here are too smooth, therefore GCV-bandwidths from \ref{tableau71} are notreasonable or not optimal. We may solve this issue just by using the corresponding derivatives for each polynomial degree to find the optimal bandwidths.
+	
+	
+	\begin{figure}[H]
+		\centering
+		\scalebox{0.7}{\input{Ex7plot4.tex}}
+		\caption{Plot of all four derivative fits obtained using the GCV-bandwidths from table \ref{tableau71}}
+		\label{fig 7.4}
+	\end{figure}
+	
+	
+	
+\end{enumerate}
+
 
 %88888888888888888888888888888888888888888888%
 

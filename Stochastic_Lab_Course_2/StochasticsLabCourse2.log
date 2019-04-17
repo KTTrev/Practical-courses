@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.31)  13 APR 2019 14:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.31)  17 APR 2019 16:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1085,43 +1085,69 @@ Overfull \hbox (1.60655pt too wide) in paragraph at lines 851--851
 Chapter 7.
 [41
 
-]
+] [42]
+Underfull \hbox (badness 10000) in paragraph at lines 947--956
+
+ []
+
+(./Ex7plot1.tex) (./Ex7plot2.tex) [43]
+Overfull \hbox (2.21182pt too wide) in paragraph at lines 990--990
+ []|\T1/lmr/m/n/10 4.999956| 
+ []
+
+
+Overfull \hbox (2.21182pt too wide) in paragraph at lines 990--990
+ []|\T1/lmr/m/n/10 10.99995| 
+ []
+
+
+Overfull \hbox (2.21182pt too wide) in paragraph at lines 990--990
+ []|\T1/lmr/m/n/10 10.99994| 
+ []
+
+
+Overfull \hbox (2.21182pt too wide) in paragraph at lines 990--991
+ []|\T1/lmr/m/n/10 8.403991| 
+ []
+
+(./Ex7plot3.tex) [44] (./Ex7plot4.tex) [45]
 Chapter 8.
-[42
+[46
 
 ]
 Chapter 9.
 
-Underfull \hbox (badness 10000) in paragraph at lines 931--932
+Underfull \hbox (badness 10000) in paragraph at lines 1035--1036
 
  []
 
-[43
+[47
 
 ]
 Chapter 10.
 
-Underfull \hbox (badness 10000) in paragraph at lines 969--971
+Underfull \hbox (badness 10000) in paragraph at lines 1073--1075
 
  []
 
-[44
+[48
 
-] [45]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 985.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 985.
+] [49]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1089.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1089.
  (./StochasticsLabCourse2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 985.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 985.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1089.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1089.
+
 Package rerunfilecheck Info: File `StochasticsLabCourse2.out' has not changed.
 (rerunfilecheck)             Checksum: 879FC92C834184B40637C8B429B2357E;2316.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 985.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1089.
  ) 
 Here is how much of TeX's memory you used:
- 18693 strings out of 494923
- 340890 string characters out of 6180742
- 6595325 words of memory out of 10000000
- 21435 multiletter control sequences out of 15000+600000
+ 18723 strings out of 494923
+ 341216 string characters out of 6180742
+ 6599052 words of memory out of 10000000
+ 21443 multiletter control sequences out of 15000+600000
  84010 words of font info for 66 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  55i,14n,55p,962b,1007s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1146,10 +1172,10 @@ pe1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></usr
 nts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on StochasticsLabCourse2.pdf (46 pages, 2775238 bytes).
+Output written on StochasticsLabCourse2.pdf (50 pages, 4175357 bytes).
 PDF statistics:
- 626 PDF objects out of 1000 (max. 8388607)
- 551 compressed objects within 6 object streams
- 158 named destinations out of 1000 (max. 500000)
+ 662 PDF objects out of 1000 (max. 8388607)
+ 581 compressed objects within 6 object streams
+ 168 named destinations out of 1000 (max. 500000)
  338 words of extra memory for PDF output out of 10000 (max. 10000000)
 

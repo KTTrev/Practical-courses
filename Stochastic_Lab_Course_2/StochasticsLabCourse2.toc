@@ -25,16 +25,16 @@
 \contentsline {chapter}{\numberline {7}Nonparametric regression: local polynomials}{41}{chapter.7}
 \contentsline {section}{\numberline {7.1}Problem description}{41}{section.7.1}
 \contentsline {section}{\numberline {7.2}Methods}{41}{section.7.2}
-\contentsline {section}{\numberline {7.3}Results}{41}{section.7.3}
-\contentsline {chapter}{\numberline {8}Nonparametric regression: splines}{42}{chapter.8}
-\contentsline {section}{\numberline {8.1}Problem description}{42}{section.8.1}
-\contentsline {section}{\numberline {8.2}Methods}{42}{section.8.2}
-\contentsline {section}{\numberline {8.3}Results}{42}{section.8.3}
-\contentsline {chapter}{\numberline {9}Mixed models}{43}{chapter.9}
-\contentsline {section}{\numberline {9.1}Problem description}{43}{section.9.1}
-\contentsline {section}{\numberline {9.2}Methods}{43}{section.9.2}
-\contentsline {section}{\numberline {9.3}Results}{43}{section.9.3}
-\contentsline {chapter}{\numberline {10}Partial least squares}{44}{chapter.10}
-\contentsline {section}{\numberline {10.1}Problem description}{44}{section.10.1}
-\contentsline {section}{\numberline {10.2}Methods}{45}{section.10.2}
-\contentsline {section}{\numberline {10.3}Results}{45}{section.10.3}
+\contentsline {section}{\numberline {7.3}Results}{43}{section.7.3}
+\contentsline {chapter}{\numberline {8}Nonparametric regression: splines}{46}{chapter.8}
+\contentsline {section}{\numberline {8.1}Problem description}{46}{section.8.1}
+\contentsline {section}{\numberline {8.2}Methods}{46}{section.8.2}
+\contentsline {section}{\numberline {8.3}Results}{46}{section.8.3}
+\contentsline {chapter}{\numberline {9}Mixed models}{47}{chapter.9}
+\contentsline {section}{\numberline {9.1}Problem description}{47}{section.9.1}
+\contentsline {section}{\numberline {9.2}Methods}{47}{section.9.2}
+\contentsline {section}{\numberline {9.3}Results}{47}{section.9.3}
+\contentsline {chapter}{\numberline {10}Partial least squares}{48}{chapter.10}
+\contentsline {section}{\numberline {10.1}Problem description}{48}{section.10.1}
+\contentsline {section}{\numberline {10.2}Methods}{49}{section.10.2}
+\contentsline {section}{\numberline {10.3}Results}{49}{section.10.3}
