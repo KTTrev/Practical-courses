@@ -33,13 +33,17 @@ plot2 <- ggplot(children3, aes(x = hypage, y = zstunt,  colour = factor(female))
   geom_point(alpha = 0.4) +
   geom_smooth(se = F) +
   scale_colour_manual(labels = c("male", "female"), values = c("blue2", "green3")) +
+  theme_classic(base_size = 15) + #font size
+  theme(legend.key = element_rect(fill = "white", colour = "purple")) + #legend keys editing
   guides(colour = guide_legend(title="Gender"))
 
 #plot zstunt against age for urban and rural children
 plot3 <- ggplot(children3, aes(x = hypage, y = zstunt,  colour = factor(ruralfacto))) +
   geom_point(alpha = 0.4) +
   geom_smooth(se = F) +
-  scale_colour_manual(labels = c("urban", "rural"), values = c("blue2", "green3")) +
+  scale_colour_manual(labels = c("urban", "rural"), values = c("red2", "yellow")) +
+  theme_classic(base_size = 15) + #font size
+  theme(legend.key = element_rect(fill = "white", colour = "purple")) + #legend keys editing
   guides(colour = guide_legend(title="Area"))
 
 #Experiment with different aesthetics, themes and font sizes for the plots, report your favourite
@@ -85,7 +89,7 @@ centroids_df$zstunt.mean <- children4$mean
 ggplot(data = Kenya1_df, aes(x = long, y = lat, group = group, fill = zstunt.mean)) + 
   geom_polygon(color = "black", size = 0.25) +
   geom_text(data = centroids_df, aes(x = long, y = lat, label = NAME_1, group = NULL), size = 3) +
-  scale_fill_distiller(name="Zstunt mean for \n each county", palette = "Spectral") +
+  scale_fill_distiller(name="Zstunt mean \n per county", palette = "Spectral") +
   theme(aspect.ratio = 1)
 
 ##(d)write the tibble from (b) into a text file

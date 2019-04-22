@@ -56,7 +56,7 @@ linkcolor=red
 {\color{royalblue}\chapter*{Introduction}}
 
 The "Stochastics Lab course II" is an Introductory Course for
-statistics and stochastics applications with R programming language. The course lasted for two weeks in March 2019. The report written on \LaTeX, contains results, interpretations and figures from the ten exercises that had to be solved. Along with this report, there is also the R codes, which are recommended to understand the result.
+statistics and stochastics applications with R programming language. The course lasted for two weeks in March 2019. The report written on \LaTeX, contains a description of the problem, a description of the methods usedto solve the problem and a detailed discussion of the results.
 
 %1111111111111111111111111111111111111111111111%
 \tableofcontents
@@ -81,29 +81,39 @@ Tidyverse is a collection of packages for data manipulation, exploration and vis
 {\color{royalblue}\section{Results}}
 
 \begin{enumerate}[label=(\alph*)]
-	\item After loading and filtering the data childrenfinal.dta, we convert some variables (namely tetanusmother, breastfeeding, wantedchild, anetalvisits, and placedelivery) into double labeled \textit{<dbl>} (doubles, or real numbers).
+	\item After loading and filtering the data childrenfinal.dta, we convert some variables (namely $\mathtt{tetanusmother}$, $\mathtt{breastfeeding}$, $\mathtt{wantedchild}$, $\mathtt{anetalvisits}$, and $\mathtt{placedelivery}$) into double labeled \textit{<dbl>} (doubles, or real numbers).
 	
 	\item 
-	\item[°]The \hyperlink{Figure 1.1}{figure 1.1} indicates that the effect of zstunt is negatively affecting te hypage.
-	\begin{figure}[ht]
+	\item[°]The smooth line in figure \ref{f} indicates that the $\mathtt{zstunt}$ is getting between the ages of 0 and 20, before stabilizing.
+	\begin{figure}[H]
 		\centering
-		\scalebox{1.2}{\input{Ex1plot1.tex}}
-		\caption{Scatter plot of zstunt against hypage with smooth line (in purple)}
+		\scalebox{1}{\input{Ex1plot1.tex}}
+		\caption{Scatter plot of $\mathtt{zstunt}$ against $\mathtt{hypage}$ with a smooth line (in purple)}
+		\label{f}
+	\end{figure}
+	
+	\newpage
+	\item[°]gjdhgdhdg
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex1plot2.tex}}
+			\caption{For each gender}
+			\label{fig 1.2}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex1plot3.tex}}
+			\caption{For each area}
+			\label{fig 1.3}
+		\end{subfigure}
+		\caption{Smooth plots
+of $\mathtt{zstunt}$ against $\mathtt{hypage}$ }
+		\label{fi}
 	\end{figure}
 	
 	\item[°]gjdhgdhdg
-	\begin{figure}[ht]
-		\centering
-		\scalebox{1.2}{\input{Ex1plot2.tex}}
-		\caption{Some Meaningful Caption}
-	\end{figure}
-	
-	\item[°]gjdhgdhdg
-	\begin{figure}[ht]
-		\centering
-		\scalebox{1.2}{\input{Ex1plot3.tex}}
-		\caption{Some Meaningful Caption}
-	\end{figure} 
 		
 	\item 
 	\begin{figure}[ht]
@@ -942,12 +952,17 @@ The bandwiddth $h$ can be chosen efficiently with the following GCV(generalized 
 
 \newpage
 {\color{royalblue}\section{Results}}
-We use the dataset from Exercise 1 on Kenyan children. We are interested in the
+We use the dataset from Exercise 1 on Kenyan children. We are interested in the
+
 following two variables\\
-\textbf{hypage}: Age of a child\\
+\textbf{hypage}: Age of a child
+\\
 \textbf{zwast}: Z-score for wasting\\
 \\
-Z-score for wasting is defined as the weight of a child standardised with the median andstandard deviation of children with the same height from the healthy population. We wouldlike to investigate how the Z-score for wasting changes with age, that is we consider themodel 
+Z-score for wasting is defined as the weight of a child standardised with the median and
+standard deviation of children with the same height from the healthy population. We would
+like to investigate how the Z-score for wasting changes with age, that is we consider the
+model 
 \[\mathtt{ zwast}_i= f(\mathtt{hypage}_i)+ \epsilon_{i}, \hspace{0.25cm}  \mathtt{for} \hspace{0.25cm}
 \epsilon_{i} \sim \mathcal{N}(0,\sigma^{2}), \hspace{0.25cm}  i=1,\dots,n. \]
 
@@ -973,7 +988,8 @@ Z-score for wasting is defined as the weight of a child standardised with the me
 	\end{figure}
 	
 	 \newpage
-	 \item Now we want to find the optimal bandwidth with Generalised Cross Validation (GCV). For this aim, we implement a function that calculates the GCV, then with used Epanechnikov kernel and obtained GCV-bandwidth to estimate f usingpolynomial degrees from 1 to 4. The results are in table \ref{tableau71}. We note that the GCV-bandwidths are less than 8, and are different. This means that we will have different estimators for different polynomial degrees.
+	 \item Now we want to find the optimal bandwidth with Generalised Cross Validation (GCV). For this aim, we implement a function that calculates the GCV, then with used Epanechnikov kernel and obtained GCV-bandwidth to estimate f using
+polynomial degrees from 1 to 4. The results are in table \ref{tableau71}. We note that the GCV-bandwidths are less than 8, and are different. This means that we will have different estimators for different polynomial degrees.
 	
 	\begin{table}[H]
 		\centering
@@ -990,18 +1006,18 @@ Z-score for wasting is defined as the weight of a child standardised with the me
 	The plot of all four fits are in figure \ref{fig 7.3}. We notice that the curves follow the same pattern in general, with less smoothness meaning that the obtained GCV-bandwidths are completely reasonable. However, the fitting curve for the polynomial degree 1 is very smooth compared to the others, especially with the fitting curve of the polynomial degree which is less smooth than the others. Moreover, the boundaries highlight slight signs of over-fitting(for polynomial degree 4), or under-fitting (for polynomial degree 2). Overall, using the polynomial degree 3 with the corresponding optimal bandwidth would be ideal. 
 	\begin{figure}[H]
 		\centering
-		\scalebox{0.7}{\input{Ex7plot3.tex}}
+		\scalebox{1}{\input{Ex7plot3.tex}}
 		\caption{Plot of all four fits obtained using the GCV-bandwidths from table \ref{tableau71}}
 		\label{fig 7.3}
 	\end{figure}
 	
 	\newpage
-	\item In this question, we use the function \textbf{localpoly.reg} of library \textit{NonpModelCheck} to calculate the first derivative of the function of $\mathtt{ zwast}$ with the GCV-bandwidth and polynomial degrees from1 to 4. Figure \ref{fig 7.4} shows the plot of all four derivative fits. We can see noticeable differences on boundaries, since the curves  start at very different $\mathtt{ zwast}$ values. This suggest that some derivative fits(especailly the one from the polynomial degree 4) takes into account a lot of outliers, while others might use them less. Nevertheless, we do have signs of better $\mathtt{ zwast}$ after 2 years. Actually, after 2 years, the derivative fitting curves head towards 0 (and we also have some fluctuations around 0). Finally, the derivative fits curves we got here are too smooth, therefore GCV-bandwidths from \ref{tableau71} are notreasonable or not optimal. We may solve this issue just by using the corresponding derivatives for each polynomial degree to find the optimal bandwidths.
+	\item In this question, we use the function \textbf{localpoly.reg} of library \textit{NonpModelCheck} to calculate the first derivative of the function of $\mathtt{ zwast}$ with the GCV-bandwidth and polynomial degrees from 1 to 4. Figure \ref{fig 7.4} shows the plot of all four derivative fits. We can see noticeable differences on boundaries, since the curves  start at very different $\mathtt{ zwast}$ values. This suggest that some derivative fits(especailly the one from the polynomial degree 4) takes into account a lot of outliers, while others might use them less. Nevertheless, we do have signs of better $\mathtt{ zwast}$ after 2 years. Actually, after 2 years, the derivative fitting curves head towards 0 (and we also have some fluctuations around 0). Finally, the derivative fits curves we got here are too smooth, therefore GCV-bandwidths from \ref{tableau71} are not reasonable or not optimal. We may solve this issue just by using the corresponding derivatives for each polynomial degree to find the optimal bandwidths.
 	
 	
 	\begin{figure}[H]
 		\centering
-		\scalebox{0.7}{\input{Ex7plot4.tex}}
+		\scalebox{1}{\input{Ex7plot4.tex}}
 		\caption{Plot of all four derivative fits obtained using the GCV-bandwidths from table \ref{tableau71}}
 		\label{fig 7.4}
 	\end{figure}
@@ -1039,39 +1055,7 @@ Here, $\beta_{0}$ and $\beta_{i}$
 
 {\color{royalblue}\chapter{Partial least squares}}
 {\color{royalblue}\section{Problem description}}
-
-In a standard linear model, we have at our disposal $(X_i, Y_i)$ supposed to be linked with,
-\begin{equation}
-Y_i = X_{i}^{t}\beta+ \epsilon_{i}, \hspace{1cm}  1 \leqslant i \leqslant n
-\end{equation}
-In particular, each observation $X_i$ is described by p variables $(X_1, \ldots, X_n)$ so that the former relation should be understood as
-\begin{equation}
-Y_i = \sum_{j = 1}^{p} \beta_j X_{i}^{j}+ \epsilon_{i}, \hspace{1cm}  1 \leqslant i \leqslant n
-\end{equation}
-
-From a matricial point of view, the linear model can we written as follows :
-\begin{equation}
-Y_i = X \beta_0 + \epsilon_{i},\hspace{1cm}  Y \in \mathbb{R}^n, X \in \mathcal{M}_{n,p},  \beta_{0} \in \mathbb{R}^p
-\end{equation}
-
-A classical "optimal" estimator is the MLE :
-\begin{equation}
-\hat{\beta}_{MLE} := (X^{t}X)^{-1} X^{t}Y
-\end{equation}
-
-This can be obtained while remarking that J is a convex function, that possesses a unique minimizer if and only if $X^{t}X$ has a full rank, meaning that $J$ is indeed strongly convex :
-\begin{equation}
- D^2 J= X^{t}X
-\end{equation}
-Which is a squared $p × p$ symmetric and positive matrix. It is non degenerate if $X^{t}X$ has full rank, meaning that necessarily $p \leqslant n$.\\
-
-In large dimensional case, we often have $p > n$, hence a problem when applying linear regression in this case:\\
-$X^{t}X$ is an $p × p$ matrix, but its rank is lower than $n$. If $n << p$, then
-\begin{equation}
-rk(X^{t}X) \leqslant n << p
-\end{equation}
-Consequently, the the Gram matrix $X^{t}X$ is not invertible and even very ill-conditionned (most of the eigenvalues are 0 !). The linear model $\hat{\beta}_{MLE}$ completely fails.\\
-As a remedy to this problem that occurs most of the time in big data analysis, we will make use of the partial least squares (PLS) method.
+In some problems of linear regression or prediction phenomenon, explicable variables can be correlated, sometimes causing  multicollinearity. This phenomenon that occurs most of the time in big data analysis, is a consequence of bad results related to regressions' coefficients estimated with least squares. To solve this problem, we have principal component analysis (PCA), and the partial least squares (PLS). We are using the latter.
 
 {\color{royalblue}\section{Methods}}
 

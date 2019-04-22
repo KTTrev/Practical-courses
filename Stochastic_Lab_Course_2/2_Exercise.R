@@ -28,6 +28,7 @@ for (i in 1:N){
 bin_rbin <- rbinom(N, n, p)
 
 #Plot the histograms of all three samples on one panel
+#First the dataframes for ggplot, then the plot
 bin_inv <- data.frame(bin_inv)
 bin_inv$method <- rep("inverse CDF", 1000)
 colnames(bin_inv) <- c("rand_num", "method")
@@ -43,7 +44,7 @@ colnames(bin_rbin) <- c("rand_num", "method")
 df <- rbind(bin_inv, bin_bern, bin_rbin)
 
 plot1 <- ggplot(df, aes(x = rand_num, fill = method)) +
-  geom_histogram( binwidth=.5, position="dodge")
+  geom_histogram( binwidth=.5, position="dodge") 
 
 #Switch the random number generator back to its default
 RNGkind(kind = "default", normal.kind = NULL)
@@ -81,11 +82,11 @@ k <- rnorm(N)
 df <- data.frame(rand_num, k)
 plot2 <- ggplot(df) +
   geom_histogram(aes( x = rand_num, y = ..density.., colour = rand_num), colour ="white") +
-  geom_density(aes(x = k), colour = "blue") 
+  geom_density(aes(x = k), colour = "blue")
 
 #QQ-plot
 plot3 <- ggplot(data = df, mapping = aes(sample = rand_num)) +
-  stat_qq() 
+  stat_qq()
 
 #it is not possible to simulate from the standard Cauchy density using
 #the accept-reject method, the standard normal candidate density
