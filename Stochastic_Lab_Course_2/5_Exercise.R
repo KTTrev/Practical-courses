@@ -101,17 +101,24 @@ legend("bottomleft", inset=.0001,
        box.lty=0)
 title(main="nonparametric & parametric estimators \n of the survivor function by group")
 
-#Is the Weibull model an appropriate assumption in both groups
-plot(log(km_smokers$time) ,log(-log(km_smokers$surv)), col = "red")
-abline(a = alpha_smokers*log(lam_hat_wei_smokers), b = alpha_smokers, col = "blue" )
-title(main="Checking Weibull if weibull is appropriate \n for smokers' group")
-
-plot(log(km_nonsmokers$time) ,log(-log(km_nonsmokers$surv)), col = "red")
-abline(a = alpha_nonsmokers*log(lam_hat_wei_nonsmokers), b = alpha_nonsmokers, col = "blue" )
-title(main="Checking Weibull if weibull is appropriate \n for nonsmokers' group")
-
-
-
+#"Checking Weibull if weibull is appropriate \n for smokers' group"
+df1 <- data.frame(A=log(km_smokers$time) ,B=log(-log(km_smokers$surv)))
+ggplot(df1) +
+  geom_point(aes(x=A, y=B)) +
+  geom_abline(aes(intercept = alpha_smokers*log(lam_hat_wei_smokers), slope = alpha_smokers, color = 'D1'))+
+  scale_colour_manual(name = " ", values = c("purple")) +
+  xlab("AA") +
+  ylab("BB") +
+  theme(legend.position = c(0.2, 0.95),legend.justification = c("right", "top"), legend.key = element_rect(fill = "white", colour = "gray19"))
+#Checking Weibull if weibull is appropriate \n for nonsmokers' group
+df2 <- data.frame(A=log(km_nonsmokers$time) ,B=log(-log(km_nonsmokers$surv)))
+ggplot(df2) +
+  geom_point(aes(x=A, y=B)) +
+  geom_abline(aes(intercept = alpha_nonsmokers*log(lam_hat_wei_nonsmokers), slope = alpha_nonsmokers, color = 'D2'))+
+  scale_colour_manual(name = " ", values = c("purple")) +
+  xlab("AAAA") +
+  ylab("BBBB") +
+  theme(legend.position = c(0.2, 0.95),legend.justification = c("right", "top"), legend.key = element_rect(fill = "white", colour = "gray19"))
 
 
 

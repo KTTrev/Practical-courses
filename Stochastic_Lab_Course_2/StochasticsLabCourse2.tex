@@ -55,8 +55,8 @@ linkcolor=red
 
 {\color{royalblue}\chapter*{Introduction}}
 
-The "Stochastics Lab course II" is an Introductory Course for
-statistics and stochastics applications with R programming language. The course lasted for two weeks in March 2019. The report written on \LaTeX, contains a description of the problem, a description of the methods usedto solve the problem and a detailed discussion of the results.
+The "Stochastics Lab course II" is a practical Course for statistics and stochastics applications with R programming language. The course lasted for two weeks in March 2019. The report written on \LaTeX, contains a description of the problem, a description of the methods used
+to solve the problem and a detailed discussion of the results.
 
 %1111111111111111111111111111111111111111111111%
 \tableofcontents
@@ -1031,23 +1031,179 @@ polynomial degrees from 1 to 4. The results are in table \ref{tableau71}. We not
 
 {\color{royalblue}\chapter{Nonparametric regression: splines}}
 {\color{royalblue}\section{Problem description}}
+In the previous chapter, we have explored the local polynomials regression method. However, this method suffers from Runge's Phenomena (especially when having lots of data). To solve this problem, we will generalized the local polynomials regression with splines.
 
 {\color{royalblue}\section{Methods}}
-	
+Denote
+\[ \mathcal{P}_m= \{p:p(x)= \sum_{i=1}^{m}c_ix^{i-1},\hspace{0.25cm}c_1,\dots,c_m,x \in \mathtt{R} \} \]
+Next, consider an interval $[a, b) (a, b \in \mathbb{R}, -\infty < a < b < \infty)$.\\
+Let $a=\tau_0<\tau_1<\dots<\tau_k<\tau_{k+1}=b$, $\tau_i \in \mathtt{R}$ and denote $\Delta= \{\tau_i \}^{k+1}_0$ a partition of $[a,b)$ into $k+1$ subintervals $[\tau_i,\tau_{i+1})$, $i=0,\dots,k$.\\
+\textbf{Definition} Let $\Delta_k$ be a partition of $[a,b)$, then\\
+$\mathcal{P}\mathcal{P}_m(\Delta_k)= \{p:\exists p_0,\dots,p_k \in \mathcal{P}_m$ such that $ p(x) = p_i(x)$ for $x \in [\tau_i; \tau_{i+1})$, $i =0,\dots,k \}$\\
+is the \textbf{space of piecewise polynomials of order} $m$ \textbf{based on} $\Delta_k$.\\
+\\
+\textbf{Definition}\\
+Let $\Delta_k$ be a partition of $[a,b)$. Let $m\in \mathbb{N}$ and $M=(m_1,\dots,m_k)$ be a vector of integers with $1\leqslant m_i\leqslant m$, $i=1,\dots,k$. Then, the space\\
+$\mathcal{S}_m(M,\Delta_k)= \Big\{s:\exists s_0,\dots,s_k \in \mathcal{P}_m$ such that $s(x)=s_i(x)$ for $x\in [\tau_i; \tau_{i+1})$, $i=0,\dots,k$ and $s^{(j)}_{i-i}(\tau_i)=s^{(j)}_{i}(\tau_i)$, $j=0,1,\dots,m-1-m_i$, $i=0,\dots,k\Big\}$\\
+is the \textbf{space of polynomial splines of order} $m$ \textbf{and multiplicities} $M$ \textbf{based on} $\Delta_k$.
+Further we will deal with $\mathcal{S}_m(M = (1,\dots,1), \Delta_k)$ only and will denote it just $\mathcal{S}_m(\Delta_k)$.\\
+\textbf{Definition} B-splines $N_i(x)$ of order $m$ can be defined as:
+\begin{enumerate}
+	\item $m$ polynomials pieces of degree $m-1$, which join at $m-1$ inner knots
+	\item $N_i(x) > 0$ for $x \in [\tau_i, \tau_{i+m})$ and is zero for $x$s outside of this interval
+	\item $N_i(x)$ overlaps with $2(m-1)$ pieces of its neighbors
+	\item $\sum_{i=j-m+1}^{j}N_i(x)=1$, $x\in [\tau_j, \tau_{j+1})$
+\end{enumerate}
+Now consider a fixed design regression model with deterministic $\{x_i\}^n_{i=1} \in [0,1]$
+\[ Y_i=f(x_i)+ \epsilon_{i}, \hspace{0.25cm}\mathtt{cov}(\epsilon_{i}\epsilon_{j})=\sigma^2\delta_{ij}, \hspace{0.25cm}\mathtt{E}(\epsilon_{i})=0,\hspace{0.25cm}i=1,\dots,n.\]
+Regression function f is estimated by regression splines, that is
+\[ \hat{f}_n= N(\cdot)\mathtt{ arg}\min_{\beta \in \mathbb{R}^{k+m}}(Y-N\beta)^t(Y-N\beta)=N(\cdot)(N^tN)^{-1}N^tY,\]
+where $N=\{ N(x_1)^t,\dots,N(x_n)^t \}^t$ is the basis matrix with $N(x)=\{ N_1(x),\dots,N_{k+m}(x) \}$ as some basis of $\mathcal{S}_m(\Delta_k).$\\
+\\
+Furthermore, in order to find the optimal knot, one can use the following \textbf{generalized cross validation},
+\[ \mathtt{GCV}(k)= \frac{||\hat{f}_n-f||^2}{[1-tr\{N(N^tN)^{-1}N^t\}/n]^2}=
+\frac{||\hat{f}_n-f||^2}{(1-k/n)^2}. \]
+
+\newpage
 {\color{royalblue}\section{Results}}
+The dataset \textit{stemcells.txt} contains 144 observations of the order parameter of a living stem
+cell observed every 10 minutes over 24 hours. We would like to understand how the order
+parameter evolves over time, i.e., we consider the model $OP_i = f(t_i) + \epsilon_{i}$, $i = 1,\dots,144$, where $t_i$ are the time points. Thereby, $\epsilon_{i}$ are not independent and identically distributed,
+but rather follow an autoregressive process of the first order. That is, $\epsilon_{i} = \alpha \epsilon_{i?1} + \xi_i$ for $\xi_i \sim \mathcal{N}(0,\sigma^2)$ and $\alpha \in (0,1)$. Note that the correlation matrix $R$ of $(\epsilon_1,\dots,\epsilon_{n})^t$ is given by $R_{i,j}= \alpha^{|i-j|}$. For this data you can take $\alpha=0.55$. 
+
+\begin{enumerate}[label=(\alph*)]
+	\item First we implemented an R function that depends on the response, covariate, number of knots and
+spline degree that calculate a regression spline fit for $f$. By fixing the spline degree to 2
+and estimate $f$ with various number of knots, we get obtain the following figure \ref{fig 8.1}. It noticeable that the fitting curve is too smooth for small number of knots(which may cause underfitting) and less smooth for larger values (which may cause overfitting). Then by fixing the number of knots to 4, we estimate $f$ using
+splines of degree from 1 to 4 and obtain the plot \ref{fig 8.2}. We can notice that per intervals, we have a line for the degree 1, which is curved as the the number increases. Hence for a good fit, we need to find the optimal number of knots and the spline degree.
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex8plot1.tex}}
+			\caption{with spline degree 2, and various number of knots}
+			\label{fig 8.1}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex8plot2.tex}}
+			\caption{ with 4 number of knots and four spline degrees }
+			\label{fig 8.2}
+		\end{subfigure}
+		\caption{Plots of regression spline fit for $f$}
+		\label{figu}
+	\end{figure}
+
+    
+    \newpage 
+    \item In order to estimate the optimal number of (equidistant) knots, a function using the Generalised Cross Validation (GCV) is implemented. First, we ignore that the data are dependent, and obtain the results in table \ref{tableau81}. Then we calculate the fits with the number of knots obtained with GCV and spline degrees from 1 to 4, and the resulting estimators are represented in plot \ref{fig 8.3}. It is noticeable that we are in case of overfitting, making these estimators unreasonable.
+    
+    \begin{table}[H]
+    	\centering
+    	\begin{tabular}{|P{3.25cm}|P{0.5cm}|P{0.5cm}|P{0.5cm}|P{0.5cm}|}
+    		\hline
+    		Spline degree & 1 & 2 & 3 & 4 \\
+    		\hline
+    		GCV knots' number & 29 & 33 & 35 & 21 \\
+    		\hline 
+    	\end{tabular}
+    	\caption{\label{tableau81}GCV knots' number for each spline degree}
+    \end{table}
+    
+    \begin{figure}[H]
+    	\centering
+    	\scalebox{1}{\input{Ex8plot3.tex}}
+    	\caption{Spline regression estimators with obtained GCV knots' number}
+    	\label{fig 8.3}
+    \end{figure}
+    
+    \newpage
+    \item In this question, we update the functions for regression
+splines and GCV so that they take into account that the errors $\epsilon_{i}$ follow and autoregressive process of order one, and have the results in table \ref{tableau82}. Then we calculate the fits with the number of knots obtained
+with this updated GCV criterion and spline degrees from 1 to 4. The resulting
+estimators are plotted in figure \ref{fig 8.4}. We notice that the estimators fit here are more relevant, since for each spline degree, the smoothness minimizes over- or under-fitting. 
+    \begin{table}[H]
+    	\centering
+    	\begin{tabular}{|P{3.25cm}|P{0.5cm}|P{0.5cm}|P{0.5cm}|P{0.5cm}|}
+    		\hline
+    		Spline degree & 1 & 2 & 3 & 4 \\
+    		\hline
+    		GCV knots' number & 6 & 3 & 1 & 1 \\
+    		\hline 
+    	\end{tabular}
+    	\caption{\label{tableau82}GCV knots' number (auto-regressive) for each spline degree}
+    \end{table}
+    
+    \begin{figure}[H]
+    	\centering
+    	\scalebox{1}{\input{Ex8plot4.tex}}
+    	\caption{Spline regression estimators with obtained auto-regressive GCV knots' number}
+    	\label{fig 8.4}
+    \end{figure}
+    
+    \newpage
+    Furthermore, we add to the plot a parametric fit, such
+that $f(t_i)= \sum_{j=0}^{4}\beta_jt^j_i$.
+    \begin{figure}[H]
+    	\centering
+    	\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+    		\centering
+    		\scalebox{0.75}{\input{Ex8plot5.tex}}
+    		\caption{Parametric fit plot added to the plot \ref{fig 8.4} }
+    		\label{fig 8.5}
+    	\end{subfigure}
+    	\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+    		\centering
+    		\scalebox{0.75}{\input{Ex8plot6.tex}}
+    		\caption{ Plot of the parametric for various degrees }
+    		\label{fig 8.6}
+    	\end{subfigure}
+    	\caption{}
+    	\label{figuu}
+    \end{figure}
+    
+    
+\end{enumerate}
+
+
 
 %99999999999999999999999999999999999999999999%
 
 {\color{royalblue}\chapter{Mixed models}}
 {\color{royalblue}\section{Problem description}}
-To illustrate the targeted problem ib this section, we use the following example. Let us consider the following linear model,\\
-\begin{equation}
-Y_{i,t} = \beta_{0} + \beta_{i}t + \epsilon_{i,t}
-\end{equation}
-Here, $\beta_{0}$ and $\beta_{i}$
- 
+Let's illustrate the problem in this section with the following exemple. The (simple) linear model state there is a linear dependence between explanatory variables $Y_{i,t}$, and the time $t$ (dependent variable), with an error term $\epsilon_{i,t}$
+\[ Y_{i,t} = \alpha + \beta_t + \epsilon_{i,t}, \hspace{0.25cm}
+ \epsilon_{i,t}\sim \mathcal{N}(0,\sigma^2)\]
+$t,\alpha ,\beta $: fixed effects.
+$\alpha ,\beta, \sigma$: parameters to estimate.
+One limit of this model is that it considers $Y_{i,t}$ to be independent, which is not often the case as they can be correlated. Therefore, take this into account, a random effect is added to the fixed effects. We obtain a (linear) mixed model
 
 {\color{royalblue}\section{Methods}}
+The data we consider are of the form $Y_{ij}$, $i = 1,\dots, n$, $j= 1,\dots,k_i$. That is, there are $n$subjects (clusters) and for each subject i there are $k_i$ observations.
+In matrix notation a mixed model can be represented as
+	\[ Y= X\beta+ Zu+ \epsilon, \hspace{0.25cm}
+\mathtt{E}
+\begin{pmatrix}
+u \\
+\epsilon
+\end{pmatrix}=
+\begin{pmatrix}
+0 \\
+0
+\end{pmatrix}, \hspace{0.25cm}
+\mathtt{cov}
+\begin{pmatrix}
+u\\
+\epsilon
+\end{pmatrix}=
+\begin{pmatrix}
+\sigma^2_u D & 0 \\
+0 & \sigma^2_\epsilon \Sigma
+\end{pmatrix}, \]
+for $Y, \epsilon \in \mathbb{R}^N$, $N=\sum_{i=1}^{n}k_i$, $Z= \mathtt{blockdiag}(Z_1,\dots,Z_n)\in \mathbb{R}^{N\times nm}$, $u\in \mathbb{R}^{nm}$
+Typically, a normality assumption is made both for $\epsilon$ and $u$.
+
 	
 {\color{royalblue}\section{Results}}
 
@@ -1058,6 +1214,15 @@ Here, $\beta_{0}$ and $\beta_{i}$
 In some problems of linear regression or prediction phenomenon, explicable variables can be correlated, sometimes causing  multicollinearity. This phenomenon that occurs most of the time in big data analysis, is a consequence of bad results related to regressions' coefficients estimated with least squares. To solve this problem, we have principal component analysis (PCA), and the partial least squares (PLS). We are using the latter.
 
 {\color{royalblue}\section{Methods}}
+Let $x \in \mathbb{R}^m$ and $y \in \mathbb{R}$ be two zero-mean random variables. Denote $\sigma = cov(x)$ and
+$\delta = cov(x, y)$. Assume $y = x\beta + e$, $\mathtt{E}(e) = 0$ and $cov(e) = \sigma^2$. This is called a population
+model.\\
+Now, let $Y = (y_1,\dots,y_n)^t \in \mathtt{R}^n$ be a vector of $n$ independent copies of $y$ and $X = (x^t_1,\dots,x^t_n)^t \in \mathtt{R}^{n\times m}$ be a matrix of $n$ independent copies of $x$. In particular, $Y= X\beta + \epsilon$, where $\mathtt{E}(\epsilon)= 0_n$ and $cov(\epsilon)= \sigma^2 I_n$.\\
+Denote $A = X^tX$ and $b = X^tY$ ; note that $A$ and $b$ are proportional to the sample estimators of $\sigma$ and $\delta$, respectively.\\
+Denote now $K_d(b; A) = span(b, Ab,\dots, A^{d-1}b)$ the $d$-dimensional Krylov space, where $d \leq rk(A)$ should be chosen data-driven. Then, the
+partial least squares estimator can be defined as 
+\[ \hat{\beta}^d_{PLS}= \mathtt{arg}\min_{\beta \in K_d}= ||Y-X\beta||^2 \]
+There are several ways to compute PLS, but in \textbf{R} it can be done with libraries \textbf{plsr} and \textbf{predict.plsr}.
 
 {\color{royalblue}\section{Results}}
 

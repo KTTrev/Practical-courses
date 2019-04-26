@@ -2,6 +2,7 @@ setwd("~/Practical-courses/Stochastic_Lab_Course_2")
 library(tidyverse)
 library(splines)
 library(nlme)
+library(tikzDevice)
 
 #Question(a)
 #loading the data
@@ -53,7 +54,7 @@ df2 <- data.frame(x = Time, y = f.fit.knot2(Time))
 df3 <- data.frame(x = Time, y = f.fit.knot3(Time))
 df4 <- data.frame(x = Time, y = f.fit.knot4(Time))
 
-ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
+plot1<- ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
   geom_point(alpha = 0.3) +
   geom_line(data = df1, aes(color = "3")) +
   geom_line(data = df2, aes(color = "14")) +
@@ -79,7 +80,7 @@ df6 <- data.frame(x = Time, y = f.fit.deg2(Time))
 df7 <- data.frame(x = Time, y = f.fit.deg3(Time))
 df8 <- data.frame(x = Time, y = f.fit.deg4(Time))
 #The plot
-ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
+plot2<- ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
   geom_point(alpha = 0.3) +
   geom_line(data = df5, aes(color = "1")) +
   geom_line(data = df6, aes(color = "2")) +
@@ -137,7 +138,7 @@ df10 <- data.frame(x = Time, y = f_fit_GCV2(Time))
 df11 <- data.frame(x = Time, y = f_fit_GCV3(Time))
 df12 <- data.frame(x = Time, y = f_fit_GCV4(Time))
 #plot
-ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
+plot3<- ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
   geom_point(alpha = 0.3) +
   geom_line(data = df9, aes(color = "1")) +
   geom_line(data = df10, aes(color = "2")) +
@@ -233,7 +234,7 @@ df14 <- data.frame(x = Time, y = f_fit_auto2(Time))
 df15 <- data.frame(x = Time, y = f_fit_auto3(Time))
 df16 <- data.frame(x = Time, y = f_fit_auto4(Time))
 #Plot
-ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
+plot4<- ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
   geom_point(alpha = 0.3) +
   geom_line(data = df13, aes(color = "1")) +
   geom_line(data = df14, aes(color = "2")) +
@@ -251,9 +252,14 @@ model1 <- gls(Y ~ X + I(X**2) + I(X**3) + I(X**4), correlation = corAR1(0.55))
 polynomial.fit1 <- function(x){ as.numeric(model1$coefficients %*% x**(0:4)) }
 polynomial.fit1 <- Vectorize(polynomial.fit1)
 
-ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
+plot5 <- ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
   geom_point(alpha = 0.3) +
-  stat_function(fun = polynomial.fit1, color = "red2") +
+  geom_line(data = df13, aes(color = "Degree 1")) +
+  geom_line(data = df14, aes(color = "Degree 2")) +
+  geom_line(data = df15, aes(color = "Degree 3")) +
+  geom_line(data = df16, aes(color = "Degree 4")) +
+  stat_function(fun = polynomial.fit1, aes(color = "Parametric \nfit(degree 4)")) +
+  scale_colour_manual(name = "", values = c("darkorchid", "blue", "red", "green2", "orange")) +
   xlab("Time(minutes)") +
   ylab("Order Parameter") +
   theme_classic(base_size = 12) + #font size
@@ -268,14 +274,46 @@ polynomial.fit3 <- function(x){ as.numeric(model3$coefficients %*% x**(0:5)) }
 polynomial.fit2 <- Vectorize(polynomial.fit2)
 polynomial.fit3 <- Vectorize(polynomial.fit3)
 
-ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
+plot6 <- ggplot(data = data.frame(x = X, y = Y), aes(x = x, y = y)) +
   geom_point(alpha = 0.3) +
   stat_function(fun = polynomial.fit1, aes(color = "4")) +
   stat_function(fun = polynomial.fit2, aes(color = "3")) +
   stat_function(fun = polynomial.fit3, aes(color = "5")) + 
-  scale_colour_manual(name = "Degree", values = c("red2", "green","blue")) +
+  scale_colour_manual(name = "Parametric \nfit degree ", values = c("green", "orange","blue")) +
   xlab("Time(minutes)") +
   ylab("Order Parameter") +
   theme_classic(base_size = 12) + #font size
   theme(legend.key = element_rect(fill = "white", colour = "gray19"))  #legend keys editing
+
+
+
+
+
+
+#exports plots as .tex files
+tikz('Ex8plot1.tex',width=3.5, height=3)
+plot1
+dev.off()
+
+tikz('Ex8plot2.tex',width=3.5, height=3)
+plot2
+dev.off()
+
+tikz('Ex8plot3.tex',width=3.5, height=3)
+plot3
+dev.off()
+
+tikz('Ex8plot4.tex',width=3.5, height=3)
+plot4
+dev.off()
+
+tikz('Ex8plot5.tex',width=3.5, height=3)
+plot5
+dev.off()
+
+tikz('Ex8plot6.tex',width=3.5, height=3)
+plot6
+dev.off()
+
+
 

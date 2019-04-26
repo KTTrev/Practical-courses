@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.31)  21 APR 2019 12:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.31)  26 APR 2019 14:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -826,16 +826,16 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 59.
+(Font)              <10> on input line 58.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 59.
+(Font)              <7> on input line 58.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 59.
+(Font)              <5> on input line 58.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.63 \tableofcontents
+l.62 \tableofcontents
                       [1
 
 ] (./StochasticsLabCourse2.toc [2
@@ -856,12 +856,12 @@ Chapter 1.
 [4
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 85.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 84.
 
  (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (29.31007pt too wide) in paragraph at lines 85--86
+Overfull \hbox (29.31007pt too wide) in paragraph at lines 84--85
 []\T1/lmr/m/n/10 After load-ing and fil-ter-ing the data chil-dren-fi-nal.dta, 
 we con-vert some vari-ables (namely $[]$,
  []
@@ -870,110 +870,110 @@ we con-vert some vari-ables (namely $[]$,
 <Ex1plot4.png, id=247, 813.0375pt x 602.25pt>
 File: Ex1plot4.png Graphic file (type png)
 <use Ex1plot4.png>
-Package pdftex.def Info: Ex1plot4.png  used on input line 122.
+Package pdftex.def Info: Ex1plot4.png  used on input line 121.
 (pdftex.def)             Requested size: 406.51776pt x 301.12425pt.
  [6] [7 <./Ex1plot4.png (PNG copy)>]
 Chapter 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--138
+Underfull \hbox (badness 10000) in paragraph at lines 135--137
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 138.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 137.
 
 (/usr/share/texmf/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 138.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 137.
 
-Overfull \hbox (13.46664pt too wide) in paragraph at lines 143--161
+Overfull \hbox (13.46664pt too wide) in paragraph at lines 142--160
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--161
+Underfull \hbox (badness 10000) in paragraph at lines 142--160
 
  []
 
 [8
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 162--164
+Underfull \hbox (badness 10000) in paragraph at lines 161--163
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--180
+Underfull \hbox (badness 10000) in paragraph at lines 176--179
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--190
+Underfull \hbox (badness 10000) in paragraph at lines 187--189
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 200--201
+Underfull \hbox (badness 10000) in paragraph at lines 199--200
 
  []
 
 
-Overfull \hbox (28.46664pt too wide) in paragraph at lines 220--221
+Overfull \hbox (28.46664pt too wide) in paragraph at lines 219--220
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 220--221
+Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 222--223
+Underfull \hbox (badness 10000) in paragraph at lines 221--222
 
  []
 
 [10] (./Ex2plot1.tex) (./Ex2plot2.tex) [11] [12] (./Ex2plot3.tex) [13]
 Chapter 3.
 
-Overfull \hbox (3.56007pt too wide) in paragraph at lines 284--294
+Overfull \hbox (3.56007pt too wide) in paragraph at lines 283--293
  [] 
  []
 
 [14
 
 ]
-Overfull \hbox (28.46664pt too wide) in paragraph at lines 310--311
+Overfull \hbox (28.46664pt too wide) in paragraph at lines 309--310
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
+Underfull \hbox (badness 10000) in paragraph at lines 309--310
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 312--313
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 316--323
+Underfull \hbox (badness 10000) in paragraph at lines 315--322
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 324--326
+Underfull \hbox (badness 10000) in paragraph at lines 323--325
 
  []
 
 [15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 341--357
+Underfull \hbox (badness 10000) in paragraph at lines 340--356
 
  []
 
@@ -982,12 +982,12 @@ Chapter 4.
 [21
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 501--504
+Underfull \hbox (badness 10000) in paragraph at lines 500--503
 
  []
 
 
-Overfull \hbox (30.94415pt too wide) in paragraph at lines 506--508
+Overfull \hbox (30.94415pt too wide) in paragraph at lines 505--507
 \T1/lmr/m/n/10 that is, the canon-i-cal pa-ram-e-ter $\OML/lmm/m/it/10 ^^Q[] \O
 T1/lmr/m/n/10 = [](\OML/lmm/m/it/10 ^^U[]\OT1/lmr/m/n/10 )\OML/lmm/m/it/10 ; ^^
 T\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 ^^Q[]\OT1/lmr/m/n/10 ) = \OML/lmm/m/it/10 ^^
@@ -1000,12 +1000,12 @@ m/n/10 )$\T1/lmr/m/n/10 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 510--512
+Underfull \hbox (badness 10000) in paragraph at lines 509--511
 
  []
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 529--531
+Underfull \hbox (badness 10000) in paragraph at lines 528--530
 
  []
 
@@ -1014,24 +1014,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 529--531
 [29] [30]
 Chapter 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 676--682
+Underfull \hbox (badness 10000) in paragraph at lines 675--681
 
  []
 
 [31
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 686--694
+Underfull \hbox (badness 10000) in paragraph at lines 685--693
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 700--707
+Underfull \hbox (badness 10000) in paragraph at lines 699--706
 
  []
 
 
-Overfull \hbox (24.97406pt too wide) in paragraph at lines 700--707
+Overfull \hbox (24.97406pt too wide) in paragraph at lines 699--706
 \T1/lmr/m/n/10 Let's as-sume that $\OML/lmm/m/it/10 T$ \T1/lmr/m/n/10 has a con
 -tin-u-ous dis-tri-bu-tion $\OML/lmm/m/it/10 F$ \T1/lmr/m/n/10 and there are $\
 OML/lmm/m/it/10 n$ \T1/lmr/m/n/10 data points avail-able $\OT1/lmr/m/n/10 (\OML
@@ -1040,51 +1040,51 @@ OML/lmm/m/it/10 n$ \T1/lmr/m/n/10 data points avail-able $\OT1/lmr/m/n/10 (\OML
  []
 
 [32]
-Underfull \hbox (badness 10000) in paragraph at lines 733--739
+Underfull \hbox (badness 10000) in paragraph at lines 732--738
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 739--759
+Underfull \hbox (badness 10000) in paragraph at lines 738--758
 
  []
 
 [33]
-Underfull \hbox (badness 10000) in paragraph at lines 768--770
+Underfull \hbox (badness 10000) in paragraph at lines 767--769
 
  []
 
 [34]
 Chapter 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 796--800
+Underfull \hbox (badness 10000) in paragraph at lines 795--799
 
  []
 
 [35
 
 ] [36]
-Underfull \hbox (badness 10000) in paragraph at lines 820--826
+Underfull \hbox (badness 10000) in paragraph at lines 819--825
 
  []
 
 (./Ex6plot1.tex) (./Ex6plot2.tex)
-Overfull \hbox (0.57497pt too wide) in paragraph at lines 856--856
+Overfull \hbox (0.57497pt too wide) in paragraph at lines 855--855
  []|$[]$| 
  []
 
 
-Overfull \hbox (0.57497pt too wide) in paragraph at lines 856--857
+Overfull \hbox (0.57497pt too wide) in paragraph at lines 855--856
  []|$[]$| 
  []
 
 
-Overfull \hbox (2.71779pt too wide) in paragraph at lines 860--860
+Overfull \hbox (2.71779pt too wide) in paragraph at lines 859--859
  []|\T1/lmr/m/n/10 reading.score| 
  []
 
 
-Overfull \hbox (1.60655pt too wide) in paragraph at lines 862--862
+Overfull \hbox (1.60655pt too wide) in paragraph at lines 861--861
  []|\T1/lmr/m/n/10 writing.score| 
  []
 
@@ -1093,63 +1093,69 @@ Chapter 7.
 [40
 
 ] [41]
-Underfull \hbox (badness 10000) in paragraph at lines 958--967
+Underfull \hbox (badness 10000) in paragraph at lines 957--966
 
  []
 
 (./Ex7plot1.tex) (./Ex7plot2.tex) [42]
-Overfull \hbox (2.21182pt too wide) in paragraph at lines 1001--1001
+Overfull \hbox (2.21182pt too wide) in paragraph at lines 1000--1000
  []|\T1/lmr/m/n/10 4.999956| 
  []
 
 
-Overfull \hbox (2.21182pt too wide) in paragraph at lines 1001--1001
+Overfull \hbox (2.21182pt too wide) in paragraph at lines 1000--1000
  []|\T1/lmr/m/n/10 10.99995| 
  []
 
 
-Overfull \hbox (2.21182pt too wide) in paragraph at lines 1001--1001
+Overfull \hbox (2.21182pt too wide) in paragraph at lines 1000--1000
  []|\T1/lmr/m/n/10 10.99994| 
  []
 
 
-Overfull \hbox (2.21182pt too wide) in paragraph at lines 1001--1002
+Overfull \hbox (2.21182pt too wide) in paragraph at lines 1000--1001
  []|\T1/lmr/m/n/10 8.403991| 
  []
 
 (./Ex7plot3.tex) [43] (./Ex7plot4.tex) [44]
 Chapter 8.
-[45
 
-]
-Chapter 9.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1044--1045
+Underfull \hbox (badness 10000) in paragraph at lines 1038--1052
 
  []
 
-[46
+[45
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 1060--1064
+
+ []
+
+[46] (./Ex8plot1.tex) (./Ex8plot2.tex) [47] (./Ex8plot3.tex) [48]
+(./Ex8plot4.tex) [49] (./Ex8plot5.tex) (./Ex8plot6.tex) [50]
+Chapter 9.
+[51
 
 ]
 Chapter 10.
-[47
+[52
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1066.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1066.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1231.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1231.
  (./StochasticsLabCourse2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1066.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1066.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1231.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1231.
 
 Package rerunfilecheck Info: File `StochasticsLabCourse2.out' has not changed.
 (rerunfilecheck)             Checksum: 879FC92C834184B40637C8B429B2357E;2316.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1066.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1231.
  ) 
 Here is how much of TeX's memory you used:
- 18719 strings out of 494923
- 341133 string characters out of 6180742
- 4849619 words of memory out of 10000000
- 21449 multiletter control sequences out of 15000+600000
+ 18770 strings out of 494923
+ 341686 string characters out of 6180742
+ 4850751 words of memory out of 10000000
+ 21465 multiletter control sequences out of 15000+600000
  84010 words of font info for 66 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  55i,14n,55p,1084b,1007s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1170,11 +1176,12 @@ type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></u
 sr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on StochasticsLabCourse2.pdf (48 pages, 4173042 bytes).
+ts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on StochasticsLabCourse2.pdf (53 pages, 4483011 bytes).
 PDF statistics:
- 644 PDF objects out of 1000 (max. 8388607)
- 565 compressed objects within 6 object streams
- 158 named destinations out of 1000 (max. 500000)
+ 693 PDF objects out of 1000 (max. 8388607)
+ 606 compressed objects within 7 object streams
+ 175 named destinations out of 1000 (max. 500000)
  338 words of extra memory for PDF output out of 10000 (max. 10000000)
 
