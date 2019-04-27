@@ -773,9 +773,54 @@ Under the assumption that $T$ is Weibull distributed, one has
 Now let $\hat{S}(t)$ be a nonparametric estimate for $S$ (e.g. the Kaplan-Meier estimator $\hat{S}_{KM}$).Then the plot $\mathtt{log}\{-\mathtt{log}(\hat{S}(t))\}$ against $\mathtt{log}(t)$ should approximately be a straight line with
 slope $\alpha$ and intercept $-\mathtt{log}(\lambda)$.
 
+\newpage
 {\color{royalblue}\section{Results}}
+The dataset of interest for the exercise is \textit{Thoracic.txt}, and can be found on \href{https://archive.ics.uci.edu/ml/datasets/Thoracic+Surgery+Data}{ UCI Machine Learning Repository}. We will be using the following three variables:\\
+\begin{enumerate}
+	\item[] \textbf{PRE30}: if a person is a smoker 
+	\item[] \textbf{AGE}: patient age at surgery
+	\item[] \textbf{Risk1Y}: is TRUE if a person has died within a year after the surgery
+\end{enumerate}
+We will consider failure times to be at AGE +1.
 
-
+\begin{enumerate}[label=(\alph*)]
+	\item After computing nonparametric estimators of the survivor function $S(t)$, we generate the figure \ref{fig 5.1}, with $95\%$ confidence bands.We notice that the two estimators are almost the same, but for a person above 80 years old, Fleming-Harrington estimate a survival probability greater than the one of Kaplan-Meier.
+	
+	\begin{figure}[H]
+		\centering
+		\scalebox{1}{\input{Ex5plot1.tex}}
+		\caption{Plot of nonparametric estimators of the survivor function}
+		\label{fig 5.1}
+	\end{figure}
+	
+	\newpage
+	Then we fit the parametric (exponential and Weibull)models to the data, and plot them with the Kaplan-Meier estimator (with its correspondingconfidence band) as shown in figure \ref{fig 5.2}. Both parametric estimators are decreasing, but the exponential estimator for $S(t)$ is linear, while the Weibull fit has almost the shape as the nonparametric fit Kaplan-Meier. Hence the exponential model is a very bad model one for this data, while the Weibull estimator would be appropriate, that is realistic.
+	\begin{figure}[H]
+		\centering
+		\scalebox{1}{\input{Ex5plot2.tex}}
+		\caption{Plot of Kaplan-Meier \& parametric estimators of the survivor function}
+		\label{fig 5.2}
+	\end{figure}
+	
+	To check if the Weibull model is adequate for the data, we use the graphical method presented in the last paragraph of the Results section, and obtain figure \ref{fig 5.3}. We can see that the points follow $D0$ line pattern, meaning that the Weibull model is effectively appropriate for the data.
+	\begin{figure}[H]
+		\centering
+		\scalebox{1}{\input{Ex5plot3.tex}}
+		\caption{Plot of $\mathtt{log}\{-\mathtt{log}(\hat{S}(t))\}$ against $\mathtt{log}(t)$, with the line $D0$ with slope $\alpha$ and intercept $-\mathtt{log}(\lambda_{weibull})$}
+		\label{fig 5.3}
+	\end{figure}
+	
+	\item Now we consider two groups of patients: smokers and non-smokers. Smokers make up $82.1\%$ in the sample. For each group, the Kaplan-Meier estimators are computed,and plotted together with the corresponding confidence bands in figure \ref{fig 5.4}. 
+	
+	\begin{figure}[H]
+		\centering
+		\scalebox{1}{\input{Ex5plot4.tex}}
+		\caption{Plot of the Kaplan-Meier estimators fit for smokers and nonsmokers}
+		\label{fig 5.4}
+	\end{figure} 
+	
+	
+\end{enumerate}
 
 
 
@@ -1180,7 +1225,8 @@ $\alpha ,\beta, \sigma$: parameters to estimate.
 One limit of this model is that it considers $Y_{i,t}$ to be independent, which is not often the case as they can be correlated. Therefore, take this into account, a random effect is added to the fixed effects. We obtain a (linear) mixed model
 
 {\color{royalblue}\section{Methods}}
-The data we consider are of the form $Y_{ij}$, $i = 1,\dots, n$, $j= 1,\dots,k_i$. That is, there are $n$subjects (clusters) and for each subject i there are $k_i$ observations.
+The data we consider are of the form $Y_{ij}$, $i = 1,\dots, n$, $j= 1,\dots,k_i$. That is, there are $n$
+subjects (clusters) and for each subject i there are $k_i$ observations.
 In matrix notation a mixed model can be represented as
 	\[ Y= X\beta+ Zu+ \epsilon, \hspace{0.25cm}
 \mathtt{E}

@@ -17,24 +17,24 @@
 \contentsline {chapter}{\numberline {5}Survival analysis}{31}{chapter.5}
 \contentsline {section}{\numberline {5.1}Problem description}{31}{section.5.1}
 \contentsline {section}{\numberline {5.2}Methods}{31}{section.5.2}
-\contentsline {section}{\numberline {5.3}Results}{34}{section.5.3}
-\contentsline {chapter}{\numberline {6}Kernel density estimation}{35}{chapter.6}
-\contentsline {section}{\numberline {6.1}Problem description}{35}{section.6.1}
-\contentsline {section}{\numberline {6.2}Methods}{35}{section.6.2}
-\contentsline {section}{\numberline {6.3}Results}{37}{section.6.3}
-\contentsline {chapter}{\numberline {7}Nonparametric regression: local polynomials}{40}{chapter.7}
-\contentsline {section}{\numberline {7.1}Problem description}{40}{section.7.1}
-\contentsline {section}{\numberline {7.2}Methods}{40}{section.7.2}
-\contentsline {section}{\numberline {7.3}Results}{42}{section.7.3}
-\contentsline {chapter}{\numberline {8}Nonparametric regression: splines}{45}{chapter.8}
-\contentsline {section}{\numberline {8.1}Problem description}{45}{section.8.1}
-\contentsline {section}{\numberline {8.2}Methods}{45}{section.8.2}
-\contentsline {section}{\numberline {8.3}Results}{47}{section.8.3}
-\contentsline {chapter}{\numberline {9}Mixed models}{51}{chapter.9}
-\contentsline {section}{\numberline {9.1}Problem description}{51}{section.9.1}
-\contentsline {section}{\numberline {9.2}Methods}{51}{section.9.2}
-\contentsline {section}{\numberline {9.3}Results}{51}{section.9.3}
-\contentsline {chapter}{\numberline {10}Partial least squares}{52}{chapter.10}
-\contentsline {section}{\numberline {10.1}Problem description}{52}{section.10.1}
-\contentsline {section}{\numberline {10.2}Methods}{52}{section.10.2}
-\contentsline {section}{\numberline {10.3}Results}{52}{section.10.3}
+\contentsline {section}{\numberline {5.3}Results}{35}{section.5.3}
+\contentsline {chapter}{\numberline {6}Kernel density estimation}{38}{chapter.6}
+\contentsline {section}{\numberline {6.1}Problem description}{38}{section.6.1}
+\contentsline {section}{\numberline {6.2}Methods}{38}{section.6.2}
+\contentsline {section}{\numberline {6.3}Results}{40}{section.6.3}
+\contentsline {chapter}{\numberline {7}Nonparametric regression: local polynomials}{43}{chapter.7}
+\contentsline {section}{\numberline {7.1}Problem description}{43}{section.7.1}
+\contentsline {section}{\numberline {7.2}Methods}{43}{section.7.2}
+\contentsline {section}{\numberline {7.3}Results}{45}{section.7.3}
+\contentsline {chapter}{\numberline {8}Nonparametric regression: splines}{48}{chapter.8}
+\contentsline {section}{\numberline {8.1}Problem description}{48}{section.8.1}
+\contentsline {section}{\numberline {8.2}Methods}{48}{section.8.2}
+\contentsline {section}{\numberline {8.3}Results}{50}{section.8.3}
+\contentsline {chapter}{\numberline {9}Mixed models}{54}{chapter.9}
+\contentsline {section}{\numberline {9.1}Problem description}{54}{section.9.1}
+\contentsline {section}{\numberline {9.2}Methods}{54}{section.9.2}
+\contentsline {section}{\numberline {9.3}Results}{54}{section.9.3}
+\contentsline {chapter}{\numberline {10}Partial least squares}{55}{chapter.10}
+\contentsline {section}{\numberline {10.1}Problem description}{55}{section.10.1}
+\contentsline {section}{\numberline {10.2}Methods}{55}{section.10.2}
+\contentsline {section}{\numberline {10.3}Results}{55}{section.10.3}
