@@ -794,7 +794,9 @@ We will consider failure times to be at AGE +1.
 	\end{figure}
 	
 	\newpage
-	Then we fit the parametric (exponential and Weibull)models to the data, and plot them with the Kaplan-Meier estimator (with its correspondingconfidence band) as shown in figure \ref{fig 5.2}. Both parametric estimators are decreasing, but the exponential estimator for $S(t)$ is linear, while the Weibull fit has almost the shape as the nonparametric fit Kaplan-Meier. Hence the exponential model is a very bad model one for this data, while the Weibull estimator would be appropriate, that is realistic.
+	Then we fit the parametric (exponential and Weibull)
+models to the data, and plot them with the Kaplan-Meier estimator (with its corresponding
+confidence band) as shown in figure \ref{fig 5.2}. Both parametric estimators are decreasing, but the exponential estimator for $S(t)$ is linear, while the Weibull fit has almost the shape as the nonparametric fit Kaplan-Meier. Hence the exponential model is a very bad model one for this data, while the Weibull estimator would be appropriate, that is realistic.
 	\begin{figure}[H]
 		\centering
 		\scalebox{1}{\input{Ex5plot2.tex}}
@@ -810,14 +812,56 @@ We will consider failure times to be at AGE +1.
 		\label{fig 5.3}
 	\end{figure}
 	
-	\item Now we consider two groups of patients: smokers and non-smokers. Smokers make up $82.1\%$ in the sample. For each group, the Kaplan-Meier estimators are computed,and plotted together with the corresponding confidence bands in figure \ref{fig 5.4}. 
+	\item Now we consider two groups of patients: smokers and non-smokers. Smokers make up $82.1\%$ in the sample. For each group, the Kaplan-Meier estimators are computed, and plotted together with the corresponding confidence bands in figure \ref{fig 5.4}. Then we want to test if the survival time depends on being a smoker. With the log-rank test, we have have the $\chi^2_1=2.7$ with p-value$=0.1>0.05$. Hence the two groups do not share the same survival function, in other words the survival time do depend on being a smoker.
 	
 	\begin{figure}[H]
 		\centering
-		\scalebox{1}{\input{Ex5plot4.tex}}
+		\includegraphics[scale=0.5]{Ex5plot4.png}
 		\caption{Plot of the Kaplan-Meier estimators fit for smokers and nonsmokers}
 		\label{fig 5.4}
 	\end{figure} 
+	
+	We fit the Weibull model to both groups. The results are in table \ref{tableau51}, and the figure \ref{fig 5.5} is the plot of the resulting parametric estimators for the
+survivor function together with the corresponding Kaplan-Meier estimators.
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{1.9cm}|P{2cm}|P{2cm}|}
+			\hline
+			& Scale & Shape  \\
+			\hline
+			smokers & 0.01205778 & 8.161903  \\
+			\hline
+			nonsmokers & 0.01181161 & 11.13959 \\
+			\hline
+		\end{tabular}
+		\caption{\label{tableau51}Weibull model estimated parameters for each group}
+	\end{table} 
+	
+	\begin{figure}[H]
+		\centering
+		\scalebox{1}{\input{Ex5plot5.tex}}
+		\caption{Plot of the nonparametric $\&$ parametric fit of the survivor function for each group}
+		\label{fig 5.5}
+	\end{figure} 
+	
+	To check Weibull model assumption in both groups, we use figures in \ref{figuuu}. We can see that the points in plot \ref{fig 5.6} follow $D1$ line pattern, meaning that the Weibull model is effectively appropriate for the smokers' group. However, the plot \ref{fig 5.7} highlight many points on the x-axis causing a different pattern with the line $D2$. Hence we can assume that the Weibull model is not appropriate for the nonsmokers group.
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex5plot6.tex}}
+			\caption{Smokers: $D1$ is the line with slope $\alpha$ and intercept $-\mathtt{log}(0.01205778)$}
+			\label{fig 5.6}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex5plot7.tex}}
+			\caption{Nonsmokers: $D2$ is the line with slope $\alpha$ and intercept $-\mathtt{log}(0.01181161)$}
+			\label{fig 5.7}
+		\end{subfigure}
+		\caption{Checking Weibull model assumption in both groups}
+		\label{figuuu}
+	\end{figure}
 	
 	
 \end{enumerate}
@@ -1227,7 +1271,7 @@ One limit of this model is that it considers $Y_{i,t}$ to be independent, which 
 {\color{royalblue}\section{Methods}}
 The data we consider are of the form $Y_{ij}$, $i = 1,\dots, n$, $j= 1,\dots,k_i$. That is, there are $n$
 subjects (clusters) and for each subject i there are $k_i$ observations.
-In matrix notation a mixed model can be represented as
+A mixed model can be represented as
 	\[ Y= X\beta+ Zu+ \epsilon, \hspace{0.25cm}
 \mathtt{E}
 \begin{pmatrix}
@@ -1248,10 +1292,207 @@ u\\
 0 & \sigma^2_\epsilon \Sigma
 \end{pmatrix}, \]
 for $Y, \epsilon \in \mathbb{R}^N$, $N=\sum_{i=1}^{n}k_i$, $Z= \mathtt{blockdiag}(Z_1,\dots,Z_n)\in \mathbb{R}^{N\times nm}$, $u\in \mathbb{R}^{nm}$
-Typically, a normality assumption is made both for $\epsilon$ and $u$.
+Typically, a normality assumption is made both for $\epsilon$ and $u$.\\
+A good exemple of mixed models' application is in \textbf{small area estimation}, where it is assumed that the means in "small areas" differ for a random amount:
+\[ Y_i= X_i\beta+ \mathbb{I}_{n_i}u_i+ \epsilon_{i}, \hspace{0.25cm}
+  \epsilon_{i} \sim \mathcal{N}_{k_i}(0_{k_i},\sigma^2I_{k_i}), \hspace{0.25cm}
+  u_i\sim \mathcal{N}(0,\sigma^2_u), , \hspace{0.25cm} i=1,\dots,n, \]
+where in each $i$th small area there are $k_i$ observations available.
 
-	
+\newpage
+In the exercise, we are interested in the estimation of $u$. Since it is assumed to be random, one typically uses the term "predictor" for $\hat{u}$, which is obtained as a \textit{best linear
+unnbiased predictor} (\textbf{BLUP})
+\[ \hat{u}= \frac{1}{\lambda}Z^t V^{-1}(Y-X\hat{\beta}) \]
+\[ \hat{\beta}= (X^tV^{-1}X)^{-1}X^tY,\]
+where $V= I_{N}+ ZZ^t/\lambda$ for $\lambda= \frac{\sigma^2_\epsilon}{\sigma^2_u}$, $N=\sum_{i=1}^{n}k_i>p$
+
+\newpage
 {\color{royalblue}\section{Results}}
+For the data, we consider the survey and satellite data measuring the area for corn and soy fields in NorthCentral Iowa from 1978. The data set is available
+as \textit{landsat} in the R-package JoSAE. We are interested in obtaining reliable estimates for the total size of corn and soy production for each of the 12 counties in the data set, respectively.
+Variables of interest:
+\begin{enumerate}
+	\item[] $\mathtt{SegmentsInCounty}$: number of of segments of county.
+	\item[] $\mathtt{SegementID}$: identificator for segment.
+	\item[] $\mathtt{HACorn}$: hectares of corn for given segment.
+	\item[] $\mathtt{HASoybeans}$: hectares of soybeans for given segment.
+	\item[] $\mathtt{PixelsCorn}$: pixels for corn for given segment.
+
+	\item[] $\mathtt{PixelsSoybeans}$: pixels for soybeans for given segment.
+	\item[] $\mathtt{MeanPixelsCorn}$: mean of pixels for corn over all segments in given county.
+	\item[] $\mathtt{MeanPixelsSoybeans}$: mean of pixels for soybeans over all segments in given county.
+	\item[] $\mathtt{CountyName}$: county identificator of the segment.
+\end{enumerate}
+
+\begin{enumerate}[label=(\alph*)]
+	\item In order to fit a linear model to both the hectares of corn and soybeans for segment for
+each county, we chose $\mathtt{PixelsCorn}$ and $\mathtt{PixelsSoybeans}$ variables since we want to estimate for the total size of corn and soy production. The limitations
+of this linear model is that it could not estimate the hectares of corn and soybeans for segment in some counties; probably because of a random effect that the model cannot take into consideration.
+	
+	\item We fit a linear mixed model $y_{ij} = x^t\beta + v_i + e_{ij}$ for both crops such that segments share
+the same countywide random effect. We can interpret from table \ref{tableau91} that Soybeans tend to have 
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{2cm}|P{2.5cm}|P{2.5cm}|P{2.5cm}|P{2.5cm}|}
+			\hline
+			& \multicolumn{2}{c|}{Fix effects} & \multicolumn{2}{c|}{Random effects (StdDev)} \\
+			\hline
+			& (Intercept) & Pixels & (Intercept) & Residual \\
+			\hline
+			Corn & 5.4661894 & 0.3878358 & 7.926246 & 17.03993 \\
+			\hline 
+			Soybeans & -3.8223556 & 0.4756781 & 15.46753 & 13.41709 \\
+			\hline 
+		\end{tabular}
+		\caption{\label{tableau91}Results of the linear mixed model}
+	\end{table}
+	
+	\newpage
+	\item Now we want to compare and
+evaluate with respect to their reliability, in order to obtain predictions for $\mu_i= \bar{x}^t_{ip}\beta+ v_i$. Here, for the $i$th county and a specified
+crop, $x_{ip}$ is the population mean of the explanatory variables and $\bar{x}_i$ the mean over the
+observed segments only. Also $\hat{\beta}$ is the weighted least-squares estimator for $\beta$ and $\gamma_i= \sigma^2_v(\sigma^2_v+ n^{-1}_i\sigma^2_\epsilon)^{-1}$ where $n_i$ the number of observations in the $i$th county, $\sigma^2_v$ and $\sigma^2_\epsilon$ the variances of random effect and error, respectively.
+	\begin{itemize}
+		\item Regression predictor: $\mu^0_i=\bar{x}^t_{ip}\hat{\beta}$.
+		\item Adjusted survey predictor: $\mu^1_i=\bar{x}^t_{ip}\hat{\beta}+ (\bar{y}_i- \bar{x}^t_{i}\hat{\beta})$
+		\item (Empirical) BLUP: $\mu^\gamma_i=\bar{x}^t_{ip}\hat{\beta}+ \hat{\gamma_i}(\bar{y}_i- \bar{x}^t_{i}\hat{\beta})$
+		\item Survey predictor: $\bar{y}_i= n^{-1}_i\sum_{n_i}^{j=1}y_{ij}$
+	\end{itemize}
+	An estimate for the mean squared error $\mathtt{MSE}_{\mu_i}(\mu^d_i)= \mathtt{E}(\mu_i- \mu^d_i)$ for $\mu^d_i$ is given by
+	\[ \widehat{\mathtt{MSE}}_{\mu_i}(\mu^d_i)= (1-d)^2\hat{\sigma}^2_v+ \frac{d^2\hat{\sigma}^2_\epsilon}{n_i}+ 2(d-\hat{\gamma_i})(\bar{x}_{ip}- d\bar{x}_i)^t\hat{V}(\hat{\beta})\bar{x}_i\]
+	\[ \hspace{4.75cm} +(\bar{x}_{ip}- d\bar{x}_{i})^t \hat{V}(\hat{\beta})(\bar{x}_{ip}- d\bar{x}_{i}) ,\]
+	where $\hat{V}(\hat{\beta})$ is the covariance matrix of $\hat{\beta}$. Tables \ref{tableau92} and \ref{tableau93} the respective MSE. We can notice the results really differ form one county to another, which tells us that in order ot have good predictions for $\mu_i$, it might better to use different predictors fo each County.
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{2cm}|P{2cm}|P{2cm}|P{2cm}|P{2cm}|}
+			\hline
+			\textbf{Counties} & $\mu^0_i$ & $\mu^1_i$ & $\mu^\gamma_i$ & $\bar{y}_i$ \\
+			\hline
+			Cerro Gordo & 72.05803 & 283.61578 & 61.66718 & 302.12264 \\
+			\hline
+			Hamilton & 71.97262 & 280.62908 & 61.72427 & 306.22149 \\
+			\hline 
+			Worth & 71.73962 & 287.68234 & 61.13340 & 292.90282 \\
+			\hline 
+			Humboldt & 69.41864 & 138.57817 & 53.48326 & 167.63961 \\
+			\hline 
+			Franklin & 65.34791 & 95.65654 & 3.27852 & 97.63366 \\
+			\hline 
+			Pocahontas & 64.34482 & 92.96560 & 43.50445 & 99.09076 \\
+			\hline 
+			Winnebago & 65.82172 & 96.77393 & 43.28370 & 96.78756 \\
+			\hline 
+			 Wright & 65.61789 & 95.44570 & 43.89862 & 101.67489 \\
+			\hline 
+			Webster & 64.08903 & 72.66995 & 38.47434 & 72.59204 \\
+			\hline 
+			Hancock & 63.18738 & 59.00156 & 34.43863 & 59.81280 \\
+			\hline 
+			Kossuth & 62.27490 & 58.09003 & 33.53265 & 58.50767 \\
+			\hline 
+			Hardin & 63.19271  & 50.62384 & 32.28565 & 51.50612 \\
+			\hline 
+		\end{tabular}
+		\caption{\label{tableau92}Results of estimated predictors' MSE for Corn}
+	\end{table}
+	
+	\newpage
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{2cm}|P{2cm}|P{2cm}|P{2cm}|P{2cm}|}
+			\hline
+			\textbf{Counties} & $\mu^0_i$ & $\mu^1_i$ & $\mu^\gamma_i$ & $\bar{y}_i$ \\
+			\hline
+			Cerro Gordo & 233.9442 & 182.87015 & 116.21477 & 208.61640 \\
+			\hline
+			Hamilton & 235.5158 & 180.10725 & 107.79506 & 180.73675 \\
+			\hline 
+			Worth &  234.7851 & 179.91494 & 108.30543 & 183.17044 \\
+			\hline 
+			Humboldt & 231.4987 & 96.67826 & 74.44887 & 100.92499 \\
+			\hline 
+			Franklin & 223.0584 & 60.24062 & 49.31044 & 60.55884 \\
+			\hline 
+			Pocahontas & 219.5358 & 59.75710 & 49.03094 & 60.22818 \\
+			\hline 
+			Winnebago & 222.6925 & 60.45358 & 49.56226 & 61.04741 \\
+			\hline 
+			Wright & 225.2767 & 61.91758 & 50.95105 & 62.20606 \\
+			\hline 
+			Webster & 217.4335 & 44.87112 & 38.54084 & 45.10319 \\
+			\hline 
+			Hancock & 219.6162 & 37.21818 & 32.99170 & 37.69316 \\
+			\hline 
+			Kossuth & 220.0136 & 36.18285 & 31.92317 & 36.19472 \\
+			\hline 
+			Hardin & 220.1881 &  31.62848 & 28.61561 & 31.80195 \\
+			\hline 
+		\end{tabular}
+		\caption{\label{tableau93}Results of estimated predictors' MSE for Soybeans}
+	\end{table}
+	
+	\item The estimation of the total county field size for both crops, using the BLUP and Survey from (c) is highlighted in the table \ref{tableau94} and on maps \ref{fig 9.1} and \ref{fig 9.2}. We can notice that the size given by the BLUP and the Survey are completely different. This confirms the fact that we need to chose the appropriate predictor in each County(by taking the one with the lowest MSE for each County).
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|P{2cm}|P{2cm}|P{2cm}|P{2cm}|P{2cm}|}
+			\hline
+			& \multicolumn{2}{c|}{Corn} & \multicolumn{2}{c|}{Soybeans} \\
+			\hline
+			\textbf{Counties} & \textbf{BLUP} & \textbf{Survey} & \textbf{BLUP} & \textbf{Survey} \\
+			\hline
+			Cerro Gordo & 36232.59 & 48947.27 & 14850.16 & 1534.673 \\
+			\hline
+			Hamilton & 37163.87 & 28934.53 & 18334.02 & 20850.800 \\
+			\hline 
+			Worth &  32692.98 & 22032.77 & 17913.60 & 21267.008 \\
+			\hline 
+			Humboldt & 33537.21 & 43869.76 & 18034.58 & 7739.632 \\
+			\hline 
+			Franklin & 43710.09 & 50475.53 & 12457.91 & 9868.135 \\
+			\hline 
+			Pocahontas & 28151.91 & 26365.93 & 27971.91 & 29333.507 \\
+			\hline 
+			Winnebago & 33973.49 & 32903.88 & 18073.97 & 16418.839 \\
+			\hline 
+			Wright & 37119.98 & 43470.81 & 24957.12 & 21649.008 \\
+			\hline 
+			Webster & 29310.33 & 30829.88 & 27162.40 & 27916.228 \\
+			\hline 
+			Hancock & 39007.80 & 34376.57 & 19952.53 & 23338.179 \\
+			\hline 
+			Kossuth & 33598.79 & 32926.76 & 24392.10 & 24112.061 \\
+			\hline 
+			Hardin & 42742.30 & 37426.91 & 13180.96 & 15894.074 \\
+			\hline 
+		\end{tabular}
+		\caption{\label{tableau94}Results of the estimation the total county field size for both crops, by the BLUPand survey form part (c)}
+	\end{table}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.5]{Ex9plot1.png}
+		\caption{Map of Iowa with estimated the total county field size for corn}
+		\label{fig 9.1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.5]{Ex9plot2.png}
+		\caption{Map of Iowa with estimated the total county field size for soybean}
+		\label{fig 9.2}
+	\end{figure}
+	
+	
+	
+	
+	
+	
+	
+	
+\end{enumerate}
+
 
 %10101010101010101010101010101010101010101010%
 
@@ -1270,7 +1511,61 @@ partial least squares estimator can be defined as
 \[ \hat{\beta}^d_{PLS}= \mathtt{arg}\min_{\beta \in K_d}= ||Y-X\beta||^2 \]
 There are several ways to compute PLS, but in \textbf{R} it can be done with libraries \textbf{plsr} and \textbf{predict.plsr}.
 
+\newpage
 {\color{royalblue}\section{Results}}
+The data of interest for this exercise can be find on the page \href{https://sites.google.com/michalkosinski.com/mypersonality/publications}{ myPersonality.org }. There are three files:
+\begin{enumerate}
+	\item [] \textit{users.csv} contains psychodemographic user profiles
+	\item [] \textit{likes.csv } contains anonymised IDs and names of Facebook Likes
+	\item [] \textit{users-likes.csv} contains the associations between users and their Likes
+\end{enumerate}
+The seed value for used in for the exercise is 1122.
+\begin{enumerate}[label=(\alph*)]
+	\item Check the R code related to this exercise
+	\item With the PLS, we would like to find a model that allowsto predict the user?s age based on Likes (s)he made. First we split the dataset into a test and training set, by sampling randomly two thirds of all rows to include into the training set and the restwill be the test set. Then on the training set fit PLS regression models with age as a response variableand with up to 50 PLS components. For each PLS model dimension (from 1 to 50), we obtain the prediction on the test set and compare it with the true age values from the test set, and calculating the Pearson correlation coefficient. The plot \ref{fig 10.1} clearly shows that we have a maximal value $d_{opt}=$, which is then used as the model of dimension. The plot \ref{fig 10.2} is the Plot the values predicted by the PLSmodel of dimension $d_{opt}=$ on the test set against corresponding age values from the testset. This plot shows that the model is pretty accurate since points are along the identity line.
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\includegraphics[scale=0.25]{Ex10plot1.png}
+			\caption{Plot of the Pearson correlationcoefficients against model dimension}
+			\label{fig 10.1}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\includegraphics[scale=0.25]{Ex10plot2.png}
+			\caption{Plot of the values predicted by the PLSmodel of dimension $d_{opt}$ on the test set against corresponding age values from the test set}
+			\label{fig 10.2}
+		\end{subfigure}
+		\caption{}
+		\label{figuuuu}
+	\end{figure}
+	
+	\newpage
+	\item Now we investigate which Likes predict the age best, using the best predictive model identified in (b). From figure \ref{figuuuuu}, we can notice that likes with the largest positive effect on the age, that is elderly people likes, are effectively topics of elders. While likes with the largest negative effect on the age, that is youngsters likes, are also things for young people. Hence we can assume that the model is accurate.
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\includegraphics[scale=0.25]{Ex10plot3.png}
+			\caption{The 6 Likes having the largest positive effect on the age}
+			\label{fig 10.3}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\includegraphics[scale=0.25]{Ex10plot4.png}
+			\caption{The 6 Likes that have the largest negative effect on the age}
+			\label{fig 10.4}
+		\end{subfigure}
+		\caption{}
+		\label{figuuuuu}
+	\end{figure}
+	
+\end{enumerate}
+
+
 
 
 \end{document}

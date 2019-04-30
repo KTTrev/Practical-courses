@@ -72,15 +72,13 @@ sum(thor$PRE30)/nrow(thor)
 km_smoker_fit <- survfit(Surv(AGE, Risk1Y) ~ PRE30, data = thor)
 #plot on one plot together with the corresponding confidence bands
 
-tikz('Ex5plot4.tex',width=3.5, height=3)
 autoplot(km_smoker_fit) +
   #ggtitle("Smokers based Survival") +
   labs(x = "t", y = "S(t)") +
   guides(fill=FALSE) +
-  theme_classic(base_size = 10) +
-  theme(legend.position = c(0.2, 0.70),legend.justification = c("right", "top"), legend.key = element_rect(fill = "white", colour = "gray19"))+
+  theme_classic(base_size = 20) +
+  theme(legend.position = c(0.4, 0.70),legend.justification = c("right", "top"), legend.key = element_rect(fill = "white", colour = "gray19"))+
   labs(colour = "Smoker")
-dev.off()
 
 #Test formally if the survival time depends on being a smoker using the log-rank test
 survdiff(Surv(AGE, Risk1Y) ~ PRE30, data = thor, rho=0)
@@ -120,7 +118,7 @@ legend("bottomleft", inset=.0001,
        col =  c("blue", "red", "green", "black"),
        lwd=c(1,1), lty=c(1,1),
        box.lty=0)
-title(main="nonparametric & parametric estimators \n of the survivor function by group")
+     #title(main="nonparametric & parametric estimators \n of the survivor function by group")
 dev.off()
 
 #"Checking Weibull if weibull is appropriate \n for smokers' group"
