@@ -83,17 +83,15 @@ Tidyverse is a collection of packages for data manipulation, exploration and vis
 \begin{enumerate}[label=(\alph*)]
 	\item After loading and filtering the data childrenfinal.dta, we convert some variables (namely $\mathtt{tetanusmother}$, $\mathtt{breastfeeding}$, $\mathtt{wantedchild}$, $\mathtt{anetalvisits}$, and $\mathtt{placedelivery}$) into double labeled \textit{<dbl>} (doubles, or real numbers).
 	
-	\item 
-	\item[°]The smooth line in figure \ref{f} indicates that the $\mathtt{zstunt}$ is getting between the ages of 0 and 20, before stabilizing.
+	\item The smooth line in figure \ref{f} indicates that the $\mathtt{zstunt}$ is deteriorating between the ages of 0 and 20, before stabilizing.
 	\begin{figure}[H]
 		\centering
-		\scalebox{1}{\input{Ex1plot1.tex}}
+		\scalebox{0.75}{\input{Ex1plot1.tex}}
 		\caption{Scatter plot of $\mathtt{zstunt}$ against $\mathtt{hypage}$ with a smooth line (in purple)}
 		\label{f}
 	\end{figure}
 	
-	\newpage
-	\item[°]gjdhgdhdg
+	
 	\begin{figure}[H]
 		\centering
 		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
@@ -113,15 +111,18 @@ of $\mathtt{zstunt}$ against $\mathtt{hypage}$ }
 		\label{fi}
 	\end{figure}
 	
-	\item[°]gjdhgdhdg
+	\newpage
+	The smmooth line in the graphics of figure \ref{fi} indicates that $\mathtt{zstunt}$ is more detoriated in rural places, and for female genders.
 		
-	\item 
-	\begin{figure}[ht]
+	\item	
+	Figure \ref{fig 1.4} shows the map of Kenya, with colors indicating the amount of $\mathtt{zstunt}$ in counties. The color in Isolo' county is grey because we had no data available for that county. The county where children are stunted is West Pokot since in the county $\mathtt{zstunt} < -2$.
+	 
+	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.5]{Ex1plot4.png}
-		\caption{Scatter plot of zstunt against hypage with smooth line (in purple)}
-	\end{figure}	
-		
+		\caption{Plot the map of Kenya with the mean of $\mathtt{zstunt}$ in the each county}
+		\label{fig 1.4}
+	\end{figure}
 		
 \end{enumerate}	
 %222222222222222222222222222222222222222222222%
@@ -220,6 +221,7 @@ Another general approach to pseudo-random variables generation is the \textbf{ac
 
 \textbf{NB:} Computing $c$ could be difficult, but one can show that $c = sup_{x} {\frac{f(x)}{g(x)}}$\\
 
+\newpage
 {\color{royalblue}\section{Results}}
 \begin{enumerate}[label=(\alph*)]
 	\item 
@@ -246,9 +248,9 @@ standard Cauchy distribution is used:
 	\item[°] The constant value $c$ for this method is given by $sup_{x} {\frac{f(x)}{g(x)}} = 1.520347 $
 	\item[°] Then after computing the $N$ standard normal random variables, we notice that the estimated and theoretical acceptance probabilities are almost equal. This is well depicted with in the figure \ref{fig 2.2}, where the histogram of the obtain sample is symmetric and has the same shape as the standard normal density curve.
 	
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\centering
-		\scalebox{1.2}{\input{Ex2plot2.tex}}
+		\scalebox{0.75}{\input{Ex2plot2.tex}}
 		\caption{Histogram of the obtained sample and the standard
 		normal density (in blue)}
 	\label{fig 2.2}
@@ -258,9 +260,9 @@ standard Cauchy distribution is used:
 	
 	\newpage
 	
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\centering
-		\scalebox{1.2}{\input{Ex2plot3.tex}}
+		\scalebox{0.75}{\input{Ex2plot3.tex}}
 		\caption{QQ-plot}
 		\label{fig 2.3}
 	\end{figure}
@@ -401,7 +403,7 @@ bias-corrected ($bc_a$) confidence intervals both for $\sigma$ and $x_{med}$, an
 		\end{tabular}
 		\caption{\label{tableau34}Confidence intervals coverage probability and average interval length: $bc_a$}
 	\end{table}
-	The CP values for the $bc_a$ confidence intervals are more closer to $0.95$ (especially for $\sigma CI$)than the ones of the bootstrap percentile confidence intervals(see table \ref{tableau31}). We also notice a slight difference in the AIL for both confidence intervals in both methods. The following table 
+	The CP values for the $bc_a$ confidence intervals are more closer to $0.95$ (especially for $\sigma CI$)than the ones of the bootstrap percentile confidence intervals(see table \ref{tableau31}). We also notice a slight difference in the AIL for both confidence intervals in both methods.
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{|P{0.5cm}|P{2.5cm}|P{2cm}|}
@@ -415,10 +417,11 @@ bias-corrected ($bc_a$) confidence intervals both for $\sigma$ and $x_{med}$, an
 		\end{tabular}
 		\caption{\label{tableau35}Average $\hat{z}_0$ and $\hat{a}$}
 	\end{table}
+	The results in table \ref{tableau35} show that $\hat{z}_0$ is negative for $x_{med}$ confidence intervals and positive for $\sigma$ confidence intervals, which are respectively signs of overestimation and underestimation. The estimated accelerated term $\hat{a}$ is slightly to zero for both confidence intervals, indicating a slight asymmetry in the data. Since all these values are close to zero, we can that the confidence bands have a good performance.
 	
 	\end{itemize}
 \newpage
-    \item From the dataset \textit{shhs1.txt} has been obtained from \href{https://sleepdata.org/datasets/shhs}{Sleep Heart Health Study}, we are using the variable \textbf{rdi4p}: respiratory disturbance index. Figure \ref{fig 3.1}, we notice that the \textbf{rdi4p} is skewed on the left.
+    \item From the dataset \textit{shhs1.txt} has been obtained from \href{https://sleepdata.org/datasets/shhs}{Sleep Heart Health Study}, we are using the variable \textbf{rdi4p}: respiratory disturbance index. Figure \ref{fig 3.1}, we notice that the \textbf{rdi4p} is skewed on the right(positiv skewness).
     
     \begin{figure}[ht]
     	\centering
@@ -461,7 +464,7 @@ median, we get the following results (with $R = 1000$)
     	\end{tabular}
     	\caption{\label{tableau37}Results for $bc_a$}
     \end{table}
-    The median of the variable \textbf{rdi4p} is 4.193012 and its standard deviation is 12.43283
+    The results from tables \ref{tableau36} and \ref{tableau37} show that the $x_{med}$ CI are almost the same, while  we notice a slight difference $\sigma$ CI. Actually notice shift to the right in the $\sigma$ CI with $bc_a$, but with slight shift to the right in the CI for $bc_a$. This can be explained by the fact that the empirical distribution is right-skewed, and that $\hat{a}$ is null for $x_{med}$ CI, and close to zero for $\sigma$ CI. We can notice that $\hat{z}_0$ is close to zero, indicating good minimization of overestimation (for $\sigma$ CI) and underestimation (for $x_{med}$ CI). 
     
 \end{enumerate}
 
@@ -618,19 +621,19 @@ to identify variables that explain grades in mathematics.
 	
 \newpage
 	
-	\item A generalised linear model(Model 1) is fitted to explain G1 including all explanatory variables. With a significance level of 0.05, we notice that all covariates are not significant. Moreover, we there too many covariates that arenot significant which is a sign of a bad fitted model.
+	\item A generalised linear model(Model 1) is fitted to explain G1 with all explanatory variables. With a $\alpha=0.05$, we notice that all covariates are not significant, which might be a sign of a bad fitted model. After calculating the Pearson residuals and Anscombe residuals, we come upn with the plots in figure \ref{fig 4.3}. We can clearly assume that these residuals are normaly distributed, because points on the Q-Q plots are distributed along the identity line. Furthermore, figure \ref{fig 4.4} we can see that the normality assumption is again fulfill and points on other plots present no pattern, therefore we can say that the fitted (generalised) linear model is adequate for the data, but since we have too many unsignificant covariates, we can conclude that this model is not adequate to the data.  
 	
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
 		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
 			\centering
-			\scalebox{0.75}{\input{Ex4plot4.tex}}
+			\scalebox{0.70}{\input{Ex4plot4.tex}}
 			\caption{Pearson residuals}
 			\label{fig 4.4}
 		\end{subfigure}
 		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
 			\centering
-			\scalebox{0.75}{\input{Ex4plot5.tex}}
+			\scalebox{0.70}{\input{Ex4plot5.tex}}
 			\caption{Anscombe residuals}
 			\label{fig 4.5}
 		\end{subfigure}
@@ -638,24 +641,32 @@ to identify variables that explain grades in mathematics.
 		\label{fig}
 	\end{figure}
 	
-	
-	
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\centering
-		\scalebox{1.2}{\input{Ex4plot6.tex}}
+		\scalebox{0.70}{\input{Ex4plot6.tex}}
 		\caption{Residuals analysis: Model 1}
 		\label{fig 4.6}
 	\end{figure}
 	
+	\newpage
+	\item Now a another model, Model.2, is made by reducing variables from Model.1 to \textbf{sex}, \textbf{Fedu}, \textbf{studytime}, \textbf{failures}, \textbf{schoolsup},
+\textbf{famsup}, \textbf{goout}. This time, all covariates are significant. \textbf{sex}, \textbf{Fedu}, \textbf{studytime} have a positive effect on grades, meaning that a female student whose father is well educated and who spend time studying has good grades. Whereas \textbf{failures}, \textbf{schoolsup}, \textbf{famsup}, \textbf{goout} have a negative effect on grades, meaning that a student who has already failed, with no extra educational support, no family educational support, and always going out has bad grades. Figure \ref{fig 4.7} show points along the identity of the Normal Q-Q plot, and no patterns in the residuals plots. Hence Model.2 is good model.
 	
-	
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\centering
-		\scalebox{1.2}{\input{Ex4plot7.tex}}
-		\caption{Q-Q plot with Poisson as theoretical distribution}
+		\scalebox{1}{\input{Ex4plot7.tex}}
+		\caption{Residuals analysis: Model 2}
 		\label{fig 4.7}
 	\end{figure}
 	
+	By comparing Model.1 and Model.2 with ANOVA, we have a p-value $= 0.1858 >\alpha$, then we reject Model.1. Model.2 delivers better fit than Model.1. A third model, Model.3 is created by replacing in Model.2 \textbf{goout} by \textbf{Walc}. Then we want to compare these two models, but since they are not nested, we cannot use ANOVA as we did previously. So we opt for residuals analysis and AIC comparison. From figures \ref{fig 4.7} and \ref{fig 4.8}, we can notice that the two models are pretty close, which makes difficult to make a choice. Nevertheless, the AIC of Model.2 is less than Model.3 AIC (respectively 1975.1 and 1977.2). Hence Model.2 delivers a better fit.
+	
+	\begin{figure}[H]
+		\centering
+		\scalebox{1}{\input{Ex4plot8.tex}}
+		\caption{Residuals analysis: Model 3}
+		\label{fig 4.8}
+	\end{figure}
 	
 \end{enumerate}
 
@@ -934,8 +945,7 @@ $\mathtt{ writing.score}$: Score on the writing exam (0-100)\\
 		\label{figg}
 	\end{figure}
 	
-	\item After the implemention of the cross-validation (CV) criterion to find the optimal bandwidth, we use it to find the optimal bandwidth in density for all three scores math.score, reading.score and
-writing.score. The same is done with \textbf{R} built-in functions $\mathtt{bw.ucv}$, and $\mathtt{bw.bcv}$, then we have the table \ref{tableau61}. The cross-validation criterion returns the highest optimal bandwidth for all three scores.
+	\item After the implemention of the cross-validation (CV) criterion to find the optimal bandwidth, we use it to find the optimal bandwidth in density for all three scores math.score, reading.score and writing.score. The same is done with \textbf{R} built-in functions $\mathtt{bw.ucv}$, and $\mathtt{bw.bcv}$, then we have the table \ref{tableau61}. The cross-validation criterion returns the highest optimal bandwidth for all three scores. We can notice that the obtained bandwidth with the implemented CV are greater than the ones of \textbf{R} built-in functions. 
 	
 	\begin{table}[H]
 		\centering
@@ -1251,7 +1261,7 @@ that $f(t_i)= \sum_{j=0}^{4}\beta_jt^j_i$.
     	\caption{}
     	\label{figuu}
     \end{figure}
-    
+    We can notice from \ref{fig 8.5} that the parametric fit of degree 4 is very close to the splines fit with degrees 2, 3 and 4. Hence it is resonable to use a fitting model. Figure \ref{fig 8.6} indicates that it also works for polynomial of 5th degree, but not for 3rd degree, because an underfitting problem.
     
 \end{enumerate}
 
@@ -1335,7 +1345,7 @@ the same countywide random effect. We can interpret from table \ref{tableau91} t
 		\centering
 		\begin{tabular}{|P{2cm}|P{2.5cm}|P{2.5cm}|P{2.5cm}|P{2.5cm}|}
 			\hline
-			& \multicolumn{2}{c|}{Fix effects} & \multicolumn{2}{c|}{Random effects (StdDev)} \\
+			& \multicolumn{2}{c|}{Fixed effects} & \multicolumn{2}{c|}{Random effects (StdDev)} \\
 			\hline
 			& (Intercept) & Pixels & (Intercept) & Residual \\
 			\hline
@@ -1346,12 +1356,64 @@ the same countywide random effect. We can interpret from table \ref{tableau91} t
 		\end{tabular}
 		\caption{\label{tableau91}Results of the linear mixed model}
 	\end{table}
+	Figure \ref{figuuuuuu} shows that the Q-Q plot indicate points falling on the identity line, which means that the residuals are well normally distributed.
+		 
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex9plot1.tex}}
+			\caption{Corn linear mixed model}
+			\label{fig 9.1}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex9plot2.tex}}
+			\caption{Soybean linear mixed model}
+			\label{fig 9.2}
+		\end{subfigure}
+	    \caption{Residuals Q-Q plot for normality assumption}
+	    \label{figuuuuuu}
+    \end{figure}
 	
-	\newpage
-	\item Now we want to compare and
-evaluate with respect to their reliability, in order to obtain predictions for $\mu_i= \bar{x}^t_{ip}\beta+ v_i$. Here, for the $i$th county and a specified
-crop, $x_{ip}$ is the population mean of the explanatory variables and $\bar{x}_i$ the mean over the
-observed segments only. Also $\hat{\beta}$ is the weighted least-squares estimator for $\beta$ and $\gamma_i= \sigma^2_v(\sigma^2_v+ n^{-1}_i\sigma^2_\epsilon)^{-1}$ where $n_i$ the number of observations in the $i$th county, $\sigma^2_v$ and $\sigma^2_\epsilon$ the variances of random effect and error, respectively.
+	Plots in figure \ref{figuuuuuuu} show points randomly displaced, which means that the linearity assumption is fulfill.
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex9plot3.tex}}
+			\caption{Corn linear mixed model}
+			\label{fig 9.3}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex9plot4.tex}}
+			\caption{Soybean linear mixed model}
+			\label{fig 9.4}
+		\end{subfigure}
+		\caption{Plots of explanatory variable of each model, against their residuals to check linearity assumption}
+		\label{figuuuuuuu}
+	\end{figure}
+	Finally, homoskedasticity of the models is also fulfill, because plots in figure \ref{figuuuuuuuu} show no patterns.
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex9plot5.tex}}
+			\caption{Corn linear mixed model}
+			\label{fig 9.5}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
+			\centering
+			\scalebox{0.75}{\input{Ex9plot6.tex}}
+			\caption{Soybean linear mixed model}
+			\label{fig 9.6}
+		\end{subfigure}
+		\caption{Fitted values vs residuals for each model}
+		\label{figuuuuuuuu}
+	\end{figure}
+	
+	\item Now we want to compare and evaluate with respect to their reliability, in order to obtain predictions for $\mu_i= \bar{x}^t_{ip}\beta+ v_i$. Here, for the $i$th county and a specified crop, $x_{ip}$ is the population mean of the explanatory variables and $\bar{x}_i$ the mean over the observed segments only. Also $\hat{\beta}$ is the weighted least-squares estimator for $\beta$ and $\gamma_i= \sigma^2_v(\sigma^2_v+ n^{-1}_i\sigma^2_\epsilon)^{-1}$ where $n_i$ the number of observations in the $i$th county, $\sigma^2_v$ and $\sigma^2_\epsilon$ the variances of random effect and error, respectively.
 	\begin{itemize}
 		\item Regression predictor: $\mu^0_i=\bar{x}^t_{ip}\hat{\beta}$.
 		\item Adjusted survey predictor: $\mu^1_i=\bar{x}^t_{ip}\hat{\beta}+ (\bar{y}_i- \bar{x}^t_{i}\hat{\beta})$
@@ -1363,6 +1425,7 @@ observed segments only. Also $\hat{\beta}$ is the weighted least-squares estimat
 	\[ \hspace{4.75cm} +(\bar{x}_{ip}- d\bar{x}_{i})^t \hat{V}(\hat{\beta})(\bar{x}_{ip}- d\bar{x}_{i}) ,\]
 	where $\hat{V}(\hat{\beta})$ is the covariance matrix of $\hat{\beta}$. Tables \ref{tableau92} and \ref{tableau93} the respective MSE. We can notice the results really differ form one county to another, which tells us that in order ot have good predictions for $\mu_i$, it might better to use different predictors fo each County.
 	
+	\newpage
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{|P{2cm}|P{2cm}|P{2cm}|P{2cm}|P{2cm}|}
@@ -1397,7 +1460,6 @@ observed segments only. Also $\hat{\beta}$ is the weighted least-squares estimat
 		\caption{\label{tableau92}Results of estimated predictors' MSE for Corn}
 	\end{table}
 	
-	\newpage
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{|P{2cm}|P{2cm}|P{2cm}|P{2cm}|P{2cm}|}
@@ -1432,7 +1494,7 @@ observed segments only. Also $\hat{\beta}$ is the weighted least-squares estimat
 		\caption{\label{tableau93}Results of estimated predictors' MSE for Soybeans}
 	\end{table}
 	
-	\item The estimation of the total county field size for both crops, using the BLUP and Survey from (c) is highlighted in the table \ref{tableau94} and on maps \ref{fig 9.1} and \ref{fig 9.2}. We can notice that the size given by the BLUP and the Survey are completely different. This confirms the fact that we need to chose the appropriate predictor in each County(by taking the one with the lowest MSE for each County).
+	\item The estimation of the total county field size for both crops, using the BLUP and Survey from (c) is highlighted in the table \ref{tableau94} and on maps \ref{fig 9.7} and \ref{fig 9.8}. We can notice that the size given by the BLUP and the Survey are completely different. This confirms the fact that we need to chose the appropriate predictor in each County(by taking the one with the lowest MSE for each County).
 	
 	\begin{table}[H]
 		\centering
@@ -1467,24 +1529,25 @@ observed segments only. Also $\hat{\beta}$ is the weighted least-squares estimat
 			Hardin & 42742.30 & 37426.91 & 13180.96 & 15894.074 \\
 			\hline 
 		\end{tabular}
-		\caption{\label{tableau94}Results of the estimation the total county field size for both crops, by the BLUPand survey form part (c)}
+		\caption{\label{tableau94}Results of the estimation the total county field size for both crops, by the BLUP
+and survey form part (c)}
 	\end{table}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.5]{Ex9plot1.png}
+		\includegraphics[scale=0.5]{Ex9plot7.png}
 		\caption{Map of Iowa with estimated the total county field size for corn}
-		\label{fig 9.1}
+		\label{fig 9.7}
 	\end{figure}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.5]{Ex9plot2.png}
+		\includegraphics[scale=0.5]{Ex9plot8.png}
 		\caption{Map of Iowa with estimated the total county field size for soybean}
-		\label{fig 9.2}
+		\label{fig 9.8}
 	\end{figure}
 	
-	
+	The huge differences between the slopes and intercepts of the models describe notable differences between the crops.
 	
 	
 	
@@ -1522,20 +1585,25 @@ The data of interest for this exercise can be find on the page \href{https://sit
 The seed value for used in for the exercise is 1122.
 \begin{enumerate}[label=(\alph*)]
 	\item Check the R code related to this exercise
-	\item With the PLS, we would like to find a model that allowsto predict the user?s age based on Likes (s)he made. First we split the dataset into a test and training set, by sampling randomly two thirds of all rows to include into the training set and the restwill be the test set. Then on the training set fit PLS regression models with age as a response variableand with up to 50 PLS components. For each PLS model dimension (from 1 to 50), we obtain the prediction on the test set and compare it with the true age values from the test set, and calculating the Pearson correlation coefficient. The plot \ref{fig 10.1} clearly shows that we have a maximal value $d_{opt}=$, which is then used as the model of dimension. The plot \ref{fig 10.2} is the Plot the values predicted by the PLSmodel of dimension $d_{opt}=$ on the test set against corresponding age values from the testset. This plot shows that the model is pretty accurate since points are along the identity line.
+	\item With the PLS, we would like to find a model that allows
+to predict the user?s age based on Likes (s)he made. First we split the dataset into a test and training set, by sampling randomly two thirds of all rows to include into the training set and the rest
+will be the test set. Then on the training set fit PLS regression models with age as a response variable
+and with up to 50 PLS components. For each PLS model dimension (from 1 to 50), we obtain the prediction on the test set and compare it with the true age values from the test set, and calculating the Pearson correlation coefficient. The plot \ref{fig 10.1} clearly shows that we have a maximal value $d_{opt}=$, which is then used as the model of dimension. The plot \ref{fig 10.2} is the Plot the values predicted by the PLS
+model of dimension $d_{opt}=8$ on the test set against corresponding age values from the test
+set. This plot shows that the model is pretty accurate since points are along the identity line.
 	
 	\begin{figure}[H]
 		\centering
 		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
 			\centering
 			\includegraphics[scale=0.25]{Ex10plot1.png}
-			\caption{Plot of the Pearson correlationcoefficients against model dimension}
+			\caption{Plot of the Pearson correlation coefficients against model dimension}
 			\label{fig 10.1}
 		\end{subfigure}
 		\begin{subfigure}[b]{0.48\linewidth}        %% or \columnwidth
 			\centering
 			\includegraphics[scale=0.25]{Ex10plot2.png}
-			\caption{Plot of the values predicted by the PLSmodel of dimension $d_{opt}$ on the test set against corresponding age values from the test set}
+			\caption{Plot of the values predicted by the PLS model of dimension $d_{opt}$ on the test set against corresponding age values from the test set}
 			\label{fig 10.2}
 		\end{subfigure}
 		\caption{}
@@ -1562,6 +1630,9 @@ The seed value for used in for the exercise is 1122.
 		\caption{}
 		\label{figuuuuu}
 	\end{figure}
+	
+	\item Now we repeat the analysis removing users that made less than 60 Likes and Likes that have
+less than 120 users in (a). Due to the huge matrix' size, I could not run de model. However, it is expected to have the same likes and users as in figure \ref{figuuuuu}, but with more significant coefficients. For a plot line the one in figure \ref{fig 10.2}, we should have points more closer to the identity line.
 	
 \end{enumerate}
 

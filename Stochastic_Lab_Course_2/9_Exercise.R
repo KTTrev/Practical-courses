@@ -8,6 +8,7 @@ library(maps)
 library(maptools)
 library(rgdal)
 library(ggrepel)
+library(tikzDevice)
 
 
 #Question(a)
@@ -35,6 +36,25 @@ beta.corn <- lme.model.corn$coefficients$fixed
 lme.model.soy <- lme(HASoybeans ~ PixelsSoybeans, data = group.soy, random = ~ 1)
 lme.model.soy
 beta.soy <- lme.model.soy$coefficients$fixed
+
+#Checking normality assumption for lme.model.corn residuals
+ df.resid.corn <- data.frame(v = residuals(lme.model.corn))
+ plot1<-ggplot(data = df.resid.corn, mapping = aes(sample = v)) + 
+  stat_qq(distribution = stats::qnorm, dparams = list(mean = mean(df.resid.corn$v), sd = sd(df.resid.corn$v))) +
+  geom_abline(alpha = 0.25)
+#Checking normality assumption for lme.model.soy residuals
+df.resid.soy <- data.frame(v = residuals(lme.model.soy))
+plot2<- ggplot(data = df.resid.soy, mapping = aes(sample = v)) + 
+  stat_qq(distribution = stats::qnorm, dparams = list(mean = mean(df.resid.soy$v), sd = sd(df.resid.soy$v))) +
+  geom_abline(alpha = 0.25)
+#Checking linearity assumption for lme.model.corn
+plot(residuals(lme.model.corn), areasat$HACorn, xlab="residuals", ylab="HACorn") #plot3
+#Checking linearity assumption for lme.model.soy
+plot(residuals(lme.model.soy), areasat$HASoybeans, xlab="residuals", ylab="HASoybeans") #plot4
+#Checking homogeneity of the variance in lme.model.corn
+plot5<- plot(lme.model.corn)
+#Checking homogeneity of the variance in lme.model.soy
+plot6<- plot(lme.model.soy)
 
 #Question(c)
 #Mean of the population for explanatory variables
@@ -249,8 +269,9 @@ ggplot(data = iowa_counties, aes(x = long, y = lat), fill = ) +
                color = "black", fill = NA) +
   geom_label(data = centroids, aes(x = long, y = lat, label = label_corn$Total_HA, group = NULL),
              fontface = "bold", alpha = 0.7, size = 3) +
-  scale_fill_manual(values = c("cornflowerblue", "blueviolet")) +
-  theme_void() 
+  scale_fill_manual(values = c("cornflowerblue", "orange")) +
+  theme_void() +
+  theme(aspect.ratio = 1)
 
 #Map for soybeans
 ggplot(data = iowa_counties, aes(x = long, y = lat), fill = ) + 
@@ -261,13 +282,36 @@ ggplot(data = iowa_counties, aes(x = long, y = lat), fill = ) +
                color = "midnightblue", fill = NA) +
   geom_label(data = centroids, aes(x = long, y = lat, label = label_soy$Total_HA, group = NULL),
              fontface = "bold", alpha = 0.7, size = 3) +
-  scale_fill_manual(values = c("cornflowerblue", "blueviolet")) +
-  theme_void() 
+  scale_fill_manual(values = c("cornflowerblue", "orange")) +
+  theme_void() +
+  theme(aspect.ratio = 1)
 
 
 
 
+#exports plots as .tex files
+tikz('Ex9plot1.tex',width=3.5, height=3)
+plot1
+dev.off()
 
+tikz('Ex9plot2.tex',width=3.5, height=3)
+plot2
+dev.off()
 
+tikz('Ex9plot3.tex',width=3.5, height=3)
+plot(residuals(lme.model.corn), areasat$HACorn, xlab="residuals", ylab="HACorn")
+dev.off()
+
+tikz('Ex9plot4.tex',width=3.5, height=3)
+plot(residuals(lme.model.soy), areasat$HASoybeans, xlab="residuals", ylab="HASoybeans")
+dev.off()
+
+tikz('Ex9plot5.tex',width=3.5, height=3)
+plot5
+dev.off()
+
+tikz('Ex9plot6.tex',width=3.5, height=3)
+plot6
+dev.off()
 
 

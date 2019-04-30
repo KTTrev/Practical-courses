@@ -107,6 +107,11 @@ dev.off()
 
 tikz('Ex4plot7.tex',width=3.5, height=3, sanitize=TRUE)
 par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
+plot(model.2)
+dev.off()
+
+tikz('Ex4plot8.tex',width=3.5, height=3, sanitize=TRUE)
+par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
 plot(model.3)
 dev.off()
 

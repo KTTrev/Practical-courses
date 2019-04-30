@@ -90,7 +90,9 @@ ggplot(data = Kenya1_df, aes(x = long, y = lat, group = group, fill = zstunt.mea
   geom_polygon(color = "black", size = 0.25) +
   geom_text(data = centroids_df, aes(x = long, y = lat, label = NAME_1, group = NULL), size = 3) +
   scale_fill_distiller(name="Zstunt mean \n per county", palette = "Spectral") +
+  theme_void() +
   theme(aspect.ratio = 1)
+  
 
 ##(d)write the tibble from (b) into a text file
 write.table(children3,"children3.txt")
